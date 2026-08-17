@@ -1,0 +1,4 @@
+interface:
+  display_name: "Corporate Router"
+  short_description: "Route corporate requests safely"
+  default_prompt: "Use $corporate-router to route this corporate request."

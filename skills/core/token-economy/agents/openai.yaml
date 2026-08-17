@@ -1,0 +1,4 @@
+interface:
+  display_name: "Token Economy"
+  short_description: "Optimize context use safely"
+  default_prompt: "Use $token-economy to audit this request context."

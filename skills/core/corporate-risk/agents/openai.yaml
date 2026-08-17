@@ -1,0 +1,4 @@
+interface:
+  display_name: "Corporate Risk"
+  short_description: "Assess corporate decision risk"
+  default_prompt: "Use $corporate-risk to assess this corporate decision."

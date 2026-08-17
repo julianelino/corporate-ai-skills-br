@@ -1,0 +1,4 @@
+interface:
+  display_name: "Executive Advisor"
+  short_description: "Frame governed executive options"
+  default_prompt: "Use $executive-advisor to analyze this executive decision."

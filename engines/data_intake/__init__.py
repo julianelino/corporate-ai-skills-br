@@ -1,0 +1,1 @@
+"""Structured data intake engine."""

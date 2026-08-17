@@ -1,0 +1,5 @@
+id: simple-time-conversion
+input: "Convert 7h45 to decimal"
+expected:
+  - uses: deterministic-calculation-engine
+  - prohibits: unnecessary-domain-routing

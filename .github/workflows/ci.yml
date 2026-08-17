@@ -1,0 +1,22 @@
+name: quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/validate-sources.py sources/SOURCE_REGISTRY.yaml
+      - run: python3 scripts/validate-schemas.py schemas
+      - run: python3 scripts/validate-skill.py skills
+      - run: python3 scripts/validate-workflows.py workflows
+      - run: python3 scripts/check-skill-overlap.py skills
+      - run: python3 scripts/check-token-budget.py skills
+      - run: python3 -m pytest -q

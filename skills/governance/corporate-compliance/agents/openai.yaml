@@ -1,0 +1,4 @@
+interface:
+  display_name: "Corporate Compliance"
+  short_description: "Assess corporate compliance controls"
+  default_prompt: "Use $corporate-compliance to assess this compliance case."

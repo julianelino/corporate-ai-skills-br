@@ -1,0 +1,24 @@
+{
+  "registry_version": "0.1.0",
+  "default_jurisdiction": "BR",
+  "sources": [
+    {"id":"planalto","name":"Presidência da República — Legislação","url":"https://www.planalto.gov.br/ccivil_03/leis/_lei-principal.htm","authority":"official","tier":"T1","jurisdiction":"BR","domains":["labor","payroll","tax","privacy"],"freshness":"critical","copyright":"public-law"},
+    {"id":"mte","name":"Ministério do Trabalho e Emprego","url":"https://www.gov.br/trabalho-e-emprego/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["labor","payroll","sst"],"freshness":"critical","copyright":"official-publication"},
+    {"id":"esocial","name":"eSocial","url":"https://www.gov.br/esocial/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["payroll","hr","sst"],"freshness":"critical","copyright":"official-publication"},
+    {"id":"fgts-digital","name":"FGTS Digital","url":"https://www.gov.br/fgtsdigital/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["payroll"],"freshness":"critical","copyright":"official-publication"},
+    {"id":"receita","name":"Receita Federal do Brasil","url":"https://www.gov.br/receitafederal/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["tax","payroll","accounting"],"freshness":"critical","copyright":"official-publication"},
+    {"id":"sped","name":"Sistema Público de Escrituração Digital","url":"https://www.gov.br/sped/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["tax","accounting"],"freshness":"critical","copyright":"official-publication"},
+    {"id":"tst","name":"Tribunal Superior do Trabalho","url":"https://www.tst.jus.br","authority":"court","tier":"T1","jurisdiction":"BR","domains":["labor"],"freshness":"critical","copyright":"public-decision"},
+    {"id":"stf","name":"Supremo Tribunal Federal","url":"https://portal.stf.jus.br","authority":"court","tier":"T1","jurisdiction":"BR","domains":["labor","privacy"],"freshness":"critical","copyright":"public-decision"},
+    {"id":"cfc","name":"Conselho Federal de Contabilidade","url":"https://cfc.org.br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["accounting","audit"],"freshness":"critical","copyright":"official-publication"},
+    {"id":"cpc","name":"Comitê de Pronunciamentos Contábeis","url":"https://www.cpc.org.br","authority":"standards","tier":"T1","jurisdiction":"BR","domains":["accounting"],"freshness":"critical","copyright":"standards"},
+    {"id":"bacen","name":"Banco Central do Brasil","url":"https://www.bcb.gov.br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["treasury","finance"],"freshness":"critical","copyright":"official-publication"},
+    {"id":"cvm","name":"Comissão de Valores Mobiliários","url":"https://www.gov.br/cvm/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["accounting","finance"],"freshness":"critical","copyright":"official-publication"},
+    {"id":"sefaz","name":"Secretarias de Fazenda estaduais","url":"https://www.gov.br/receitafederal/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["tax"],"freshness":"critical","copyright":"official-publication"},
+    {"id":"municipal-tax","name":"Municípios competentes","url":"https://www.gov.br/pt-br/servicos/consultar-cadastro-nacional-de-pessoas-juridicas","authority":"official","tier":"T1","jurisdiction":"BR","domains":["tax"],"freshness":"critical","copyright":"official-publication"},
+    {"id":"abrh","name":"ABRH Brasil","url":"https://abrhbrasil.org.br","authority":"professional","tier":"T3","jurisdiction":"BR","domains":["hr"],"freshness":"periodic","copyright":"third-party"},
+    {"id":"fipecafi","name":"FIPECAFI","url":"https://fipecafi.org","authority":"professional","tier":"T3","jurisdiction":"BR","domains":["accounting","finance"],"freshness":"periodic","copyright":"third-party"},
+    {"id":"econet","name":"Econet","url":"https://www.econeteditora.com.br","authority":"secondary","tier":"T3","jurisdiction":"BR","domains":["labor","payroll","tax"],"freshness":"periodic","use_for":["practical-reference","topic-discovery","permitted-interpretation"],"never_use_as":["sole-legal-authority","copied-paid-content"],"copyright":"third-party-paid-or-restricted"},
+    {"id":"openai-skills","name":"OpenAI Agent Skills guidance","url":"https://developers.openai.com","authority":"benchmark","tier":"T4","jurisdiction":"global","domains":["architecture"],"freshness":"periodic","copyright":"third-party"}
+  ]
+}

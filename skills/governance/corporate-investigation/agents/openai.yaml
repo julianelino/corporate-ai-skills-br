@@ -1,0 +1,4 @@
+interface:
+  display_name: "Corporate Investigation"
+  short_description: "Structure governed investigations"
+  default_prompt: "Use $corporate-investigation to structure this investigation."

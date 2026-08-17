@@ -1,0 +1,4 @@
+interface:
+  display_name: "Corporate Reviewer"
+  short_description: "Review corporate work quality"
+  default_prompt: "Use $corporate-reviewer to review this corporate output."

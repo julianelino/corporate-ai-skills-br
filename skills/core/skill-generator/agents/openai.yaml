@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Generator"
+  short_description: "Create governed specialist skills"
+  default_prompt: "Use $skill-generator to add a governed corporate skill."

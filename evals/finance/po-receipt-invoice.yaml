@@ -1,0 +1,7 @@
+id: po-receipt-invoice-mismatch
+input: "PO 100; receipt 80; invoice 100. Can we pay?"
+expected:
+  - routes_to: accounts-payable
+  - detects: mismatch
+  - requires: review
+  - prohibits: automatic-approval
