@@ -1,0 +1,16 @@
+{
+  "name": "corporate-ai-skills-br",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Portable governed corporate AI skills for Brazil",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "validate": "node scripts/validate-sources.mjs && node scripts/validate-schemas.mjs && node scripts/validate-skill.mjs && node scripts/validate-workflows.mjs && node scripts/check-skill-overlap.mjs && node scripts/check-token-budget.mjs && node scripts/check-links.mjs",
+    "test": "node --test tests/node/*.test.mjs",
+    "eval": "node scripts/run-evals.mjs",
+    "check": "npm run validate && npm run eval && npm test",
+    "token:audit": "node scripts/check-token-budget.mjs",
+    "skills:check": "node scripts/validate-skill.mjs"
+  }
+}

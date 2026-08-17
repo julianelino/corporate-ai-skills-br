@@ -82,4 +82,4 @@ Repository releases use semantic versioning. Each skill has its own version and 
 
 ## Runtime independence
 
-The governed product surface is Markdown, YAML, JSON Schema, and templates. It has no mandatory local programming runtime. `engines/` describes deterministic contracts independently of language; the Python files are tested reference implementations for maintainers only. An adapter must preserve engine inputs, outputs, precision, errors, auditability, and approval boundaries when using another runtime.
+The governed product surface is Markdown, YAML, JSON Schema, and templates. It has no mandatory local programming runtime. `engines/` describes deterministic contracts independently of language; Node.js implementations are the preferred optional automation runtime. Python is reserved for a future optional advanced-analytics adapter. An adapter must preserve engine inputs, outputs, precision, errors, auditability, and approval boundaries when using another runtime.

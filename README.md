@@ -45,17 +45,28 @@ Source-dependent legal, tax, payroll, accounting, SST, eSocial, SPED, CCT/ACT, a
 
 Use the repository as controlled source material in a compatible workspace. Keep the shared foundations available, make individual skill directories discoverable by the platform in use, and only load relevant references for the request. **No Python, Node.js, package manager, or local runtime is required to use the skills, workflows, policies, schemas, or references.** Do not import real employee, medical, banking, customer, credential, or production data into fixtures or examples.
 
-## Optional contributor tooling
+## Optional automation runtime
 
-The Python scripts and tests are optional reference tooling for maintainers; they are not part of the product runtime. GitHub Actions provisions its own Python environment for these checks. A platform adapter may implement the engine specifications in Python, JavaScript/TypeScript, VBA, Apps Script, ABAP, or another approved runtime.
+The Core has zero runtime dependencies. For deterministic engines, repository validation, token auditing, and evals, the preferred optional runtime is **Node.js 20+**. It uses only native Node functionality; `npm install` is not required. Python may be introduced only by a future advanced-analytics adapter, never by the Core.
 
-If you choose to run the reference checks locally, use:
+If Node is available, run the full automation suite:
 
 ```bash
-python3 scripts/validate-skill.py skills
-python3 scripts/validate-sources.py sources/SOURCE_REGISTRY.yaml
-pytest -q
+npm run check
 ```
+
+## Portable validation scripts
+
+Run the no-runtime structural validation for your operating system:
+
+| Platform | Command |
+| --- | --- |
+| Linux | `bash scripts/validate.sh` |
+| macOS | `bash scripts/validate.sh` |
+| Windows PowerShell | `powershell -ExecutionPolicy Bypass -File scripts/validate.ps1` |
+| Windows Command Prompt | `scripts\validate.cmd` |
+
+See [scripts/README.md](scripts/README.md) for the boundary between portable validation and optional deep maintainer checks.
 
 ## Author
 

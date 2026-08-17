@@ -1,0 +1,11 @@
+runtime_policy:
+  core:
+    python_required: false
+    node_required: false
+  automation:
+    preferred_runtime: node
+    node_minimum_version: "20"
+    external_dependencies: false
+  advanced_analytics:
+    python: optional
+    activation: explicit-adapter-only

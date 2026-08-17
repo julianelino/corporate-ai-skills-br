@@ -6,17 +6,26 @@ on:
     branches: [main]
 
 jobs:
+  portable-structure:
+    name: portable structure (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - if: runner.os != 'Windows'
+        run: bash scripts/validate.sh
+      - if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./scripts/validate.ps1
+
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: "3.12"
-      - run: python3 scripts/validate-sources.py sources/SOURCE_REGISTRY.yaml
-      - run: python3 scripts/validate-schemas.py schemas
-      - run: python3 scripts/validate-skill.py skills
-      - run: python3 scripts/validate-workflows.py workflows
-      - run: python3 scripts/check-skill-overlap.py skills
-      - run: python3 scripts/check-token-budget.py skills
-      - run: python3 -m pytest -q
+          node-version: "20"
+      - run: npm run check
