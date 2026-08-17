@@ -20,7 +20,7 @@ Use one specialist for a simple request, one or two for a typical request, and t
 - `workflows/` — approval-gated multi-specialist processes.
 - `knowledge/registry/` and `sources/` — capability and source registries.
 - `reasoning/`, `schemas/`, `policies/`, `context/` — shared foundations and controlled corporate context boundaries.
-- `engines/` — deterministic calculations and matching.
+- `engines/` — platform-neutral deterministic-engine specifications plus optional reference implementations.
 - `evals/`, `fixtures/`, `tests/`, `scripts/` — synthetic evaluation and quality controls.
 
 Read [ARCHITECTURE.md](ARCHITECTURE.md) before extending the platform and [GOVERNANCE.md](GOVERNANCE.md) before changing a critical skill.
@@ -43,9 +43,13 @@ Source-dependent legal, tax, payroll, accounting, SST, eSocial, SPED, CCT/ACT, a
 
 ## Installation and use
 
-Use the repository as controlled source material in a compatible workspace. Keep the shared foundations available, make individual skill directories discoverable by the platform in use, and only load relevant references for the request. Do not import real employee, medical, banking, customer, credential, or production data into fixtures or examples.
+Use the repository as controlled source material in a compatible workspace. Keep the shared foundations available, make individual skill directories discoverable by the platform in use, and only load relevant references for the request. **No Python, Node.js, package manager, or local runtime is required to use the skills, workflows, policies, schemas, or references.** Do not import real employee, medical, banking, customer, credential, or production data into fixtures or examples.
 
-Run local validation after changes:
+## Optional contributor tooling
+
+The Python scripts and tests are optional reference tooling for maintainers; they are not part of the product runtime. GitHub Actions provisions its own Python environment for these checks. A platform adapter may implement the engine specifications in Python, JavaScript/TypeScript, VBA, Apps Script, ABAP, or another approved runtime.
+
+If you choose to run the reference checks locally, use:
 
 ```bash
 python3 scripts/validate-skill.py skills

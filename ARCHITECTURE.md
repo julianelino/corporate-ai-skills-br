@@ -16,7 +16,7 @@ The repository separates responsibilities deliberately:
 | Workflow | Ordered multi-component process with gates and audit expectations. |
 | Reasoning pack | Reusable method, never domain-specific facts. |
 | Knowledge/reference | Detailed, selectively loaded material with source and temporality. |
-| Engine | Deterministic operation; it calculates or validates, but does not decide. |
+| Engine | Platform-neutral deterministic operation specification; a runtime adapter calculates or validates, but does not decide. |
 | Schema | Stable data shape and validation rules. |
 | Policy | Repository-wide non-negotiable control. |
 | Adapter | Platform or enterprise-system mapping; never owns business policy. |
@@ -79,3 +79,7 @@ Corporate context is partitioned by domain and loaded only for the use case. Mas
 ## Versioning and maturity
 
 Repository releases use semantic versioning. Each skill has its own version and one of `EXPERIMENTAL`, `BETA`, `STABLE`, `CRITICAL`, `DEPRECATED`, or `RETIRED`. A critical skill change requires sources, rationale, impact assessment, tests, and human review.
+
+## Runtime independence
+
+The governed product surface is Markdown, YAML, JSON Schema, and templates. It has no mandatory local programming runtime. `engines/` describes deterministic contracts independently of language; the Python files are tested reference implementations for maintainers only. An adapter must preserve engine inputs, outputs, precision, errors, auditability, and approval boundaries when using another runtime.
