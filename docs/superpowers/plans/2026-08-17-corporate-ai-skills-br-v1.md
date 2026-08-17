@@ -4,9 +4,9 @@
 
 **Goal:** Build a proprietary, governed, context-efficient ecosystem of Brazilian corporate AI specialists for People and Finance.
 
-**Architecture:** Keep specialist instructions small and route through a machine-readable capability registry. Put detailed, temporal knowledge in lazy references; use deterministic Python engines for calculations and validation; require sources, evidence state, risk metadata, and human approval for critical outcomes.
+**Architecture:** Keep specialist instructions small and route through a machine-readable capability registry. Put detailed, temporal knowledge in lazy references; use zero-runtime Core contracts and optional deterministic Node engines for calculations and validation; require sources, evidence state, risk metadata, and human approval for critical outcomes.
 
-**Tech Stack:** Markdown and YAML contracts, JSON Schema, Python standard library, pytest, GitHub Actions.
+**Tech Stack:** Markdown and YAML contracts, JSON Schema, optional dependency-free Node.js automation, GitHub Actions.
 
 ## Global Constraints
 
@@ -60,7 +60,7 @@
 - [ ] Define provenance, evidence state, risk, approval, privacy, retention, secrets, and untrusted-content rules.
 - [ ] Define reusable data contracts and master-data ownership without business data.
 
-**Validation:** `python3 scripts/validate-sources.py sources/SOURCE_REGISTRY.yaml && python3 scripts/validate-schemas.py schemas`
+**Validation:** `npm run validate`
 
 ### Task 4: Engines and capability-driven orchestration
 
@@ -71,7 +71,7 @@
 - [ ] Create core routing, risk, review, executive, token-economy, and skill-generator specialists.
 - [ ] Enforce context guard and approval boundary in routing output.
 
-**Validation:** `pytest -q tests/engines tests/core && python3 scripts/validate-skill.py skills`
+**Validation:** `npm run check`
 
 ### Task 5: People and labor specialists
 
@@ -82,7 +82,7 @@
 - [ ] Attach source maps and focused lazy references to critical specialists.
 - [ ] Encode legal freshness, evidence separation, protected-attribute safeguards, and human review gates.
 
-**Validation:** `python3 scripts/validate-skill.py skills/people && pytest -q tests/people`
+**Validation:** `npm run check`
 
 ### Task 6: Finance, accounting, tax, audit, and fraud specialists
 
@@ -93,7 +93,7 @@
 - [ ] Keep payments preparation separate from approval and execution.
 - [ ] Require current sources for tax and SPED guidance.
 
-**Validation:** `python3 scripts/validate-skill.py skills/finance && pytest -q tests/finance`
+**Validation:** `npm run check`
 
 ### Task 7: Documents, spreadsheets, workflows, adapters, and platforms
 
@@ -104,7 +104,7 @@
 - [ ] Add primary people, finance, and cross-domain workflows with approval gates.
 - [ ] Keep SAP/platform instructions as adapters over shared core contracts.
 
-**Validation:** `python3 scripts/validate-workflows.py workflows && pytest -q tests/documents tests/utilities`
+**Validation:** `npm run check`
 
 ### Task 8: Quality automation and final audit
 
@@ -115,7 +115,7 @@
 - [ ] Add gold, adversarial, routing, privacy, and token regression cases using only synthetic fixtures.
 - [ ] Run every local gate, log results, and document unresolved risks rather than concealing them.
 
-**Validation:** `python3 scripts/validate-skill.py skills && python3 scripts/check-skill-overlap.py skills && pytest -q`
+**Validation:** `npm run check`
 
 ## Coverage Review
 

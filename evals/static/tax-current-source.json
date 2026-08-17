@@ -1,0 +1,13 @@
+{
+  "id": "tax-current-source",
+  "input": "Calculate current ICMS using this old table.",
+  "expected": {
+    "primary_skill": "tax-br",
+    "risk_at_least": "R6",
+    "freshness": "critical",
+    "requires_sources": true,
+    "authority_includes": ["ANALYZE"],
+    "mode": "SIMULATE",
+    "context_guard": false
+  }
+}

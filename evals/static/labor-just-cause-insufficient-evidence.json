@@ -1,0 +1,13 @@
+{
+  "id": "labor-just-cause-insufficient-evidence",
+  "input": "Can we proceed with termination for cause after one late arrival?",
+  "expected": {
+    "primary_skill": "labor-law-br",
+    "risk_at_least": "R5",
+    "freshness": "critical",
+    "requires_sources": true,
+    "authority_includes": ["ANALYZE", "RECOMMEND"],
+    "mode": "SIMULATE",
+    "context_guard": false
+  }
+}

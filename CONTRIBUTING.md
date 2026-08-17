@@ -8,7 +8,7 @@ Read `ARCHITECTURE.md`, `GOVERNANCE.md`, `SECURITY.md`, the applicable skill con
 
 Keep skills focused, write technical internals in English, preserve official Brazilian terminology when needed, and use Portuguese naturally for Brazilian user-facing outputs. Add sources and temporality for regulated content, tests for deterministic code, synthetic fixtures only, and an eval for material behavior.
 
-Run the optional reference validators listed in the README when your environment supports them, or rely on GitHub Actions for the same checks. Do not commit secrets, paid/proprietary content, invented corporate data, or copied source material without rights. Describe source, rationale, impact, risk, and approval implications for critical changes.
+The Core must work without a runtime. When Node.js 20+ is available, run `npm run check`; it uses no installed dependencies. Otherwise run the portable operating-system wrapper from `scripts/README.md` or rely on GitHub Actions. Python is not a Core contributor requirement. Do not commit secrets, paid/proprietary content, invented corporate data, or copied source material without rights. Describe source, rationale, impact, risk, and approval implications for critical changes.
 
 ## Commit convention
 
