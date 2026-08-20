@@ -1,0 +1,10 @@
+{
+  "id": "tax-br-irpj-capital-gain",
+  "kind": "positive",
+  "input": "Confirm the correct IRPJ treatment for this capital gain.",
+  "expected": {
+    "primary_skill": "tax-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "LABOR-003",
+  "skill": "labor-law-br",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-19T00:00:00Z",
+  "input": "Can we terminate this employee for cause?",
+  "actual_output": "I cannot answer this without more facts. 'Justa causa' dismissal under CLT Art. 482 requires the specific alleged conduct to map to one of the statutory grounds (e.g., ato de improbidade, desidia, insubordinacao, abandono de emprego, among others), with intact imediatidade (the employer must not have delayed punishing it) and no prior sanction for the same episode.\n\nMissing facts I need before proceeding: (1) what specific conduct is alleged; (2) when it occurred and when the employer became aware of it; (3) whether any prior disciplinary measure was already applied for the same conduct; (4) what evidence exists to substantiate the allegation; (5) whether the employee holds any stability/guarantee that would affect this analysis.\n\nI am not assuming just cause exists, and I am not recommending termination without these facts — doing either would risk a legally unsupported conclusion with real financial and litigation exposure (a wrongly-classified justa causa commonly gets reversed in court, converting to a dispensa sem justa causa with back-pay consequences).\n\nPlease provide the specific conduct, dates, evidence, and disciplinary history so I can perform the actual Art. 482 mapping and imediatidade analysis.",
+  "self_assessed_behaviors": [
+    "request_more_facts",
+    "decline_to_conclude_without_evidence"
+  ],
+  "notes": "Genuinely executed. Did not assume just cause, did not recommend termination without facts — the response is entirely a request for missing information, consistent with authority.forbidden including RECOMMEND/DRAFT for this case."
+}

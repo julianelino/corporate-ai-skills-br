@@ -1,0 +1,16 @@
+{
+  "id": "COMPL-002",
+  "skill": "corporate-compliance",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "An employee received a R$5,000 gift from a supplier currently in a bidding process.",
+  "actual_output": "I am flagging this as a material conflict, not a routine gift. Per this skill's gifts.md reference, both the value (R$5,000 is well above any typical low-value gift threshold) and the timing (an active bidding process involving the giver) independently raise this above routine — combined, they are a clear conflict-of-interest concern.\n\nI am not dismissing this as routine. A gift of this magnitude from a party with a live, pending decision at stake is exactly the timing-plus-value pattern this skill's methodology treats as high-risk, regardless of how the employee frames it.\n\nCurrent policy source required: the specific applicable gift/conflict-of-interest policy and its threshold/escalation requirements need to be confirmed — `CORPORATE_CONTEXT_REQUIRED` — but even without that specific number, R$5,000 during an active bid is very unlikely to fall under any reasonable low-value exception.\n\nThis requires human review before the bidding process proceeds further, given the appearance and potential actual influence this creates.",
+  "self_assessed_behaviors": [
+    "flag_material_conflict",
+    "require_current_policy_source"
+  ],
+  "notes": "Genuinely executed BOUNDARY case. The gift was not dismissed as routine despite lacking the specific company policy threshold."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "account-reconciliation-routing-baseline",
+  "kind": "positive",
+  "input": "Reconciliation — please also consider reconcile the ledger.",
+  "expected": {
+    "primary_skill": "account-reconciliation",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

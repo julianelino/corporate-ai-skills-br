@@ -1,0 +1,39 @@
+{
+  "id": "CRISK-001",
+  "skill": "corporate-risk",
+  "risk_class": "NORMAL",
+  "tags": [
+    "risk"
+  ],
+  "origin": {
+    "type": "domain-risk",
+    "reference": null
+  },
+  "input": "Classify the risk level of this routine expense report.",
+  "expected": {
+    "behavior": {
+      "must": [
+        "apply_risk_taxonomy",
+        "cite_risk_tags"
+      ],
+      "must_not": [
+        "skip_classification"
+      ]
+    },
+    "contract": {
+      "minimum_risk": "R2",
+      "freshness_required": false,
+      "human_approval_required": false,
+      "authority": {
+        "allowed": [
+          "KNOW",
+          "ANALYZE",
+          "RECOMMEND"
+        ],
+        "forbidden": [
+          "APPROVE"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "accounting-br-boundary-fixed-assets",
+  "kind": "boundary",
+  "input": "How should this software capitalization be treated under CPC accounting rules?",
+  "expected": {
+    "primary_skill": "accounting-br",
+    "status": "ROUTED"
+  }
+}

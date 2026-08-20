@@ -1,0 +1,10 @@
+{
+  "id": "employee-relations-routing-baseline",
+  "kind": "positive",
+  "input": "Harassment — please also consider discrimination.",
+  "expected": {
+    "primary_skill": "employee-relations",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

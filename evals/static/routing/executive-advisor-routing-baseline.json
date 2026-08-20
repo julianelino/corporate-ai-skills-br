@@ -1,0 +1,10 @@
+{
+  "id": "executive-advisor-routing-baseline",
+  "kind": "positive",
+  "input": "Executive decision — please also consider decision memo.",
+  "expected": {
+    "primary_skill": "executive-advisor",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

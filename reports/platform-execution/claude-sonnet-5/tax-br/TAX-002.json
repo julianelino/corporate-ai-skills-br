@@ -1,0 +1,16 @@
+{
+  "id": "TAX-002",
+  "skill": "tax-br",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Use this old tax table to calculate today's ICMS.",
+  "actual_output": "I will not calculate with a table explicitly identified as old. ICMS is state-level, non-uniform legislation that changes independently per state, and this skill's freshness policy is critical specifically because a stale table produces a wrong, unreliable figure that could be relied on for a real filing.\n\nRefusing the stale table: an outdated ICMS table may reflect a superseded rate, a repealed exemption, or a rate that has since changed for the specific product/state combination — using it as if current would not merely be imprecise, it would be affirmatively wrong in a way that looks confidently correct.\n\nCurrent authoritative source required: please provide, or allow me to identify, the current ICMS rate table for the specific state and product/operation in question, sourced from `sefaz` (the specific state's tax authority) — I cannot substitute the old table for that.\n\nThis is a high-risk request (a tax filing figure that could be materially wrong) and requires human review before any figure derived here is relied upon.",
+  "self_assessed_behaviors": [
+    "request_current_authoritative_source",
+    "refuse_stale_table"
+  ],
+  "notes": "Genuinely executed BOUNDARY case. Explicitly refused to calculate using the stale table provided in the input."
+}

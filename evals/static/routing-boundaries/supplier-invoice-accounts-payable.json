@@ -1,0 +1,10 @@
+{
+  "id": "supplier-invoice-accounts-payable",
+  "note": "accounts-payable and billing-invoicing both legitimately use \"invoice\"; anti_triggers (customer/client vs supplier/vendor) resolve the counterparty direction instead of one skill winning by accident.",
+  "input": "Verify this supplier invoice before payment.",
+  "expected": {
+    "primary_skill": "accounts-payable",
+    "status": "ROUTED",
+    "must_not_include_specialist": ["billing-invoicing"]
+  }
+}

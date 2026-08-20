@@ -1,0 +1,10 @@
+{
+  "id": "budgeting-routing-baseline",
+  "kind": "positive",
+  "input": "Budget cycle — please also consider budget submission.",
+  "expected": {
+    "primary_skill": "budgeting",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

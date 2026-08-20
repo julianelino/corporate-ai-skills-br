@@ -1,0 +1,10 @@
+{
+  "id": "finance-analytics-routing-baseline",
+  "kind": "positive",
+  "input": "Finance kpi — please also consider finance trend analysis.",
+  "expected": {
+    "primary_skill": "finance-analytics",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

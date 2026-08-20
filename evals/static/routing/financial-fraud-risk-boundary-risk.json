@@ -1,0 +1,6 @@
+{
+  "id": "financial-fraud-risk-boundary-risk",
+  "kind": "boundary",
+  "input": "A fraud signal was detected in this payment; assess the risk before approval.",
+  "expected": { "primary_skill": "financial-fraud-risk", "status": "ROUTED" }
+}

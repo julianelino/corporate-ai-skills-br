@@ -1,0 +1,10 @@
+{
+  "id": "fpa-routing-baseline",
+  "kind": "positive",
+  "input": "Budget — please also consider forecast.",
+  "expected": {
+    "primary_skill": "fpa",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

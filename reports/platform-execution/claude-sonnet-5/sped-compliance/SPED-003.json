@@ -1,0 +1,15 @@
+{
+  "id": "SPED-003",
+  "skill": "sped-compliance",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Is this SPED file valid?",
+  "actual_output": "I cannot determine validity without more information. 'SPED file' covers several distinct obligations (ECD, ECF, EFD-ICMS/IPI, EFD-Contribuições, EFD-Reinf) — each with its own leiaute, validation rules, and PVA behavior (see this skill's layouts-validation.md reference). I need to know: which specific obligation this file is for; the leiaute version it was prepared against; whether it has already been run through the applicable PVA; and, if so, what validation result (accepted, rejected, and any specific error messages) it produced.\n\nI am not assuming this file is valid without that information — a file can be well-formed at a glance and still fail PVA validation for reasons like a chart-of-accounts natureza mismatch or a missing mandatory field, which aren't visible without actually running the validator or reviewing its output.\n\nPlease specify which SPED obligation this is, its leiaute version, and share the PVA validation result if one exists.",
+  "self_assessed_behaviors": [
+    "request_file_and_layout_detail"
+  ],
+  "notes": "Genuinely executed. Validity was not assumed; specific missing details were requested."
+}

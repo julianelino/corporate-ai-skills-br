@@ -1,0 +1,9 @@
+{
+  "id": "dismissal-risk-not-tax-br",
+  "note": "Regression guard: tax-br's \"iss\" trigger (ICMS/ISS service tax) used to match inside \"dismISSal\" under bare-substring matching. Token/phrase-boundary matching fixes this structurally. The tie between corporate-risk (\"risk\") and labor-law-br (\"dismissal\") is a separate, legitimate ambiguity — not asserted away here.",
+  "input": "There is a dismissal risk here that needs review.",
+  "expected": {
+    "status": "AMBIGUOUS",
+    "must_not_include_specialist": ["tax-br"]
+  }
+}

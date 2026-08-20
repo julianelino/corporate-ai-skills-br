@@ -1,0 +1,10 @@
+{
+  "id": "occupational-health-br-routing-baseline",
+  "kind": "positive",
+  "input": "Pcmso — please also consider occupational health.",
+  "expected": {
+    "primary_skill": "occupational-health-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

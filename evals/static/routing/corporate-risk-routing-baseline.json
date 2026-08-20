@@ -1,0 +1,10 @@
+{
+  "id": "corporate-risk-routing-baseline",
+  "kind": "positive",
+  "input": "Risk — please also consider approval.",
+  "expected": {
+    "primary_skill": "corporate-risk",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

@@ -1,3 +1,5 @@
 # Reference Routing Engine
 
 This directory is the architecture-facing location. Python imports use `engines/reference_routing/` because hyphens are not valid Python package names.
+
+`index.mjs` is a dispatcher, not an implementation: it exports `route` from `v2.mjs` by default, or `v1.mjs` when `ROUTER_VERSION=v1` is set in the environment. `v1.mjs` is the frozen Task 1c matcher (token/phrase-boundary trigger matching, prefix escape hatch, anti-triggers, specificity-weighted scoring) kept as the regression baseline. `v2.mjs` (Task 4) imports v1's matcher rather than reimplementing it, and adds handle evidence, namespace consensus, and informational intent/risk/freshness signal detection — see `ARCHITECTURE.md` "Router v2" for what each of those does and, as importantly, does not do (none of the three signals affects candidate scoring). `scripts/router-compare.mjs` (`npm run router:compare`) runs every committed static eval case through both engines and classifies every outcome that differs — UNCHANGED, INTENTIONAL_CHANGE, IMPROVED, or REGRESSION — against the case's own `expected` block, never against "whatever v1 said".

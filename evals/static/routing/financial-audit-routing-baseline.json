@@ -1,0 +1,10 @@
+{
+  "id": "financial-audit-routing-baseline",
+  "kind": "positive",
+  "input": "Financial audit — please also consider internal control testing.",
+  "expected": {
+    "primary_skill": "financial-audit",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

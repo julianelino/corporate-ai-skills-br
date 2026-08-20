@@ -18,7 +18,25 @@
 
 ---
 
-### Task 1: Executable evaluation framework
+### Task 0: Capability registry integrity (P0, done 2026-08-17)
+
+**Goal:** Guarantee every active skill is accounted for by routing governance before Router v2 or freshness work builds on top of it. A repository audit found the router's `knowledge/registry/capability-registry.yaml` hand-maintained only 13 of 56 skills — including `accounting-br`, one of the five skills `GOVERNANCE.md` names critical — so 77% of skills were unreachable by keyword routing with no gate catching it.
+
+**Files:**
+- Created: `knowledge/registry/routing-triggers.yaml`, `knowledge/registry/capability-registry.generated.yaml`, `scripts/build-capability-registry.mjs`, `scripts/validate-registry-coverage.mjs`, `scripts/check-registry-drift.mjs`, `scripts/report-routing-coverage.mjs`
+- Modified: every `skills/**/skill.yaml` (added `routing.exposure`), `engines/reference-routing/index.mjs`, `skills/core/corporate-router/SKILL.md`, `ARCHITECTURE.md`, `package.json`
+- Removed: `knowledge/registry/capability-registry.yaml` (superseded by the generated file)
+
+- [x] Add `routing.exposure` (`DIRECT`/`DELEGATED`/`INTERNAL`/`UTILITY`) to every skill manifest; `DELEGATED` carries `callable_by`, `INTERNAL` carries `reason`.
+- [x] Generate the registry from manifests plus curated triggers instead of hand-maintaining it; make the router read the generated file.
+- [x] Hard-fail when a `DIRECT`/`DELEGATED` skill is absent from the registry, when a governance-critical or `status: CRITICAL` skill is invisible, or when `routes_to` points at an unknown skill (`validate-registry-coverage.mjs`).
+- [x] Hard-fail when the committed generated registry no longer matches the manifests (`check-registry-drift.mjs`).
+- [x] Remove the router's self-referential fallback: `route()` now returns `status: ROUTED | NO_MATCH | AMBIGUOUS` with `primary: null` on no match, instead of defaulting back to `corporate-router`.
+- [x] Wire both gates into `npm run validate`.
+
+**Deferred to later tasks** (not required to close the P0 finding): anti-triggers/namespace scoring in the router, a per-skill routing/behavioral/adversarial eval minimum, and the full multi-dimensional coverage matrix (registry × sources × evals × human review). Track these under Task 1/Task 6 below.
+
+### Task 1: Executable evaluation framework (done 2026-08-17)
 
 **Files:**
 - Create: `evals/static/*.json`, `evals/behavioral/*.json`, `scripts/run-static-evals.mjs`, `scripts/run-behavioral-evals.mjs`, `tests/node/evals.test.mjs`
@@ -29,54 +47,258 @@
 - Behavioral case: `{ id, input, expected: { must_include_behaviors, must_not } }`.
 - Behavioral result: `{ id, behaviors: string[], output?: string }`.
 
-- [ ] Implement static assertions against router and skill contracts.
-- [ ] Implement behavioral assertions against externally produced structured results; skip only when no result file is supplied.
-- [ ] Add initial legal, payment, privacy, and routing cases.
-- [ ] Run `npm run eval` and Node tests.
+- [x] Implement static assertions against router and skill contracts.
+- [x] Implement behavioral assertions against externally produced structured results; skip only when no result file is supplied.
+- [x] Add initial legal, payment, privacy, and routing cases.
+- [x] Run `npm run eval` and Node tests.
+- [x] Migrate the 10 schema-only `evals/{domain}/*.yaml` gold cases (`run-evals.mjs`, which only validated that a case file had `id`/`input`/`expected` — never actually routed or asserted anything) into 7 new static cases plus behavioral companions, and retire `run-evals.mjs`/`eval:legacy`. Two legacy cases (`medical-record-access`, `stale-tax-table`) duplicated static cases already migrated in an earlier pass; only their missing behavioral companions were added. One (`supplier-pix-change`) was already fully covered by `payment-bank-change` static+behavioral and needed nothing.
+- [x] Extend `run-static-evals.mjs` with an `expected.status` (`ROUTED`/`NO_MATCH`/`AMBIGUOUS`) assertion so routing-only cases (deterministic-engine bypass, `CONTEXT_GUARD`) don't need a skill contract.
+- [x] Fix `route()` so `AMBIGUOUS` never names a `primary` (only `NO_MATCH` did before); a router that is unsure should not look confident.
+- [x] Widen `financial-fraud-risk`, `labor-law-br`, and `talent-acquisition` triggers in `routing-triggers.yaml` — the legacy inputs exposed real collisions (`"duplicate...fraud"` was winning to `accounts-payable` on the `invoice` keyword alone; `"terminate a pregnant employee"` and `"rank these candidates"` matched nothing).
 
-### Task 2: Gold-case and fixture coverage
+### Task 1b: Routing coverage baseline (P1, done 2026-08-17)
 
-**Files:**
-- Create: critical-domain gold cases and synthetic People, Finance, Accounting, and Tax fixtures.
-- Modify: coverage-report script and quality thresholds.
+**Goal:** Registry integrity (Task 0) proved every skill is *accounted for*; it never proved the router can actually *reach* each one. Give every routable skill at least one automated proof that its activation path works, so breadth is verified before investing in anti-triggers/namespaces (Task 6) — otherwise that work would tune collisions in a small slice of the graph while most skills still had zero routing evidence.
 
-- [ ] Add cases according to risk tier and map every case to a skill/workflow/fixture.
-- [ ] Fail readiness when a critical skill lacks its minimum gold coverage.
-
-### Task 3: Critical reference depth
-
-**Files:**
-- Create: thematic references under critical skills.
-- Modify: critical SKILL routing instructions and sources maps.
-
-- [ ] Add purpose, load condition, decision points, evidence, freshness, and related references without copying source text.
-
-### Task 4: Source Registry v2 and freshness monitoring
+**Method:** for every candidate input, ran the real `route()` first and inspected `routed.debug` before writing any `expected` block — never wrote the assertion first and forced the router to match it.
 
 **Files:**
-- Modify: `sources/SOURCE_REGISTRY.yaml`.
-- Create: source baseline, monitor script, and issue workflow.
+- Created: `evals/static/routing/*.json` (64 cases: 48 one-per-skill baselines for the non-critical `DIRECT` skills, 10 extra positive + 5 boundary cases for the 5 `GOVERNANCE.md`-critical skills, 1 delegation case for `corporate-reviewer`), `scripts/validate-routing-eval-coverage.mjs`, `scripts/report-routing-eval-coverage.mjs`, `knowledge/registry/routing-collisions.yaml`
+- Modified: `engines/reference-routing/index.mjs` (added a `debug` field: matched triggers + score per candidate, not asserted by any eval, only for building/inspecting cases), `scripts/run-static-evals.mjs` (added `expected.delegate_target`, checked against the primary skill's `routes_to`), `knowledge/registry/routing-triggers.yaml` (see collisions below), `package.json`
 
-- [ ] Add verification lifecycle fields.
-- [ ] Compare HTTP validators or content fingerprints against baseline.
-- [ ] Open a human-review issue when a monitored source changes; never update knowledge automatically.
+- [x] `53/53` `DIRECT` skills have >=1 positive static routing eval (48 baseline + the 5 critical skills' existing/new positive cases).
+- [x] `corporate-reviewer` (the one `DELEGATED` skill) has 1 delegation eval, asserted structurally (`primary.routes_to` includes the delegate target), not by keyword match — it has no triggers by design.
+- [x] `skill-generator` and `token-economy` (`INTERNAL`) are explicitly exempted by the validator, not silently passing.
+- [x] All 5 `GOVERNANCE.md`-critical skills (`labor-law-br`, `payroll-br`, `tax-br`, `accounting-br`, `payments`) have >=3 positive cases and >=1 boundary/confusion case (mix of cases already committed during the eval migration and new ones written here).
+- [x] `scripts/validate-routing-eval-coverage.mjs` hard-fails on any gap; wired into `npm run eval` (so `npm run check` fails on a missing routing eval). Smoke-tested by removing `accounting-br`'s cases and confirming the failure, then restoring.
+- [x] `scripts/report-routing-eval-coverage.mjs` prints per-exposure coverage and per-critical-skill positive/boundary counts (`npm run routing:eval-report`). **Retired at the Final Reliability Gate (2026-08-18):** it kept its own hardcoded 5-name `GOVERNANCE_CRITICAL` copy — never updated when Task 1e introduced `quality_profile` — so it silently showed only 5 of the 13 real critical skills. Found by the gate's own "no duplicate hardcoded critical list" check. Removed rather than fixed: `npm run readiness` already reports the same per-skill routing counts correctly, dynamically, and this script had no other unique function.
+- [x] Boundary cases were **not** written to eliminate secondary candidates. `accounting-br`/`fixed-assets` on "software capitalization" and `tax-br`/`sped-compliance` on ICMS+EFD are asserted as legitimate overlaps (correct primary, plausible secondary), not bugs to squash.
+- [x] Collisions found while writing cases were fixed only when narrow and low-risk, and otherwise recorded in `knowledge/registry/routing-collisions.yaml` for the anti-triggers task rather than patched ad hoc:
+  - Fixed: `payments`' bare `"pay"` trigger was tying with `payroll-br` on "vacation pay" (alphabetical tiebreak picked `payments`) — added a more specific `"vacation pay"` trigger to `payroll-br`.
+  - Fixed: `payments`' bare `"ted"` trigger matched inside ordinary English past-tense verbs (repea**ted**, trea**ted**), and `labor-law-br` had no trigger at all for a plain "discipline an employee under a collective agreement" query — replaced `"ted"` with `"ted transfer"`/`"via ted"`, and added `"collective agreement"`/`"disciplinary"` to `labor-law-br`.
+  - Recorded, not fixed: `tax-br`'s bare `"iss"` trigger is a substring of "dismissal" (didn't flip any current case, but is a latent false-positive source); the generic `"pay"` trigger still adds noise to some payroll/labor queries. Both are exactly what word-boundary matching or anti-triggers should solve next, not one-off trigger patches.
+- [x] `npm run check` remains green (75 static eval cases total, up from 11).
 
-### Task 5: Executable security and injection gates
+**Routing accountability: 54/54 = 100%.** This measures that every routable capability has a proof its activation path is known — not that routing quality is complete. Depth (anti-triggers, namespaces, the multi-dimensional coverage matrix, manifest-level source/eval requirements) is deferred to the following tasks and is now informed by `routing-collisions.yaml`'s real inventory instead of guesswork.
+
+### Task 1c: Routing precision hardening (P1, done 2026-08-17)
+
+**Goal:** Task 1b's baseline proved every skill is reachable; building it also exposed that some of the wrong-primary bugs were mechanical (bare-substring matching), not semantic. Fix the matcher first, so anti-triggers only get added for genuine vocabulary overlap between two skills — not to paper over a trigger matching inside an unrelated word.
+
+**Method:** same discipline as Task 1a/1b — run the real `route()` first, inspect `routed.debug`, decide root cause, only then lock an eval's `expected`.
 
 **Files:**
-- Create: secret, security, and injection check scripts and eval cases.
-- Modify: package scripts and CI.
+- Modified: `engines/reference-routing/index.mjs` (rewritten matcher), `scripts/run-static-evals.mjs` (`must_not_include_specialist`, already had `delegate_target` from Task 1b), `scripts/build-capability-registry.mjs` (pass through `anti_triggers` and `routing.namespace`), `knowledge/registry/routing-triggers.yaml`, every `skills/**/skill.yaml` (`routing.namespace`), `knowledge/registry/routing-collisions.yaml` (expanded taxonomy), `ARCHITECTURE.md`
+- Created: `evals/static/routing-boundaries/*.json` (4 cases)
 
-- [ ] Scan high-signal secret patterns with synthetic-fixture allowlist.
-- [ ] Assert adversarial behavior contracts without treating untrusted content as instructions.
+- [x] Triggers now match on word/phrase boundaries, not bare substring. `"ted"` no longer matches inside `"repeated"`; `"iss"` no longer matches inside `"dismissal"` — fixed structurally in the matcher, not by patching those two triggers.
+- [x] A trailing `*` on a trigger is the explicit, opt-in prefix-match escape hatch (`"pay*"` also catches "payment", "payable"); scored at 0.5, below any exact single-token match (1), so a generic prefix can never out-rank or tie a precise word.
+- [x] Match weight is the trigger's token count (specificity), not "1 per matched trigger" — `"vacation pay"` (2) now legitimately outweighs `"pay"` (used to tie 1-1 with `"vacation"`).
+- [x] `anti_triggers` supported end-to-end (schema → build → router) and used only where a real collision was found: `accounts-payable` excludes on `{customer, client}`, `billing-invoicing` excludes on `{supplier, vendor}` — both skills legitimately use the word "invoice" for opposite counterparties, and `billing-invoicing` previously had no trigger for plain "invoice" at all, so `accounts-payable` won every time.
+- [x] `AMBIGUOUS` now only fires on an exact top-score tie (`status_reason: "score_tie"`) or `CONTEXT_GUARD` (`"context_guard"`) — not on any smaller margin, so none of the already-legitimate near-ties (accounting-br/fixed-assets, tax-br/sped-compliance) flipped to ambiguous.
+- [x] `routing.namespace` added to all 56 manifests (e.g. `finance.p2p`, `people.labor`, `core.internal`) — informational/organizational for now, explicitly not a two-phase routing gate (that would be real new complexity for uncertain payoff; revisit only if the collision inventory below keeps growing).
+- [x] `knowledge/registry/routing-collisions.yaml` taxonomy expanded to `lexical_false_positive` / `semantic_overlap` / `legitimate_handoff` / `missing_trigger` / `scoring_problem` / `namespace_conflict` (reserved). Every Task 1b finding re-classified; two turned out to be lexical bugs the matcher now fixes for free (were previously worked around with less-precise triggers, which have been reverted to their natural form: `"ted transfer"/"via ted"` → back to bare `"ted"`).
+- [x] `evals/static/routing-boundaries/` created with 4 regression-guard cases using the new `expected.must_not_include_specialist` assertion: the two structural lexical fixes (repeated/ted, dismissal/iss) and the two anti-trigger directions (supplier vs customer invoice).
+- [x] Did not try to eliminate the legitimate ambiguities (accounting-br/fixed-assets, tax-br/sped-compliance) — confirmed unchanged by rerunning the full suite.
+- [x] All 75 previously-committed static cases plus the 4 new boundary cases pass (79 total); `npm run check` green throughout, including a full regression pass after every trigger-file edit in this task.
 
-### Task 6: Router v2 and lifecycle controls
+**Not done, deliberately:** the fuller point-based scoring table (exact phrase/token/prefix/handle/namespace as separate weighted factors), `insufficient_margin`/`cross_namespace`/`conflicting_intents`/`insufficient_evidence` as detected `ambiguity_reason`s (only `score_tie` and `context_guard` are implemented — the others need namespace-aware or behavioral logic that doesn't exist yet), and namespace actually gating router candidate selection. These are real Router v2 (Task 4) territory and should be designed from a larger collision inventory than the one this task produced, not built ahead of the evidence.
+
+### Task 1d: Multidimensional coverage matrix (P1, done 2026-08-17)
+
+**Goal:** Tasks 0/1b/1c proved every skill is registered and reachable. That says nothing about whether a skill is actually *mature*. Answer, per skill and honestly: registry/routing/sources/eval-depth/behavioral coverage, separated from a distinct `release_blockers` list — a skill's percentage must never imply readiness by itself. Measure first; no coverage requirement is enforced yet (that is Task 1e, once these numbers say what to require).
 
 **Files:**
-- Modify: router, capability registry, contracts, and router tests.
+- Created: `scripts/report-skill-coverage.mjs` (`npm run coverage`), `scripts/validate-skill-coverage.mjs` (`npm run validate:coverage`), `reports/skill-coverage.json` (generated, gitignored)
+- Modified: `scripts/lib.mjs` (hoisted `GOVERNANCE_CRITICAL`, previously duplicated in `validate-registry-coverage.mjs` and `validate-routing-eval-coverage.mjs`, into one place), `package.json`, `.gitignore`
 
-- [ ] Return domain, task, risk signals, freshness signals, artifacts, action request, candidates, and minimal set.
-- [ ] Exclude `RETIRED`; warn on `DEPRECATED` only when no viable substitute exists.
+- [x] Report covers all 56 skills; `registry`/`routing_eval`/`eval_depth`/`behavioral_eval` are `null` (not `false`) for `INTERNAL`/`UTILITY` skills — never silently scored as a failure for a dimension that doesn't apply.
+- [x] `eval_depth` is a new, real signal, not padding: a skill only counts as "deep" if at least one of its static cases asserts something about the contract beyond bare routing (`risk_at_least`, `freshness`, `authority_includes`, or `requires_sources`) — distinguishing the 5 critical skills' rich cases from the 48 mechanical routing-only baselines from Task 1b.
+- [x] `adversarial_eval` and `human_review` are reported as repo-wide `0/56` with an explicit note that the mechanism doesn't exist yet (no `evals/adversarial/`, no `human_review` field in `skill.yaml`) — not folded into any skill's `coverage_pct`, so today's absence of a not-yet-built capability doesn't quietly punish every skill's score.
+- [x] `coverage_pct` and `release_blockers` are separate fields. A skill can show high coverage and still be `BLOCKED`.
+- [x] Release readiness computed for the 5 governance-critical skills specifically: **all 5 are `BLOCKED`** — `accounting-br` (50%) and `payroll-br` (67%) lack any contract-depth assertion and any behavioral case; all 5 lack adversarial coverage and human review (repo-wide gaps, not skill-specific failures). This is the expected, correct outcome for a repository that has not yet built Task 2/3/5/9 — not a bug in the measurement.
+- [x] `scripts/validate-skill-coverage.mjs` checks only that the report is complete and well-formed (all 56 skills present, required fields present, no duplicates) — it enforces no threshold. Wired into `npm run validate`.
+- [x] Did not touch any skill, trigger, or eval to raise a number. Confirmed by re-running `npm run check` before and after — same 79/79 static evals, same 54/56 registry accounting.
+- [x] `reports/skill-coverage.json` is a generated artifact (`.gitignore`d), not committed; `npm run coverage` regenerates it from source on demand.
+
+**Repo totals at time of writing:** registry 54/54 (100%), routing eval 54/54 (100%), eval depth 7/54 (13%), sources 35/56 (62.5%), references present 3/56 (5.4%), behavioral 7/54 (13%), adversarial 0/56 (mechanism absent), human review 0/56 (field absent). Sources and eval-depth/behavioral are the real next gaps this task exists to surface — not to close.
+
+### Task 1e: Manifest quality-profile requirements (P1, done 2026-08-17)
+
+**Goal:** Turn Task 1d's photograph into explicit, versioned, machine-checkable policy — without remediating a single gap it found. `quality_profile` says what a skill's tier requires; the report says what it actually has; the two stay separate on purpose.
+
+**Files:**
+- Created: `knowledge/registry/quality-profiles.yaml` (single policy source for `critical`/`high`/`standard`/`utility`/`internal`), `scripts/validate-quality-profile.mjs` (`npm run validate:quality`), `scripts/report-release-readiness.mjs` (`npm run readiness`, `npm run readiness -- --release`)
+- Modified: every `skills/**/skill.yaml` (`quality_profile`; `human_review` block for the 13 `critical`-profile skills only), `package.json`
+
+- [x] `quality_profile` classified for all 56 skills by a deterministic rule, not by name: `INTERNAL` exposure → `internal`; `financial-spreadsheets`/`spreadsheet-automation` → `utility`; `GOVERNANCE.md`-named critical (including `payroll-br`, which is `R5` not `R6`) → `critical`; `risk_ceiling R6` → `critical`; `R5` → `high`; everything else → `standard`. Result: 13 critical, 22 high, 17 standard, 2 utility, 2 internal.
+- [x] Requirements centralized once in `quality-profiles.yaml`, not repeated per skill — a `skill.yaml` declares only `quality_profile` (an override, when one is ever needed, requires a `reason`).
+- [x] `sources`/`references`/eval-type minimums/`human_review` are explicit per profile, distinct from `status` (maturity) — a skill can be `status: BETA` and `quality_profile: critical` at once, and several are.
+- [x] Consistency rules enforced structurally: `R5`/`R6` cannot be `standard`/`utility`/`internal`; `critical`/`high` profiles cannot fall below `freshness: conditional` (found no violations — the 4 governance/review skills with `freshness: conditional` are a deliberate, correct distinction from the 9 with `freshness: critical`, not a gap). Smoke-tested by forcing `tax-br` to `standard` and confirming the hard fail, then restoring.
+- [x] `human_review` given real per-skill state (`status`, `reviewed_at`, `reviewers`, `scope`) only for the 13 skills whose profile requires it — not scattered onto all 56 as a mostly-empty field.
+- [x] Two validators, two purposes, as specified: `validate-quality-profile.mjs` (structural — malformed/inconsistent profile assignment) is in `npm run check`. `report-release-readiness.mjs` (has each skill actually met its profile's requirements) is not — a readiness gap must not break ordinary development CI, only `npm run readiness -- --release`, confirmed to exit 1 today (38/56 skills `BLOCKED`, including all 13 `critical`-profile skills — expected, since `evals/adversarial/` and `human_review` approval don't exist as mechanisms yet).
+- [x] `coverage_pct` and `release_status` visibly diverge as intended: every `standard`-profile skill shows ~33% raw coverage yet `READY` (their profile requires only a routing eval, which all have); `labor-law-br` shows 100% coverage yet `BLOCKED` (behavioral/adversarial/human-review, all profile-required for `critical`).
+- [x] Touched no skill's content, sources, or evals to change a number. `npm run check` green throughout (79 static evals, 54/56 registry accounting, both unchanged).
+
+**Known simplification, noted rather than hidden:** `report-release-readiness.mjs` measures a `DELEGATED` skill's "routing eval" requirement by its delegation-case count against the same numeric minimum a `DIRECT` skill's positive-case count uses. That is why `corporate-reviewer` shows a `routing_eval` gap at 1/3 — a reasonable bar, but not a distinction designed for `DELEGATED` skills specifically. Revisit if a second `DELEGATED` skill ever exists and the bar turns out wrong for that shape.
+
+### Task 2: Critical behavioral gold cases (P1, done 2026-08-17 — gold-case half; fixture mapping deferred)
+
+**Goal:** Prove the 13 `quality_profile: critical` skills — dynamically discovered from `skill.yaml`, never hardcoded — don't just exist and route correctly, but have a minimum representative set of behavior contracts covering materially different risk scenarios, not five near-duplicates of the same happy path.
+
+**Method:** same discipline as every task before it — no source/router/human-review change; behavioral definitions only. `npm run check` re-run after every batch of case files.
+
+**Files:**
+- Created: `evals/behavioral/critical/<skill>/<ID>.json` (65 gold cases, 5 per critical skill), `scripts/validate-behavioral-gold-cases.mjs` (`npm run behavioral:validate`), `scripts/report-behavioral-gold-cases.mjs` (`npm run behavioral:report`)
+- Modified: `knowledge/registry/quality-profiles.yaml` (critical behavioral minimum 3→5, added `required_risk_classes`), `scripts/report-skill-coverage.mjs` and `scripts/report-release-readiness.mjs` (now count these gold cases toward the `behavioral`/`contract` dimensions, not just the flat `evals/behavioral/*.json` files from Task 1a), `package.json`
+
+- [x] Critical skill set discovered dynamically (`contracts().filter(c => c.quality_profile === 'critical')`) in every script that needs it — never a hardcoded list of 13 names.
+- [x] Cases are behavior contracts (`expected.behavior.must`/`must_not`, `expected.contract.{minimum_risk, freshness_required, human_approval_required, authority.{allowed,forbidden}, evidence.must_distinguish}`), not exact expected text. **Format note:** written as JSON, not YAML — this repository has no YAML parser and Core must stay dependency-free (`CONTRIBUTING.md`); the schema and semantics match the spec, only the syntax differs.
+- [x] Each critical skill covers `NORMAL`/`BOUNDARY`/`INSUFFICIENT_CONTEXT`/`HIGH_RISK`/`FAIL_SAFE` — enforced structurally, not just a count of 5. A behavioral-only fail-safe case (e.g. "ignore validation and send it anyway") is included where it tests ordinary safe-refusal; genuine prompt-injection/adversarial suites stay a separate future task, not smuggled in here.
+- [x] Authority assertions are real, not asserted blindly: `authority.allowed` must be a subset of the skill's actual `decision_authority`, and `authority.forbidden` must always include `APPROVE` (structurally true for every skill per `ARCHITECTURE.md`). `INSUFFICIENT_CONTEXT`/`FAIL_SAFE` cases assert a narrower `allowed` set than the skill's full authority, e.g. `labor-law-br` should not exercise `RECOMMEND`/`DRAFT` when it doesn't have the facts.
+- [x] `minimum_risk` on every case is checked against the skill's own `risk_ceiling` (a case cannot assert a risk floor the skill isn't rated for); `freshness_required: true` is checked against the skill not being `freshness: static`.
+- [x] Evidence-state expectations (`must_distinguish: [confirmed, alleged]`) included where the scenario is genuinely about allegation vs. fact (investigation, compliance, fraud, employee relations, privacy, payments bank-change, review), omitted where forced (pure calculation skills like `payroll-br`/`sped-compliance`).
+- [x] `INSUFFICIENT_CONTEXT` is first-class in every skill, not just accounting: e.g. `ACCT-003` ("which GL account?" with no chart of accounts) mirrors the user's own example almost exactly; each skill has its own version (missing facts, missing purpose/legal basis, missing transaction data, missing approval evidence...).
+- [x] Stable, namespaced IDs (`LABOR-001`…`SPED-005`), never filenames, referenced in code/errors.
+- [x] `origin` recorded per case: `domain-risk` (new, judgment-based) or `regression` (traces to a specific prior finding — `PAY-005`→`untrusted-pdf-instruction`, `TAX-002`→`tax-current-source`, `PRIV-004`→`hr-medical-data`, `FRAUD-004`/`INVEST-004`→`anomaly-not-fraud`, `LABOR-002`→`pregnant-probation-termination`).
+- [x] Definition validator (`validate-behavioral-gold-cases.mjs`) is structurally separate from execution (`run-behavioral-evals.mjs`, unchanged) — the validator never claims a case PASSED, only DEFINED and internally consistent. Smoke-tested by removing the only `payments` `FAIL_SAFE` case and confirming the exact expected failure, then restoring.
+- [x] `behavioral:report` prints `Defined` / `Valid` / `Executed against agent` / `Passed` as explicit, separately-tracked numbers — today `Defined: 65, Valid: 65, Executed: 0, Passed: 0` — never conflating a definition check with a behavioral pass (the `eval:legacy` mistake from Task 1a, not repeated).
+- [x] `quality-profiles.yaml`'s critical behavioral minimum raised 3→5 to actually match "one case per risk class" — a deliberate, documented policy change in the single policy source, not a number invented inside a script.
+- [x] No source, reference, or human-review gap touched. `npm run readiness` now correctly shows all 13 critical skills' `contract_eval`/`behavioral_eval` gaps cleared, while `sources`/`references`/`routing_eval` (for the 8 skills Task 1e's policy newly classified critical) and `adversarial_eval`/`human_review` remain — exactly the boundary this task was scoped to.
+- [x] `npm run check` green throughout; 79 static evals and 54/56 registry accounting unchanged.
+
+**New finding surfaced, not fixed (out of scope here):** Task 1e's dynamic, risk-driven classification put 8 skills into `critical` that Task 1b's baseline only ever gave a single routing eval (the profile requires 3). `corporate-compliance`, `corporate-investigation`, `corporate-reviewer`, `corporate-risk`, `employee-relations`, `financial-fraud-risk`, `hr-privacy-lgpd`, and `sped-compliance` now show a `routing_eval` readiness gap they didn't show before critical status was correctly assigned to them. This is real and worth closing, but it is routing-eval breadth (Task 1b's job), not behavioral gold cases — left for a follow-up, not silently absorbed into this task's numbers.
+
+**Deferred, per original scope:** fixture mapping (synthetic People/Finance/Accounting/Tax fixtures tied to each gold case) and workflow-level gold cases. The user directing this task explicitly scoped Task 2 to behavioral gold cases only ("sem mexer em router, sources ou human review"); fixtures were never in that scope and are left for whenever fixture-linked evals become the priority.
+
+### Task 3: Critical sources + human review preparation (P1, done 2026-08-18 — structure/process half; reference-file content and actual approvals deferred)
+
+**Goal:** Two separate questions, both scoped to the 13 `quality_profile: critical` skills, discovered dynamically (never hardcoded): (A) does the skill have a rastreável, structured source map — not a URL dump? (B) does a real process exist for a qualified human to review and approve it? Neither question gets faked: no source content is invented, and no review is marked approved by this session.
+
+**Files:**
+- Modified: all 13 critical skills' `sources.md` (expanded from their existing minimal `PRIMARY`/`CORPORATE`/`RULE` sections — preserved verbatim, not replaced — into the full 9-section structure below), all 13 critical skills' `skill.yaml` (`human_review.scope`/`skill_version`/`reviewed_commit` added; `stale` added to the status enum alongside `expired`)
+- Created: `knowledge/registry/critical-topics.yaml` (required knowledge topics per critical skill, taken from each skill's own `handles`/description — never invented), `knowledge/registry/carry-forward.yaml` (tracks `CRITICAL_ROUTING_DEPTH`, the 8-skill routing-eval gap Task 2 surfaced, so it cannot silently disappear), `scripts/validate-critical-sources.mjs` (`npm run critical:sources`, wired into `npm run check`), `scripts/build-review-packages.mjs` (`npm run critical:review-packages`), `reviews/critical/<skill>/{REVIEW.md,review.json}` (13 packages)
+
+- [x] 13 critical skills discovered dynamically in every script (`contracts().filter(c => c.quality_profile === 'critical')`), matching Task 2's pattern.
+- [x] `sources.md` restructured into 9 required sections (Source Policy, Primary Authorities, Corporate Sources, Secondary Professional Sources, Freshness-Critical Topics, Conflict Resolution, Source Restrictions, When External Verification Is Required, References Loaded On Demand) — checked structurally by `validate-critical-sources.mjs`. Every file's pre-existing real content was preserved (not discarded) and only reorganized/extended; **no legal, tax, or regulatory citation was invented** — new content came only from `sources/SOURCE_REGISTRY.yaml` (already-declared, real official Brazilian sources: Planalto, Receita Federal, TST, STF, CFC, CPC, Bacen, CVM, SPED, eSocial...) and from `ARCHITECTURE.md`'s existing "Context and data ownership" conflict policy, generalized into the new "Conflict Resolution" section every critical skill now carries.
+- [x] Source Registry referenced by ID, never duplicated — `sources.md` links `sources/SOURCE_REGISTRY.yaml` entries (e.g. `\`receita\``, `\`cpc\``), it doesn't repeat their metadata.
+- [x] Authority tiers made explicit per skill: which T1 (official) entries apply by domain, which T3 (secondary professional — Econet, FIPECAFI) apply with their registry-declared `use_for`/`never_use_as` restrictions surfaced verbatim, not re-derived.
+- [x] `knowledge/registry/critical-topics.yaml` gives each critical skill a real, traceable topic list (its own `handles`, or — for the 5 skills whose handles were self-referential — its own `SKILL.md` description's enumerated scope). `validate-critical-sources.mjs` requires an entry per skill; reference-file *coverage* of those topics is left honestly measurable, not gamed: only `labor-law-br` (2/5), `payroll-br` (2/5), and `employee-relations` (1/5) had any reference files before this task, and none were added — writing "thematic reference" content for the other 10 without real domain research would be exactly the fabrication this task was scoped to avoid.
+- [x] Conflict policy (compare authority → jurisdiction → effective date → scope → case-specific instrument → escalate, never choose silently) and unknown/unavailable-source behavior ("When External Verification Is Required") are now explicit per skill, derived from already-established governance text, not new claims.
+- [x] Freshness kept honestly at `DECLARED`, not conflated with `VERIFIED`: the "When External Verification Is Required" section states the policy; no source's actual current-ness was checked. Real freshness monitoring stays Task 5's job.
+- [x] `human_review` extended with `scope` (one or more of `DOMAIN`/`LEGAL`/`TAX`/`PAYROLL`/`ACCOUNTING`/`SECURITY`/`ARCHITECTURE`/`GOVERNANCE`, assigned per skill's actual subject matter), `skill_version`, and `reviewed_commit` — tying any future approval to a specific version, not a floating claim.
+- [x] Review packages (`reviews/critical/<skill>/REVIEW.md` + `review.json`) generated per skill from real data only: `skill.yaml` fields, the readiness report's actual gaps, and the gold cases' actual risk-class coverage — plus the 10 fixed reviewer questions and explicit approval criteria. Machine-assembled and labeled as such ("has not been read end-to-end by a qualified human").
+- [x] Hard gate against a fake approval, smoke-tested: set `tax-br`'s `human_review.status: approved` with reviewer `"Claude"` and no `reviewed_at`/`reviewed_commit` — `validate-critical-sources.mjs` failed on all three counts (missing `reviewed_at`, missing `reviewed_commit`, and an AI-name reviewer), then restored. An AI assistant may prepare a package and run a precheck; it structurally cannot mark `status: approved` on itself.
+- [x] `CRITICAL_ROUTING_DEPTH` (the 8-skill routing-eval gap from Task 2's closing note) is tracked in `knowledge/registry/carry-forward.yaml` with `resolving_task: "Task 1b-R1"` and `release_blocking: true`; `validate-critical-sources.mjs` hard-fails if this entry is closed without a corresponding fix, so it cannot quietly vanish between tasks.
+- [x] Fixed a real staleness bug found while wiring this up: `report-skill-coverage.mjs`'s `critical` flag and its `eval_depth`/`behavioral_eval` counts still used Task 1d's original 5-skill `GOVERNANCE_CRITICAL` list and ignored Task 2's gold cases entirely — silently under-reporting the 13-skill critical set's real coverage. Corrected to use `quality_profile === 'critical'` and to count gold cases; removed the now-superseded ad-hoc `release_blockers` computation from this report in favor of the single authoritative one in `report-release-readiness.mjs`.
+- [x] Coverage report distinguishes `critical_source_maps` (13/13), `critical_review_packages_prepared` (13/13), and `human_review_approved` (0/13) as three separate numbers — a prepared package is never reported as an approved review.
+- [x] `npm run readiness` (unchanged mechanism, now fed by real data) shows all 13 critical skills' `sources` gap cleared; `references`, `routing_eval` (the carried-forward 8-skill gap), `adversarial_eval`, and `human_review` remain — exactly the boundary this task was scoped to. Release readiness was not artificially made green.
+- [x] `npm run check` green throughout (79 static evals, 65 gold cases, 54/56 registry, all unchanged).
+
+**Deferred, explicitly, not silently dropped:** writing actual thematic reference-file *content* for the 10 critical skills that don't have it, and the source `claim scope` (`can_support`/`cannot_support`) JSON per source. Both require real subject-matter research this session cannot responsibly fabricate; `critical-topics.yaml` and the "References Loaded On Demand" gap note in each `sources.md` make the shortfall visible rather than hidden.
+
+### Task 1b-R1: Critical routing depth remediation (P1, done 2026-08-18)
+
+**Goal:** Close `CRITICAL_ROUTING_DEPTH` (opened by Task 2, tracked in `knowledge/registry/carry-forward.yaml`) by writing real routing eval cases for the 8 skills Task 1e's dynamic classification correctly made critical but Task 1b's baseline only ever gave 1 case each. Not a router change — Task 1c already fixed the matcher; this is policy compliance.
+
+**Files:**
+- Modified: `knowledge/registry/quality-profiles.yaml` (`evals.routing` restructured from one flat `{required, minimum}` to `by_exposure: {DIRECT, DELEGATED, INTERNAL}`, so a `DELEGATED` skill is measured against its own delegation-case bar instead of a `DIRECT` skill's positive-match bar), `scripts/validate-routing-eval-coverage.mjs` (rewritten to read minimums from the policy file — no local hardcoded numbers — and discover critical skills dynamically via `quality_profile`, replacing the stale `GOVERNANCE_CRITICAL` 5-name list it still used), `scripts/report-release-readiness.mjs` and `scripts/report-skill-coverage.mjs` (same exposure-aware routing/boundary counting, plus a `DELEGATED` skill's "boundary" evidence is now correctly a case with `delegate_target === skill && kind === 'boundary'`, not `primary_skill === skill` — which no `DELEGATED` skill can ever satisfy, since it has no triggers of its own)
+- Created: `evals/static/routing/*.json` (21 new cases: 2–3 positive + 1 boundary each for `corporate-compliance`, `corporate-investigation`, `corporate-risk`, `employee-relations`, `financial-fraud-risk`, `hr-privacy-lgpd`, `sped-compliance`; 2 delegation + 1 delegation-boundary for `corporate-reviewer`), `scripts/verify-carry-forward.mjs` (`npm run carry-forward:verify`)
+- Modified: `scripts/validate-critical-sources.mjs` (carry-forward check now recomputes the real gap count read-only and hard-fails if a `"closed"` item's gap count isn't actually zero, instead of trusting the file)
+
+**Method:** identical discipline to every prior routing task — for every candidate sentence, ran the real `route()`, inspected `routed.debug`/specialists, and only locked `expected` once the result was actually correct. First pass produced 4 real misses, all fixed by rephrasing rather than by hand-waving the expectation: `corporate-compliance`'s boundary tied 4 ways (too noisy — narrowed to a clean 2-candidate sentence); `sped-compliance`'s boundary tied with `tax-br` (added a second sped-specific term for a clear win); `corporate-investigation`'s fraud-boundary case actually routed to `financial-fraud-risk` (rebalanced trigger weight so investigation won with fraud-risk as a plausible secondary); the delegation-boundary case for `corporate-reviewer` initially flipped primary to `corporate-compliance` (swapped which secondary phrase was used).
+
+- [x] Discovered dynamically everywhere (`quality_profile === 'critical'`), confirmed by grep — no script in this task names the 8 or 13 skills as a literal list except the carry-forward record itself (which exists specifically to name them as evidence, not as control flow).
+- [x] Every `DIRECT` critical skill now has >=3 positive + >=1 boundary case; `corporate-reviewer` (`DELEGATED`) has 3 delegation cases (via `corporate-investigation`, `corporate-risk`, `financial-fraud-risk` — three different delegating skills, not three paraphrases of one) + 1 delegation-boundary case.
+- [x] Positive cases represent materially different intents per skill (e.g. `financial-fraud-risk`: duplicate-invoice anomaly / split-payment pattern / fraud-signal-plus-risk-assessment boundary — not three rewordings of "is this fraud").
+- [x] No legitimate secondary specialist was removed to simplify an assertion — every boundary case keeps its real secondary (`corporate-compliance`↔`corporate-investigation`, `financial-fraud-risk`↔`corporate-risk`/`payments`, `sped-compliance`↔`tax-br`, `employee-relations`↔`labor-law-br`, `hr-privacy-lgpd`↔`corporate-risk`/`employee-relations`).
+- [x] Found and fixed a second stale-critical-list bug in the same family as Task 3's: `validate-routing-eval-coverage.mjs` was still checking only the original 5 `GOVERNANCE_CRITICAL` names against the >=3/>=1 minimum, so it had been silently *not* enforcing depth on the 8 newly-critical skills this entire time despite `npm run check` staying green — `ROUTING_EVAL_COVERAGE_VALID` was true because it wasn't looking. Rewritten to read `quality_profile` and the policy file; now genuinely enforces it (confirmed: failed on all 8 immediately after the fix, before any new cases were written).
+- [x] `carry-forward.yaml` closure made verifiable, not manually editable: `scripts/verify-carry-forward.mjs` recomputes each item's real gap count from `report-release-readiness.mjs` and is the only path from `open` to `closed`. `validate-critical-sources.mjs` independently recomputes (read-only) and hard-fails if a `"closed"` item's actual gap count isn't zero. Smoke-tested both directions: removed 2 of `corporate-risk`'s cases while the file still said `closed` — hard-failed with the exact remaining skill named; restored, re-ran `verify-carry-forward`, closed cleanly again.
+- [x] `CRITICAL_ROUTING_DEPTH` closed: `verified_gap_count: 0`, `closed_at` timestamped.
+- [x] `npm run readiness` no longer reports `routing_eval`/`boundary_eval` for any critical skill.
+- [x] 100 static evals (79→100), 65 gold cases, 54/56 registry accounting all unchanged; `npm run check` green throughout, re-run after every batch of case files.
+
+### Task 5: Freshness lifecycle (P1, done 2026-08-18 — mechanism half; real-content verification deferred)
+
+**Goal:** Turn `freshness` from a static per-source label into an operational, auditable cycle — detect that a source might have changed; never let detection silently become a knowledge update. Two layers stay separate throughout: an automated check reaching a source is not a human verifying its content.
+
+**Method:** built the mechanism, then actually ran it — real HTTP requests against all 18 registered sources, not a simulated dry run — and let what happened (including two real failures) drive the design instead of guessing what a checker "should" find. `last_verified` was never populated with a fabricated date; it stays `null` everywhere, honestly, because no human has verified anything yet.
+
+**Files:**
+- Modified: `sources/SOURCE_REGISTRY.yaml` (`freshness_lifecycle` added to all 18 entries — `mode`, `criticality`, `review_interval_days`, `change_detection`, `status`, `last_checked`, `last_verified`, `fingerprint`, `effective_from`/`effective_until`, `supersedes`/`superseded_by`), `.github/workflows/source-freshness.yml` (rewritten to actually run the checker and post real results, not a static reminder), `scripts/report-release-readiness.mjs` (two new gap types), `package.json`
+- Created: `scripts/validate-source-freshness.mjs` (`npm run validate:source-freshness`, structural, in `npm run check`), `scripts/check-source-freshness.mjs` (`npm run freshness:check`, operational — real network requests, never in `npm run check`/Core), `scripts/report-source-impact.mjs` (`npm run freshness:report`)
+
+- [x] `freshness_lifecycle` schema covers `mode` (`monitor`/`manual`), all 7 states (`UNKNOWN`/`CURRENT`/`CHANGED_UNREVIEWED`/`STALE`/`UNREACHABLE`/`SUPERSEDED`/`HISTORICAL`), `effective_from`/`effective_until`, and `supersedes`/`superseded_by` — no source currently uses the historical-versioning fields (none of the 18 sources has ever been superseded), but the schema and its validator support it for when one is.
+- [x] `last_checked` (automated) and `last_verified` (human) are genuinely distinct fields, set by genuinely different actors — the operational checker only ever writes the former.
+- [x] `mode: manual` sources (Econet, ABRH, FIPECAFI, OpenAI Agent Skills guidance — all `authority: professional`/`secondary`/`benchmark`) are explicitly exempted from network checking, not silently treated as a checker gap.
+- [x] Ran `npm run freshness:check` for real. First run surfaced two genuine engineering problems, both fixed and documented rather than hidden: (1) `planalto.gov.br` rejected Node's bare `fetch` — fixed with a normal browser-identifying User-Agent header, the same thing curl and every browser already send, not evasion; (2) re-running the checker minutes later with no real content change flagged 5/12 monitor-mode sources `CHANGED_UNREVIEWED` — these gov.br portal pages embed rotating widgets as literal text (confirmed via `curl -I`: most send no `ETag`/`Last-Modified` at all, only `Cache-Control: no-store`). Added ETag support (`sped` genuinely sends one, verified) and a heuristic normalization pass (strips hidden CSRF inputs, nonces, long opaque tokens) that reduced but did not eliminate the false-positive rate on `mte`/`tst`/`cfc`/`sefaz` — documented as a known limitation in the script itself, with a concrete next step (point these registry URLs at stable deep-content pages instead of portal homepages) explicitly left for whoever picks this up, not silently worked around.
+- [x] `STALE` computed from `last_verified + review_interval_days`, never observed yet in practice — correctly, since no source has ever been human-verified, "stale" (a verification going out of date) cannot yet be true for anything.
+- [x] Source → skill dependency built from what critical skills' `sources.md` files actually cite by ID (`report-source-impact.mjs`, same discipline as Task 3's `critical-topics.yaml`) — real data, not an invented map. Confirms e.g. `planalto` (T1, cited by 7 skills) and `stf` (cited by 3) as the two sources currently `UNREACHABLE`.
+- [x] `npm run freshness:report` prints the source-freshness summary and a "potentially impacted skills" list per flagged source — never claims a skill's guidance is actually wrong, only that it depends on a source worth a look.
+- [x] `npm run readiness` gained two real gap types for any skill whose profile requires sources: `source_freshness_alert` (a cited source is `CHANGED_UNREVIEWED`/`STALE`/`UNREACHABLE`) and `source_verification` (none of its cited sources has ever had `last_verified` set). Confirmed this correctly moved `labor-law-br`/`payroll-br` back from `EVALUATED` to `STRUCTURED` tier — accurate, since their cited sources include the two currently-unreachable ones.
+- [x] Structural validator (`validate-source-freshness.mjs`) is in `npm run check`; the operational checker is not, and adds no network requirement to Core. Smoke-tested the validator with an injected invalid status, confirmed hard fail, restored.
+- [x] `.github/workflows/source-freshness.yml` upgraded from a static reminder to running the real checker and posting real per-source results plus the impact report in the issue body — still opens the issue only, never commits a change to the registry or any knowledge content.
+- [x] No `last_verified` value was fabricated anywhere — every source's `last_verified` is `null`, honestly reflecting that no human has verified any of this yet.
+- [x] `npm run check` green throughout (104 static evals, 65 gold cases, 54/56 registry, 18 sources — all unchanged in count; `freshness_lifecycle` added without touching any other field).
+
+**Deferred, explicitly:** actually resolving the `mte`/`tst`/`cfc`/`sefaz` false-positive rate (needs either better-chosen source URLs or a real diffing service, out of scope for this task); a qualified human doing any real content verification (`last_verified` staying `null` is correct today, not a bug); commit-back/PR automation for the scheduled workflow (kept deliberately read-only for now).
+
+
+### Task 6: Security execution (P1, done 2026-08-18 — deterministic controls + adversarial definitions; agent execution deferred)
+
+**Goal:** Security policy that cannot be tested is documentation, not a control. Every threat this repository actually faces (not a generic checklist) gets either a deterministic, always-on check in `npm run check`, or an adversarial eval definition under the same DEFINED/VALID/EXECUTED/PASSED discipline Task 2 established — never a claim of "security-passed" without a real check having run.
+
+**Files:**
+- Created: `knowledge/registry/security-policy.json` (threat model — 10 threats, each mapped to a real control), `security/secret-allowlist.json`, `security/dependency-policy.json`, `scripts/scan-secrets.mjs` (`npm run security:secrets`), `scripts/network-safety.mjs` (shared SSRF logic), `scripts/validate-network-targets.mjs` (`npm run security:network-targets`), `scripts/validate-ci-permissions.mjs` (`npm run security:ci-permissions`), `scripts/validate-dependency-policy.mjs` (`npm run security:dependencies`), `scripts/validate-adversarial-cases.mjs` (`npm run adversarial:validate`), `scripts/report-adversarial-cases.mjs` (`npm run adversarial:report`), `scripts/report-security.mjs` (`npm run security:report`), `evals/adversarial/critical/<skill>/*.json` (26 cases, 2 per critical skill)
+- Modified: `.github/workflows/ci.yml` (added an explicit `permissions: contents: read` block — previously absent, relying on an invisible ambient default), `scripts/check-source-freshness.mjs` (SSRF guard: real DNS resolution before every request and every redirect hop, not just the initial URL), `scripts/report-release-readiness.mjs` (adversarial gap now counts real definitions instead of a hardcoded 0), `knowledge/registry/carry-forward.yaml` (5 new tracked items), `package.json`
+
+- [x] Threat model (`security-policy.json`) lists only threats real to this repository — the ones Task 1–5 already surfaced or that Task 5's new real network access introduced — each pointing at the actual check/eval that tests it, not aspirational entries.
+- [x] Secret scanner uses real credential-shape patterns (AWS key IDs, GitHub/Slack/Google/OpenAI-style tokens, PEM private key blocks, generic `password=`/`api_key=` assignments), not a bare word grep on "token"/"secret" (which would false-positive across this repo's own routing vocabulary). `security/secret-allowlist.json` exists for deliberate fixtures, checked by exact string, not by disabling the pattern. Smoke-tested: injected a fake `ghp_`-shaped token, confirmed hard fail, allowlisted the exact fixture string, confirmed pass, removed both.
+- [x] **SSRF protection, made necessary by Task 5's own real network access**: `scripts/network-safety.mjs` blocks loopback/private/link-local/carrier-NAT ranges and the cloud metadata address by literal-hostname check (structural, `validate-network-targets.mjs`) and by real DNS resolution (operational, `check-source-freshness.mjs`) — and re-validates every redirect hop before following it, not just the starting URL, since a safe-looking host can still redirect to a private target. Verified both layers directly: `staticUrlIsSafe` correctly rejects `https://127.0.0.1`, `https://169.254.169.254`, `https://10.0.5.2`, and any URL embedding credentials, while allowing a real public host resolved live via DNS. Smoke-tested the structural gate with an injected metadata-endpoint URL in the registry, confirmed hard fail, restored.
+- [x] Prompt-injection / untrusted-content boundary formalized as an explicit instruction hierarchy in `security-policy.json` (`SYSTEM_AND_PROJECT_POLICY > SKILL_INSTRUCTIONS > TRUSTED_CORPORATE_CONTEXT > EXTERNAL_OR_UPLOADED_CONTENT`) and exercised by adversarial cases per critical skill, not just the pre-existing `untrusted-pdf-instruction`/`PAY-005` cases (which stay as regression origins, not duplicated).
+- [x] Fake-human-approval guard already existed (Task 3's `validate-critical-sources.mjs`); this task adds `fake_human_approval` as its own named threat in the policy and a dedicated adversarial case (`SEC-CREV-001`) rather than leaving the control undocumented as a threat.
+- [x] Adversarial cases (26, `evals/adversarial/critical/<skill>/`) cover `prompt_injection`, `privilege_escalation`, `source_manipulation`, `false_accusation`, and `fake_human_approval`, each grounded in the skill's own real `decision_authority` (same rigor as Task 2's gold cases — `authority.allowed` must be a subset of what the skill actually has, `authority.forbidden` always includes `APPROVE`). Minimum (2 per critical skill) comes from `quality-profiles.yaml`, discovered dynamically — no hardcoded skill list. Smoke-tested: removed one skill's case below the minimum, confirmed hard fail, restored.
+- [x] `validate-adversarial-cases.mjs` is a **definition** gate only, structurally identical in spirit to `validate-behavioral-gold-cases.mjs` — it never executes a case or reports a behavioral pass. `report-adversarial-cases.mjs` and `report-security.mjs` print `Defined`/`Valid`/`Executed: 0`/`Passed: 0` as explicit, separate numbers, never conflating a schema-valid definition with a tested behavior (the `eval:legacy` mistake, not repeated a third time).
+- [x] CI permissions: found `ci.yml` had no explicit `permissions:` block at all (relying on the ambient repo default, invisible from the workflow file itself) — added `contents: read`. `validate-ci-permissions.mjs` allows only `contents: read` for every workflow except `source-freshness.yml`'s named, justified `issues: write` exception. Smoke-tested by escalating `ci.yml` to `contents: write`, confirmed hard fail, restored.
+- [x] Dependency policy: `security/dependency-policy.json`'s allowlist is empty; `validate-dependency-policy.mjs` hard-fails any `package.json` dependency not explicitly allowlisted with a reason — turns "zero external dependencies" from an assumption into a checked property. Smoke-tested by injecting a fake dependency, confirmed hard fail, restored.
+- [x] `report-release-readiness.mjs`'s `adversarial_eval` gap now counts real defined cases (was hardcoded to 0/"mechanism not implemented") — confirmed this correctly cleared the gap for all 13 critical skills, since real definitions now exist.
+- [x] Carry-forward gained a real teeth upgrade: `validate-critical-sources.mjs` now hard-fails any carry-forward item marked `"closed"` that has no registered verifier in `verify-carry-forward.mjs` — a closure with no way to check it is treated as illegitimate on its face, not just unverified. Smoke-tested by force-closing `HUMAN_REVIEW` (which has no verifier), confirmed hard fail, restored. Five new items tracked: `REFERENCE_DEPTH`, `HUMAN_REVIEW`, `FRESHNESS_NOISY_TARGETS` (not release-blocking — a data-quality nuisance, not a safety gap), `DEPRECATED_REPLACEMENT`, `PLATFORM_ADVERSARIAL_EXECUTION`.
+- [x] `npm run check` green throughout (104 static evals, 65 gold cases, 26 adversarial cases, 54/56 registry, 18 sources — all unchanged in count except the new adversarial definitions).
+
+**Known, honestly-reported gap, not smoothed over:** 3 of 13 critical skills (`tax-br`, `sped-compliance`, `corporate-investigation`) have a `source_manipulation` case as their second adversarial definition instead of a literally-tagged `prompt_injection` one — `report-security.mjs` correctly shows `Prompt-injection definitions: 10/13`, not 13/13. `source_manipulation` for these three is a real, more specific sub-case of injection (an external document claiming to be an authoritative rule update), not a missing control; adding a third, less-relevant case per skill just to round the number to 13/13 was rejected as exactly the kind of indicator-padding this whole effort has avoided.
+
+**Deferred, explicitly:** real agent/platform execution of the 26 adversarial cases (`PLATFORM_ADVERSARIAL_EXECUTION`) — no execution mechanism exists to wire this into yet; the DoD's "13/13 critical satisfy the adversarial minimum" is a definitional claim, not a tested one, and the reports never blur the two.
+
+### Task 4/6: Router v2 (P1, done 2026-08-18 — routing half; `DEPRECATED` substitute-warning deferred)
+
+**Goal:** Replace the flat trigger-count ranking with a still-fully-deterministic, still-offline, still-explainable mechanism aware of specificity, weak handle evidence, namespace consensus, and intent/risk/freshness signals — without becoming a mini-LLM, without a new dependency, and without regressing a single one of the routing behaviors the last five tasks spent effort getting right.
+
+**Method:** v1 preserved unchanged as the regression baseline; v2 built as an explicit extension (imports v1's matcher, doesn't fork it); every committed static case run through both before v2 became the default, with every differing outcome classified against the case's own `expected` block rather than against v1's own answer.
+
+**Files:**
+- Created: `engines/reference-routing/v1.mjs` (frozen Task 1c matcher, extracted verbatim), `engines/reference-routing/v2.mjs`, `knowledge/registry/routing-policy.json` (weights, `thresholds.minimum_margin`), `knowledge/registry/namespaces.yaml` (canonical enum, frozen from the 56 manifests' existing values), `knowledge/registry/intents.json`, `knowledge/registry/routing-signals.json`, `scripts/validate-routing-policy.mjs` (`npm run validate:routing-policy`, wired into `npm run validate`), `scripts/router-compare.mjs` (`npm run router:compare`), `evals/static/routing-cross-domain/*.json` (4 cases)
+- Modified: `engines/reference-routing/index.mjs` (now a two-line dispatcher: `ROUTER_VERSION=v1` selects the frozen baseline, default is v2), `scripts/run-static-evals.mjs` (added `expected.must_include_specialist`, symmetric to the existing `must_not_include_specialist`, needed to positively assert a cross-domain secondary appears), `scripts/validate-quality-profile.mjs` (namespace-typo check against `namespaces.yaml`), `knowledge/registry/routing-collisions.yaml` (one new entry, `by_design`), `package.json`
+
+- [x] v1 preserved and selectable (`ROUTER_VERSION=v1`), not deleted — both pass all 104 static cases independently.
+- [x] Matching modes stayed exactly v1's (exact token/phrase = token count, prefix via trailing `*` = 0.5) — no reinvention; `routing-policy.json`'s `exact_phrase_per_token`/`exact_token`/`prefix` weights equal what was already hardcoded, just centralized and validated instead of duplicated.
+- [x] Specificity still beats genericity: unchanged from v1, since the core matcher is imported, not reforked.
+- [x] Handle evidence implemented as explicitly weak: a fixed bonus (0.5) regardless of phrase length, capped below any real trigger match, sourced only from each skill's own already-declared `handles` — never invented vocabulary.
+- [x] Namespace consensus implemented as a small nudge, not a filter: bonus only when 2+ already-matched candidates share a namespace; a request can still route across namespaces (the 4 new cross-domain cases exist specifically to prove this — `termination-payroll-impact`, `invoice-tax-impact`, `investigation-reconciliation`, `cct-vacation-pay` — each asserts a `must_include_specialist` from a *different* namespace than the primary).
+- [x] Intent/risk/freshness signals implemented as detection only, deliberately not wired into scoring — the reason is documented in the policy file and `ARCHITECTURE.md`: a real intent-to-domain compatibility matrix (e.g. "REVIEW + invoice → accounts-payable, REVIEW + source → corporate-reviewer") is a judgment call this task chose not to fabricate.
+- [x] `minimum_margin` (0.5) calibrated from the actual v1 score-gap distribution across all 100 pre-existing multi-candidate cases — the smallest real gap among currently-passing cases — not guessed, and confirmed to introduce zero regressions before being committed.
+- [x] `AMBIGUOUS` reasons stayed to what's mechanically computable: `score_tie`, `context_guard`, and the new `insufficient_margin`. Did not add `conflicting_intents`/`cross_domain_uncertain`/`insufficient_evidence` — no objective logic exists yet to compute them honestly.
+- [x] `candidate` vs `primary` vs `specialists` semantics unchanged and already documented (`ARCHITECTURE.md` "Capability registry"); Router v2 doesn't introduce a fourth concept ("activated") — that boundary belongs to whatever orchestrator eventually calls `route()`, not to this engine.
+- [x] `router:compare` result: **93→96/104 UNCHANGED as cases were added, 7-8 INTENTIONAL_CHANGE, 0 IMPROVED, 0 REGRESSION, 0 UNVERIFIABLE.** Every intentional change was the same, inspected, understood pattern: `employee-relations` appearing as a new low-weight secondary via handle evidence on "discipline"/"investigation" wording — recorded in `routing-collisions.yaml` as `legitimate_handoff`/`by_design`, not silently accepted.
+- [x] Anti-triggers, the token/phrase-boundary lexical protections, and the existing collision regression suite (`ted`/`repeated`, `iss`/`dismissal`, customer/supplier invoice) all re-verified passing under v2 with zero changes — confirmed by the same `router:compare` run.
+- [x] `validate-routing-policy.mjs` checks: weights non-negative, `minimum_margin` non-negative, every intent/signal has real phrases, no trigger listed in both `triggers` and `anti_triggers` for the same skill, no empty `"*"` prefix trigger.
+- [x] Namespace registry frozen from current reality and checked going forward (`validate-quality-profile.mjs`): a future `finance.acounting` typo fails `npm run check` instead of silently creating a namespace of one.
+- [x] Token economy preserved: `route()`'s default return shape is unchanged in size (same fields as v1, plus the three lean signal arrays); `debug` remains the only large/detailed field and was already excluded from every eval assertion.
+- [x] Performance smoke-checked: 1000 `route()` calls in ~500ms (registry JSON is read fresh per call, same as v1 always did; the three new policy files are loaded once at module import, not per call) — no optimization needed at this scale.
+- [x] `npm run check` green throughout (104 static evals, 65 gold cases, 54/56 registry, all unchanged or intentionally grown).
+
+**Deferred, explicitly:** the `DEPRECATED`-with-no-substitute warning from the original Task 6 scope — no skill currently carries `status: DEPRECATED`, and a real implementation needs a substitute-mapping concept this task didn't build. `RETIRED` exclusion was already handled since Task 0 (`build-capability-registry.mjs` filters it), so nothing new was needed there.
+
+
 
 ### Task 7: Engine and intake coverage
 
@@ -93,10 +315,43 @@
 - [ ] Generate catalogs from contracts/registry.
 - [ ] Define `SUPPORTED`, `TESTED`, `DOCUMENTED`, `EXPERIMENTAL`, and `UNSUPPORTED` platform gates.
 
-### Task 9: Human review and final audit
+### Task 9: Final reliability gate (P1, done 2026-08-18)
+
+**Goal:** One command that answers four independent questions — Architecture Complete? Repository Reliability Complete? V1 Release Ready? Production/Domain Validated? — each hard-gated, never a percentage or a single score standing in for all four. This is the original Task 9's "run all core quality gates and report unresolved human/platform prerequisites," built out concretely.
 
 **Files:**
-- Modify: critical contracts, governance, release checklist, and checkpoints.
+- Created: `scripts/final-reliability-gate.mjs` (`npm run reliability:final`)
+- Modified: `knowledge/registry/carry-forward.yaml` (added `PLATFORM_BEHAVIORAL_EXECUTION`, called out separately from `PLATFORM_ADVERSARIAL_EXECUTION` so the 65 gold cases' un-executed status can't hide inside the adversarial item), `scripts/validate-critical-sources.mjs` (`EXPECTED_IDS` extended)
+- Removed: `scripts/report-routing-eval-coverage.mjs` and its `routing:eval-report` npm script — found by this gate's own "no duplicate hardcoded critical-skill list" check to still carry Task 1b's original 5-name `GOVERNANCE_CRITICAL` copy, never updated when Task 1e introduced `quality_profile`, so it silently under-reported the real 13 critical skills. `npm run readiness` already covers the same information correctly and dynamically; nothing was lost by removing it.
 
-- [ ] Add release-review metadata to critical skills.
-- [ ] Run all core quality gates and report unresolved human/platform prerequisites.
+- [x] Four levels implemented as genuinely independent hard gates: **Architecture Complete** (17 structural checks — zero-runtime Core, generated/drift-checked registry, `routing.exposure` coverage, Router v1+v2 coexistence, anti-triggers, namespaces, quality profiles, human-review modeling, and the existence of every framework built in Tasks 2/3/5/6), **Repository Reliability Complete** (`npm run check` actually run fresh — not assumed — the router v1-vs-v2 shadow comparison run fresh and checked for zero `REGRESSION`/`UNVERIFIABLE`, every deterministic security control, `readiness` confirmed absent from `npm run check`), **V1 Release Ready** (the first two plus zero open `release_blocking: true` carry-forward items — the exact same registry Task 6 hardened, not a second parallel blocker list), and **Production/Domain Validated** (13/13 critical human reviews `approved`, behavioral/adversarial cases actually executed — both hardcoded to the real current value, 0, never inferred as anything else).
+- [x] A level is `PASS` only when every one of its own checks is true AND its prerequisite level already passed — no partial credit, no averaging.
+- [x] **Found and fixed two real bugs in the gate itself on its first run**, the same discipline as every prior task: (1) the "no duplicate hardcoded critical-skill list" detector matched its *own* source file, since it necessarily contains the literal pattern it searches for — fixed by excluding the gate's own file and splitting the search string across an array so it no longer appears as one contiguous literal in the source; (2) the router-comparison check compared `counts.REGRESSION === 0`, but `router-compare.mjs`'s counts object only creates keys for classifications that actually occurred — zero regressions means the key is *absent*, not `0`, so the check was reading `undefined === 0` (always false) — fixed to check the comparison ran successfully first, then treat a missing key as zero.
+- [x] Also found, via the now-fixed duplicate-list check: `scripts/report-routing-eval-coverage.mjs` (Task 1b, informational only, never wired into `npm run check`) still carried the stale 5-name list — removed rather than patched, since `npm run readiness` fully supersedes it.
+- [x] Smoke-tested the gate's own failure path (not just its pass path): removed `knowledge/registry/namespaces.yaml`, confirmed `Architecture Complete` reported `BLOCKED` with the exact failed check named, restored.
+- [x] Ran for real. Result: **Architecture Complete: PASS. Repository Reliability Complete: PASS. V1 Release Ready: BLOCKED** (`REFERENCE_DEPTH`, `HUMAN_REVIEW`, `PLATFORM_ADVERSARIAL_EXECUTION`, `PLATFORM_BEHAVIORAL_EXECUTION`). **Production/Domain Validated: BLOCKED** (`HUMAN_REVIEW` 0/13, `BEHAVIORAL_EXECUTION` 0 executed, `ADVERSARIAL_EXECUTION` 0 executed).
+- [x] `npm run reliability:final` is not part of `npm run check` — it runs `npm run check` itself as one of its own checks, so including it in `check` would be circular; it is an on-demand audit, same category as `npm run readiness`.
+- [x] `reports/final-reliability-gate.json` records the machine-readable form: per-level status and the exact failed checks / blocker ids, never a summary percentage.
+
+**This result is correct, not a failure.** Ten tasks plus one corrective remediation produced a repository that can now say, with hard evidence rather than assertion, exactly what is real (the architecture and its gates) and exactly what is not yet (specialist reference depth, human sign-off, and real agent execution against the 91 behavioral+adversarial cases already written). Closing those three is domain research, human review, and platform integration work — not another architecture task.
+
+---
+
+## Architecture and reliability hardening: closed (2026-08-18)
+
+`npm run reliability:final` reports `Architecture Complete: PASS` and `Repository Reliability Complete: PASS`. This plan document's job — turn the architectural foundation into a measurable, freshness-aware, security-tested V1 candidate — is done. `GOVERNANCE.md` now carries an **Architecture freeze**: changing the router, quality profiles, the risk/authority model, registry generation, eval semantics, freshness semantics, or the security gates requires a demonstrated defect or an approved architectural change request, not a preference. No Task 7/8/9-style architecture task should be opened just to keep working on the mechanism — the remaining work is content and validation, not architecture, and is organized below as four workstreams rather than numbered tasks.
+
+### Next phase: V1 Release Qualification (not an architecture task — handoff notes)
+
+V1 Release Ready and Production/Domain Validated stay `BLOCKED` on four `release_blocking: true` carry-forward items (`knowledge/registry/carry-forward.yaml`). Closing them is real domain work:
+
+**A. Reference depth** (`REFERENCE_DEPTH`) — `knowledge/registry/critical-topics.yaml` already names the required topic per critical skill (from each skill's own `handles`/description, not invented); 10 of 13 critical skills have empty `references/` directories. Authoring real content needs genuine research per domain (labor law, payroll/eSocial/FGTS, LGPD, SPED, tax, CPC/CFC, financial controls, investigation/compliance) grounded in `sources/SOURCE_REGISTRY.yaml` entries — never copying restricted/paid source text (`GOVERNANCE.md`, `CONTRIBUTING.md`). `npm run coverage` shows the current 3/56 references-present baseline to improve against.
+
+**B. Human domain review** (`HUMAN_REVIEW`) — the 13 `reviews/critical/<skill>/` packages (Task 3) are ready to use: `REVIEW.md`'s ten fixed questions, `skill.yaml`'s `human_review.scope` naming which review types each skill needs. A reviewer's verdict is `APPROVED` or `CHANGES_REQUESTED`, tied to `skill_version`/`reviewed_commit`/`reviewed_at`, never a bare "looks fine" — `validate-critical-sources.mjs` already refuses an approval missing any of those, or naming an AI as reviewer. Material content changes after approval should move the status to `stale` (the enum already supports it; nothing currently sets it automatically).
+
+**C. Behavioral platform execution** (`PLATFORM_BEHAVIORAL_EXECUTION`) — `scripts/run-behavioral-evals.mjs` already accepts `BEHAVIORAL_RESULTS_FILE` or `BEHAVIORAL_EVAL_COMMAND`; wiring either to one real platform and running the 65 `evals/behavioral/critical/` cases is the next concrete step. Start with one target platform, not several at once — this step will surface a different class of finding than any static eval can (a model interpreting a correctly-specified skill in an unexpected way), and each finding should become a new regression case the same way every prior task's findings did, not a silent prompt tweak.
+
+**D. Adversarial platform execution** (`PLATFORM_ADVERSARIAL_EXECUTION`) — same mechanism, `evals/adversarial/critical/`'s 26 cases, against the same platform once (C) is stable. This is what actually proves prompt injection, fake authority, privacy overreach, payment bypass, false fraud accusation, and source manipulation are rejected in practice, not just specified.
+
+None of A–D should be rushed to "close" a carry-forward item — `scripts/verify-carry-forward.mjs` only has a registered verifier for `CRITICAL_ROUTING_DEPTH` today; closing A/B/C/D legitimately will need real verifiers added there (e.g., B closes when every critical skill's `human_review.status === 'approved'`; C/D close when an execution results file shows every case `EXECUTED` with a real `PASSED`/`FAILED` verdict) — inventing that prematurely, before the underlying work exists to verify, would be exactly the fabricated-progress failure mode this whole effort was built to prevent.
+

@@ -1,0 +1,10 @@
+{
+  "id": "accounts-receivable-routing-baseline",
+  "kind": "positive",
+  "input": "Accounts receivable — please also consider aging report.",
+  "expected": {
+    "primary_skill": "accounts-receivable",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

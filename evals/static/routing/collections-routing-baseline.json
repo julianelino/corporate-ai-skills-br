@@ -1,0 +1,10 @@
+{
+  "id": "collections-routing-baseline",
+  "kind": "positive",
+  "input": "Collections — please also consider overdue payment.",
+  "expected": {
+    "primary_skill": "collections",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

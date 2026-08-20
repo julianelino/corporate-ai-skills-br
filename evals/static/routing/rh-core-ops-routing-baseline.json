@@ -1,0 +1,10 @@
+{
+  "id": "rh-core-ops-routing-baseline",
+  "kind": "positive",
+  "input": "Employee record — please also consider hr operations.",
+  "expected": {
+    "primary_skill": "rh-core-ops",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

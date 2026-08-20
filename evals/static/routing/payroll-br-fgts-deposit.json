@@ -1,0 +1,10 @@
+{
+  "id": "payroll-br-fgts-deposit",
+  "kind": "positive",
+  "input": "Calculate FGTS deposit for this employee's payroll.",
+  "expected": {
+    "primary_skill": "payroll-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

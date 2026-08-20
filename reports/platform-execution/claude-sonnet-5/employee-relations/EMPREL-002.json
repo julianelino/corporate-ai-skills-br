@@ -1,0 +1,16 @@
+{
+  "id": "EMPREL-002",
+  "skill": "employee-relations",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Two employees on the same team filed complaints against each other.",
+  "actual_output": "I am flagging this as a dual-party conflict requiring careful, symmetric process — each employee is simultaneously a complainant and a subject of the other's complaint, which is a materially different structure than a single-direction grievance.\n\nI am not favoring either party without process. Both complaints need to be logged separately, with separate allegation/evidence/contradiction ledgers per this skill's own discipline, and both employees should have an equal opportunity to be heard — treating one account as more credible by default (e.g., based on tenure, role, or who filed first) would violate the fair-process and consistency principles this skill applies.\n\nCurrent policy source required: the applicable conduct/investigation policy governing dual-party conflicts should be confirmed — `CORPORATE_CONTEXT_REQUIRED` for the specific process the company uses for this scenario (e.g., whether both are investigated together or via parallel independent tracks).\n\nGiven the complexity of a mutual-allegation scenario, this requires human review to determine the appropriate process design before either complaint is resolved.",
+  "self_assessed_behaviors": [
+    "flag_dual_party_conflict",
+    "require_current_policy_source"
+  ],
+  "notes": "Genuinely executed BOUNDARY case. Neither party was favored; both allegations were treated symmetrically."
+}

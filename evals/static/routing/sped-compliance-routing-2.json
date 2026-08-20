@@ -1,0 +1,6 @@
+{
+  "id": "sped-compliance-routing-2",
+  "kind": "positive",
+  "input": "Confirm the ECF filing requirements for this fiscal year.",
+  "expected": { "primary_skill": "sped-compliance", "status": "ROUTED", "context_guard": false }
+}

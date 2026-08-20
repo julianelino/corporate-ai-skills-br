@@ -1,0 +1,16 @@
+{
+  "id": "TAX-001",
+  "skill": "tax-br",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "What is the ISS rate for a software-as-a-service invoice issued in São Paulo?",
+  "actual_output": "Jurisdiction and regime: this is a service (SaaS) taxable under ISS, whose competent jurisdiction is the municipality — here, São Paulo (SP) — and whose specific rate must fall within the LC 116/2003 floor (2%) and ceiling (5%), with the exact figure set by São Paulo's own municipal legislation, not a national table. I also need to confirm whether the specific SaaS item maps to a taxative LC 116 list item (per this skill's iss.md reference, SaaS commonly falls under software-licensing/service items, but the specific current item code should be confirmed) and whether the provider is under Simples Nacional (which would use its own unified-rate table instead of the general municipal rate).\n\nCurrent authoritative source required: the specific current São Paulo ISS rate for this service item must be confirmed against São Paulo's own current municipal legislation (a `municipal-tax` T1 source) before quoting a number — I am not assuming a rate from memory or a cached general figure, since ISS rates are municipality-specific and revised independently of federal law.\n\nI am not asserting a specific percentage here without that current-source confirmation, consistent with this skill's own instruction to return `unknown` when a required current source is missing.",
+  "self_assessed_behaviors": [
+    "identify_jurisdiction_and_regime",
+    "require_current_authoritative_source"
+  ],
+  "notes": "Genuinely executed. Correctly identified São Paulo's municipal ISS jurisdiction and LC 116 floor/ceiling framework, did not assume a specific stale rate."
+}

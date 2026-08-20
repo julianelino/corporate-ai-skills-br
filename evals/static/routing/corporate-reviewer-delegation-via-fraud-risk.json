@@ -1,0 +1,6 @@
+{
+  "id": "corporate-reviewer-delegation-via-fraud-risk",
+  "kind": "positive",
+  "input": "This fraud finding needs independent evidence review before escalation.",
+  "expected": { "primary_skill": "financial-fraud-risk", "status": "ROUTED", "delegate_target": "corporate-reviewer" }
+}

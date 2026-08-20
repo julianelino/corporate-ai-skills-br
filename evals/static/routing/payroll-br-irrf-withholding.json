@@ -1,0 +1,10 @@
+{
+  "id": "payroll-br-irrf-withholding",
+  "kind": "positive",
+  "input": "How much IRRF should be withheld from this employee's salary?",
+  "expected": {
+    "primary_skill": "payroll-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

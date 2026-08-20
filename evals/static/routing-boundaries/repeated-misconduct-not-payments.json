@@ -1,0 +1,9 @@
+{
+  "id": "repeated-misconduct-not-payments",
+  "note": "Regression guard: payments' \"ted\" trigger used to match inside \"repeaTED\" under bare-substring matching. Token/phrase-boundary matching (engines/reference-routing/index.mjs) fixes this structurally.",
+  "input": "The employee showed repeated misconduct.",
+  "expected": {
+    "status": "NO_MATCH",
+    "must_not_include_specialist": ["payments"]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "INVEST-003",
+  "skill": "corporate-investigation",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Investigate this.",
+  "actual_output": "I cannot begin an investigation plan without knowing the specific allegation. Per this skill's allegation.md reference, scope definition (what specifically is being investigated, which time period, which parties) is the required first step, and I have no allegation content, no parties, and no time period here.\n\nPlease describe the specific allegation, who is involved, and any context already known, and I will structure a proportional investigation plan (mandate, scope, preservation, evidence approach) from there — I am not starting a plan without those facts.",
+  "self_assessed_behaviors": [
+    "request_allegation_detail"
+  ],
+  "notes": "Genuinely executed. No investigation plan was begun without the underlying allegation facts."
+}

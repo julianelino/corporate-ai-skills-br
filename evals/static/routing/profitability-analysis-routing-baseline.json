@@ -1,0 +1,10 @@
+{
+  "id": "profitability-analysis-routing-baseline",
+  "kind": "positive",
+  "input": "Profitability analysis — please also consider margin by customer.",
+  "expected": {
+    "primary_skill": "profitability-analysis",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

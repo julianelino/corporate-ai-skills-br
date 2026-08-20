@@ -1,0 +1,10 @@
+{
+  "id": "forecasting-routing-baseline",
+  "kind": "positive",
+  "input": "Rolling forecast — please also consider stress scenario.",
+  "expected": {
+    "primary_skill": "forecasting",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

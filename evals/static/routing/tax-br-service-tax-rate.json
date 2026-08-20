@@ -1,0 +1,10 @@
+{
+  "id": "tax-br-service-tax-rate",
+  "kind": "positive",
+  "input": "What is the ISS rate applicable to this service in São Paulo?",
+  "expected": {
+    "primary_skill": "tax-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

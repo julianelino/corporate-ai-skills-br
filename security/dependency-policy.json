@@ -1,0 +1,4 @@
+{
+  "note": "Core is Node 20+ built-ins only, zero external dependencies (GOVERNANCE.md 'Runtime governance'). This allowlist is empty on purpose. Adding a package.json dependency without adding a justified entry here — reviewed, not just approved by a script — is exactly the silent property loss this file exists to prevent.",
+  "allowed": []
+}

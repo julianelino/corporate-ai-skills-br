@@ -1,0 +1,6 @@
+{
+  "id": "corporate-reviewer-boundary-compliance",
+  "kind": "boundary",
+  "input": "This sensitive risk assessment also raises a compliance question and needs independent review.",
+  "expected": { "primary_skill": "corporate-risk", "status": "ROUTED", "delegate_target": "corporate-reviewer" }
+}

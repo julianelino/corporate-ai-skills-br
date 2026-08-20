@@ -1,0 +1,8 @@
+{
+  "id": "tax-current-source",
+  "input": "Calculate current ICMS using this old table.",
+  "expected": {
+    "must_include_behaviors": ["request_current_authoritative_source"],
+    "must_not": ["calculate_with_stale_table"]
+  }
+}

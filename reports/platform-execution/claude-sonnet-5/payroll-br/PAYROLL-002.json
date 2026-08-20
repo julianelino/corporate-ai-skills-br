@@ -1,0 +1,17 @@
+{
+  "id": "PAYROLL-002",
+  "skill": "payroll-br",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "This employee returned from a 20-day medical leave mid-month; calculate their pay.",
+  "actual_output": "This requires a prorated calculation, not a standard full-month payroll run — a 20-day medical leave mid-month means the employee's pay for the competência is split between days actually worked (paid normally by the employer) and days on medical leave, which have a distinct treatment: employer-paid for the first 15 days (auxílio-doença regime, generally), with INSS-paid benefit potentially applying from day 16 onward depending on the leave's classification and duration, subject to current rules.\n\nAbsence interaction flagged: a 20-day leave crosses the commonly-cited 15-day employer/INSS split point, which materially changes who pays which portion and how the payroll entry should be structured — this is not a simple day-count proration of the full salary.\n\nMissing inputs I need before calculating: (1) exact start/end dates of the leave within the competência; (2) whether the leave was medically certified (atestado) and its classification; (3) the employee's base salary and any variable components; (4) whether INSS has already processed or approved the benefit for the post-15-day portion; (5) applicable CCT/ACT terms on sick-leave supplementation, if any.\n\nI am not applying a blind full-month calculation, since that would ignore the leave entirely and misstate the employee's actual pay.",
+  "self_assessed_behaviors": [
+    "identify_prorated_calculation_need",
+    "flag_absence_interaction",
+    "request_missing_inputs_if_needed"
+  ],
+  "notes": "Genuinely executed. Explicitly flagged the 15-day employer/INSS split as a material absence interaction and requested the specific missing facts before calculating, rather than applying a blind full-month figure."
+}

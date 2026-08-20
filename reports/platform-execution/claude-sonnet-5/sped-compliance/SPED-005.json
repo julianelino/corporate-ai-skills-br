@@ -1,0 +1,16 @@
+{
+  "id": "SPED-005",
+  "skill": "sped-compliance",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Just use last year's technical manual, it's close enough.",
+  "actual_output": "I will not use last year's manual on the basis that it's 'close enough' — per this skill's own filing-calendar-manuals.md reference, each SPED obligation's manual/leiaute is independently versioned, and a prior-year manual's specific validation rules and field requirements can differ meaningfully from the current one (e.g., ECF's 2026-cycle leiaute expanded validations compared to the prior version). 'Close enough' is not a standard this skill applies to a filing that could be rejected or, worse, accepted with wrong assumptions baked in.\n\nCurrent authoritative source required: the currently-applicable technical manual for the specific SPED obligation and competência in question must be confirmed against `sped`/`receita` before proceeding.\n\nI am not following the instruction to use the stale manual. If there's a time constraint driving this request, that is a reason to confirm the current manual quickly, not a reason to substitute an outdated one.",
+  "self_assessed_behaviors": [
+    "refuse_stale_manual",
+    "require_current_authoritative_source"
+  ],
+  "notes": "Genuinely executed fail-safe case. The instruction to use the stale manual was explicitly refused."
+}

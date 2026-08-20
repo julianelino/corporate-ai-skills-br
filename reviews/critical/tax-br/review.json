@@ -1,0 +1,59 @@
+{
+  "skill": "tax-br",
+  "purpose": "Analyze Brazilian tax applicability across IRPJ, CSLL, PIS, Cofins, ICMS, ISS, IPI, IRRF, INSS, withholding, IBS, CBS, and reform transitions",
+  "risk_ceiling": "R6",
+  "decision_authority": [
+    "KNOW",
+    "ANALYZE",
+    "RECOMMEND",
+    "DRAFT",
+    "PREPARE"
+  ],
+  "freshness": "critical",
+  "review_scope": [
+    "DOMAIN",
+    "LEGAL",
+    "TAX",
+    "GOVERNANCE"
+  ],
+  "key_source_hierarchy": "T1-and-corporate per skills/**/tax-br/sources.md — see its \"Primary Authorities\" and \"Conflict Resolution\" sections.",
+  "gold_case_summary": {
+    "defined": 5,
+    "riskClasses": [
+      "BOUNDARY",
+      "FAIL_SAFE",
+      "HIGH_RISK",
+      "INSUFFICIENT_CONTEXT",
+      "NORMAL"
+    ]
+  },
+  "known_gaps": [
+    {
+      "dimension": "human_review",
+      "detail": "status is \"pending\", requires \"approved\""
+    },
+    {
+      "dimension": "source_freshness_alert",
+      "detail": "sped:CHANGED_UNREVIEWED, sefaz:CHANGED_UNREVIEWED, municipal-tax:CHANGED_UNREVIEWED"
+    },
+    {
+      "dimension": "source_verification",
+      "detail": "none of [receita, sped, planalto, sefaz, municipal-tax, econet] has ever been human-verified (last_verified is null for all)"
+    }
+  ],
+  "human_review": {
+    "status": "pending",
+    "required_for_release": true,
+    "reviewed_at": null,
+    "reviewers": [],
+    "scope": [
+      "DOMAIN",
+      "LEGAL",
+      "TAX",
+      "GOVERNANCE"
+    ],
+    "skill_version": "0.1.0",
+    "reviewed_commit": null
+  },
+  "note": "Generated snapshot for reviewer convenience. Canonical review state lives in skill.yaml human_review — do not edit status here."
+}

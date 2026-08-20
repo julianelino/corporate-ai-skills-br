@@ -1,0 +1,10 @@
+{
+  "id": "accounting-br-depreciation-schedule",
+  "kind": "positive",
+  "input": "Calculate the depreciation schedule for this equipment under CPC rules.",
+  "expected": {
+    "primary_skill": "accounting-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

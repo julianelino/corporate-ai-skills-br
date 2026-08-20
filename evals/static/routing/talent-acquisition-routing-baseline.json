@@ -1,0 +1,10 @@
+{
+  "id": "talent-acquisition-routing-baseline",
+  "kind": "positive",
+  "input": "Job requisition — please also consider candidate screening.",
+  "expected": {
+    "primary_skill": "talent-acquisition",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

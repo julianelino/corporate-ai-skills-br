@@ -1,0 +1,10 @@
+{
+  "id": "spreadsheet-automation-routing-baseline",
+  "kind": "positive",
+  "input": "Spreadsheet automation — please also consider vba macro.",
+  "expected": {
+    "primary_skill": "spreadsheet-automation",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

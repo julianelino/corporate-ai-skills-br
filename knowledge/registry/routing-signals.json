@@ -1,0 +1,18 @@
+{
+  "version": "0.1.0",
+  "note": "Keyword lexicons for router v2's risk_signals/freshness_signals output. These are surfaced signals for a downstream orchestrator (Context Guard, corporate-risk) to weigh — the router does not decide risk or verify freshness itself, and these signals never affect candidate scoring.",
+  "risk_signals": {
+    "protected_employee": ["pregnant", "maternity", "stability"],
+    "medical_data": ["medical", "diagnosis", "biometric"],
+    "employment_termination": ["terminate", "termination", "dismiss", "dismissal"],
+    "fraud": ["fraud", "duplicate invoice", "duplicate supplier"],
+    "bank_change": ["bank change", "pix key", "supplier pix"],
+    "harassment": ["harassment", "discrimination"],
+    "tax_penalty": ["tax penalty", "late filing"]
+  },
+  "freshness_signals": {
+    "current_law_required": ["current law", "current regulation", "new regulation", "today"],
+    "current_rate_required": ["latest rate", "current rate", "current table"],
+    "current_agreement_required": ["current cct", "current collective agreement"]
+  }
+}

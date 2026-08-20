@@ -1,0 +1,13 @@
+{
+  "id": "po-receipt-invoice-mismatch",
+  "input": "PO 100; receipt 80; invoice 100. Can we pay?",
+  "expected": {
+    "primary_skill": "accounts-payable",
+    "risk_at_least": "R5",
+    "freshness": "critical",
+    "requires_sources": true,
+    "authority_includes": ["ANALYZE", "RECOMMEND"],
+    "mode": "SIMULATE",
+    "context_guard": false
+  }
+}

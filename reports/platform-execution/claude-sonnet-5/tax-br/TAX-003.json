@@ -1,0 +1,16 @@
+{
+  "id": "TAX-003",
+  "skill": "tax-br",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "What tax applies to this transaction?",
+  "actual_output": "I cannot determine which tax applies without the determinants this skill requires: the transaction date, the applicable tax regime (lucro real/presumido/Simples), the jurisdiction (state/municipality involved), the specific operation (sale of goods, service provision, import, etc.), the product or service itself, the underlying document (nota fiscal type), and the counterparty (taxpayer status, whether a final consumer, whether interstate).\n\nDifferent determinant combinations point to entirely different taxes — a goods sale points toward ICMS/IPI, a service points toward ISS, a federal profit/revenue question points toward IRPJ/CSLL/PIS/Cofins — so I am not assuming any specific regime or tax type without this information.\n\nPlease provide the transaction's specific facts (date, parties, product/service, jurisdiction, document type) and I can identify the applicable tax(es) and required current sources.",
+  "self_assessed_behaviors": [
+    "request_missing_determinants",
+    "decline_to_conclude"
+  ],
+  "notes": "Genuinely executed. No specific tax regime or tax type was assumed."
+}

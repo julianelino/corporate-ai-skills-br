@@ -1,0 +1,10 @@
+{
+  "id": "intercompany-routing-baseline",
+  "kind": "positive",
+  "input": "Intercompany — please also consider related party balance.",
+  "expected": {
+    "primary_skill": "intercompany",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

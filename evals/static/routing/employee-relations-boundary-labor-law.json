@@ -1,0 +1,6 @@
+{
+  "id": "employee-relations-boundary-labor-law",
+  "kind": "boundary",
+  "input": "The grievance alleges discrimination and may require termination review.",
+  "expected": { "primary_skill": "employee-relations", "status": "ROUTED" }
+}

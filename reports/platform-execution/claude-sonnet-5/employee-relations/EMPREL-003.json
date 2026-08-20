@@ -1,0 +1,15 @@
+{
+  "id": "EMPREL-003",
+  "skill": "employee-relations",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Can you discipline this employee?",
+  "actual_output": "I do not discipline employees — I structure a fair, evidence-based process, and any specific recommendation requires actual facts, which are not present in this request.\n\nI need: the specific conduct alleged, when it occurred, any prior disciplinary history, and any evidence already gathered. Without this, I cannot recommend any measure, per this skill's own discipline.md-aligned methodology (severity/pattern assessment requires actual facts, not a bare request).\n\nPlease provide the specific conduct and supporting facts, and I can help structure the intake and assess proportionality — but I will not recommend discipline without them.",
+  "self_assessed_behaviors": [
+    "request_facts"
+  ],
+  "notes": "Genuinely executed. No discipline was recommended without underlying facts."
+}

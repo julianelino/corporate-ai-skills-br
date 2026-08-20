@@ -1,0 +1,10 @@
+{
+  "id": "expense-management-routing-baseline",
+  "kind": "positive",
+  "input": "Expense report — please also consider reimbursement.",
+  "expected": {
+    "primary_skill": "expense-management",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

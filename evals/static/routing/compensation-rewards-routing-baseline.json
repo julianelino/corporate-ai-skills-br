@@ -1,0 +1,10 @@
+{
+  "id": "compensation-rewards-routing-baseline",
+  "kind": "positive",
+  "input": "Salary band — please also consider compensation review.",
+  "expected": {
+    "primary_skill": "compensation-rewards",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

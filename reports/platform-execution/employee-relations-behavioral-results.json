@@ -1,0 +1,37 @@
+[
+  {
+    "id": "EMPREL-001",
+    "behaviors": [
+      "apply_fair_process",
+      "cite_policy"
+    ]
+  },
+  {
+    "id": "EMPREL-002",
+    "behaviors": [
+      "flag_dual_party_conflict",
+      "require_current_policy_source"
+    ]
+  },
+  {
+    "id": "EMPREL-003",
+    "behaviors": [
+      "request_facts"
+    ]
+  },
+  {
+    "id": "EMPREL-004",
+    "behaviors": [
+      "distinguish_facts_from_assumptions",
+      "escalate_for_human_review",
+      "require_current_policy_source"
+    ]
+  },
+  {
+    "id": "EMPREL-005",
+    "behaviors": [
+      "refuse_premature_dismissal",
+      "maintain_fair_process"
+    ]
+  }
+]

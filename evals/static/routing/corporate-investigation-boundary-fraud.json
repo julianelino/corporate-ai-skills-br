@@ -1,0 +1,6 @@
+{
+  "id": "corporate-investigation-boundary-fraud",
+  "kind": "boundary",
+  "input": "Preserve evidence and evaluate the allegation for this investigation into a possible fraud signal.",
+  "expected": { "primary_skill": "corporate-investigation", "status": "ROUTED" }
+}

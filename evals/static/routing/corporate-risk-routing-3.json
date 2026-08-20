@@ -1,0 +1,6 @@
+{
+  "id": "corporate-risk-routing-3",
+  "kind": "positive",
+  "input": "This data is sensitive and needs a risk classification.",
+  "expected": { "primary_skill": "corporate-risk", "status": "ROUTED", "context_guard": false }
+}

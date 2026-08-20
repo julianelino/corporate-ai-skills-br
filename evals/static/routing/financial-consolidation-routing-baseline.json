@@ -1,0 +1,10 @@
+{
+  "id": "financial-consolidation-routing-baseline",
+  "kind": "positive",
+  "input": "Consolidation — please also consider eliminations.",
+  "expected": {
+    "primary_skill": "financial-consolidation",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

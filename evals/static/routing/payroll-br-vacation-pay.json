@@ -1,0 +1,10 @@
+{
+  "id": "payroll-br-vacation-pay",
+  "kind": "positive",
+  "input": "Calculate vacation pay including the constitutional bonus.",
+  "expected": {
+    "primary_skill": "payroll-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

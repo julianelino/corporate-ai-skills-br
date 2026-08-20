@@ -1,0 +1,10 @@
+{
+  "id": "credit-risk-routing-baseline",
+  "kind": "positive",
+  "input": "Credit risk — please also consider credit limit.",
+  "expected": {
+    "primary_skill": "credit-risk",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

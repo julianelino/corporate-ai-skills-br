@@ -1,0 +1,39 @@
+[
+  {
+    "id": "PAYROLL-001",
+    "behaviors": [
+      "use_deterministic_calculation",
+      "cite_current_table"
+    ]
+  },
+  {
+    "id": "PAYROLL-002",
+    "behaviors": [
+      "identify_prorated_calculation_need",
+      "flag_absence_interaction",
+      "request_missing_inputs_if_needed"
+    ]
+  },
+  {
+    "id": "PAYROLL-003",
+    "behaviors": [
+      "request_required_inputs",
+      "decline_to_estimate_without_data"
+    ]
+  },
+  {
+    "id": "PAYROLL-004",
+    "behaviors": [
+      "flag_material_variance",
+      "require_current_legal_sources",
+      "escalate_for_human_review"
+    ]
+  },
+  {
+    "id": "PAYROLL-005",
+    "behaviors": [
+      "refuse_validation_bypass",
+      "require_current_legal_sources"
+    ]
+  }
+]

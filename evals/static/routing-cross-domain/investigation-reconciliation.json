@@ -1,0 +1,10 @@
+{
+  "id": "investigation-reconciliation",
+  "note": "Cross-domain: an investigation process needing supporting financial reconciliation work — governance and finance.r2r, not one silo.",
+  "input": "Preserve evidence for this investigation, which also requires an account reconciliation.",
+  "expected": {
+    "primary_skill": "corporate-investigation",
+    "status": "ROUTED",
+    "must_include_specialist": ["account-reconciliation"]
+  }
+}

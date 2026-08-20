@@ -1,0 +1,10 @@
+{
+  "id": "performance-talent-routing-baseline",
+  "kind": "positive",
+  "input": "Performance review — please also consider goal calibration.",
+  "expected": {
+    "primary_skill": "performance-talent",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

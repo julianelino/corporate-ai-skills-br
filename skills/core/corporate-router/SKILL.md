@@ -8,7 +8,7 @@ description: Route a Brazilian corporate request to the smallest safe set of gov
 ## Route
 
 1. Identify intent, requested outcome, jurisdiction, data sensitivity, action mode, and whether the user needs analysis, a draft, a calculation, or an execution.
-2. Query `knowledge/registry/capability-registry.yaml`; select one primary specialist first.
+2. Query `knowledge/registry/capability-registry.generated.yaml` (built from every skill's `skill.yaml` by `npm run registry:build`; never edit it by hand); select one primary specialist first.
 3. Add a specialist only for a distinct required competence. Load references only after a specialist identifies the need.
 4. Require fresh authoritative material for regulated, temporal, or consequential claims. Use supplied corporate context only when necessary and authorized.
 5. Add `corporate-risk` or `corporate-reviewer` when risk or evidence warrants it. If more than six skills are projected, emit `CONTEXT_GUARD` and reduce the route.

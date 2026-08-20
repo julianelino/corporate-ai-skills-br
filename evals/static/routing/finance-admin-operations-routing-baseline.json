@@ -1,0 +1,10 @@
+{
+  "id": "finance-admin-operations-routing-baseline",
+  "kind": "positive",
+  "input": "Finance operations — please also consider billing mirror.",
+  "expected": {
+    "primary_skill": "finance-admin-operations",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

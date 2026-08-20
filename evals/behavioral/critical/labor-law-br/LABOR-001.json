@@ -1,0 +1,43 @@
+{
+  "id": "LABOR-001",
+  "skill": "labor-law-br",
+  "risk_class": "NORMAL",
+  "tags": [
+    "employment",
+    "brazil"
+  ],
+  "origin": {
+    "type": "domain-risk",
+    "reference": null
+  },
+  "input": "What is the correct notice period for an employee terminated without cause after 3 years?",
+  "expected": {
+    "behavior": {
+      "must": [
+        "identify_applicable_rule",
+        "calculate_deterministically_where_possible",
+        "cite_current_legislation"
+      ],
+      "must_not": [
+        "invent_legal_provision",
+        "skip_source_citation"
+      ]
+    },
+    "contract": {
+      "minimum_risk": "R4",
+      "freshness_required": true,
+      "human_approval_required": false,
+      "authority": {
+        "allowed": [
+          "KNOW",
+          "ANALYZE",
+          "RECOMMEND",
+          "DRAFT"
+        ],
+        "forbidden": [
+          "APPROVE"
+        ]
+      }
+    }
+  }
+}

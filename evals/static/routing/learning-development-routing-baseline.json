@@ -1,0 +1,10 @@
+{
+  "id": "learning-development-routing-baseline",
+  "kind": "positive",
+  "input": "Training plan — please also consider learning path.",
+  "expected": {
+    "primary_skill": "learning-development",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

@@ -4,3 +4,11 @@ __pycache__/
 .coverage
 dist/
 build/
+# reports/ holds regenerable script output (coverage, reliability-gate, etc.) — ignored via `reports/*`
+# (not `reports/`) specifically so the negation below can still work: git never re-includes a path
+# under a directory that was itself excluded, only one excluded by a glob on its contents.
+# reports/platform-execution/ is primary evidence (real per-case agent inputs/outputs behind the
+# PLATFORM_BEHAVIORAL_EXECUTION / PLATFORM_ADVERSARIAL_EXECUTION carry-forward closures) that no
+# script regenerates, so it is deliberately versioned rather than excluded.
+reports/*
+!reports/platform-execution/

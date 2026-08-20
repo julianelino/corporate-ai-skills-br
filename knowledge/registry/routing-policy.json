@@ -1,0 +1,14 @@
+{
+  "version": "0.1.0",
+  "note": "Central scoring policy for engines/reference-routing/v2.mjs. Weights are deliberately unsophisticated (see ARCHITECTURE.md 'Router v2') — the only number chosen from data instead of intuition is thresholds.minimum_margin, calibrated by running all 100 committed static eval cases through v1 and inspecting the real score-gap distribution (see docs/superpowers/plans/2026-08-17-reliability-hardening.md Task 4): the smallest real gap among currently-passing multi-candidate cases is exactly 0.5 (payments-boundary-accounts-payable), so 0.5 is the largest threshold that produces zero regressions against the existing corpus while still being able to catch a genuinely closer future case.",
+  "weights": {
+    "exact_phrase_per_token": 1,
+    "exact_token": 1,
+    "prefix": 0.5,
+    "handle_evidence": 0.5,
+    "namespace_consensus": 0.5
+  },
+  "thresholds": {
+    "minimum_margin": 0.5
+  }
+}

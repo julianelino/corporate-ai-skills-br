@@ -1,0 +1,6 @@
+{
+  "id": "hr-privacy-lgpd-routing-3",
+  "kind": "positive",
+  "input": "We need to review our biometric data privacy controls.",
+  "expected": { "primary_skill": "hr-privacy-lgpd", "status": "ROUTED", "context_guard": false }
+}

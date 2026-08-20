@@ -1,0 +1,15 @@
+{
+  "id": "CREV-003",
+  "skill": "corporate-reviewer",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Is this decision well supported?",
+  "actual_output": "I cannot assess this without the actual evidence package behind the decision — the artifact itself, its cited sources, and the claims it makes. 'Well supported' is exactly the judgment this skill's quality-review.md/provenance-review.md methodology exists to make, but it requires something concrete to trace (claim -> data -> evidence -> source -> rule -> skill -> reviewer), not a bare question.\n\nI am not assuming adequate support without seeing that evidence. Please share the decision and its supporting materials, and I will trace the critical claims and report specific findings.",
+  "self_assessed_behaviors": [
+    "request_evidence_package"
+  ],
+  "notes": "Genuinely executed. Adequate support was not assumed without seeing the actual evidence."
+}

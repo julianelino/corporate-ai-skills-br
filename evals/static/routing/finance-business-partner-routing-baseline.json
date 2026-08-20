@@ -1,0 +1,10 @@
+{
+  "id": "finance-business-partner-routing-baseline",
+  "kind": "positive",
+  "input": "Pricing decision — please also consider resource allocation.",
+  "expected": {
+    "primary_skill": "finance-business-partner",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "CRISK-003",
+  "skill": "corporate-risk",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Is this risky?",
+  "actual_output": "I cannot assign a risk level without knowing what 'this' is. Please describe the specific request, workflow, or action — what it involves, what data or decision it touches, and any relevant facts about impact and reversibility — and I will classify it against the R0-R6 scale with applicable tags.\n\nI am not assigning an arbitrary risk level without that detail.",
+  "self_assessed_behaviors": [
+    "request_request_detail"
+  ],
+  "notes": "Genuinely executed. No arbitrary risk level was assigned without knowing the underlying request."
+}

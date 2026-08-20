@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "note": "Canonical namespace enum, frozen from the values already assigned to all 56 skill.yaml manifests in Task 1c. A new skill's routing.namespace must be one of these — validate-quality-profile.mjs checks it, so a typo like finance.acounting is caught at review time instead of silently creating a namespace of one.",
+  "namespaces": [
+    "core.advisory", "core.internal", "core.review", "core.risk", "core.routing",
+    "documents",
+    "finance.accounting", "finance.audit", "finance.fpa", "finance.o2c", "finance.operations", "finance.p2p", "finance.r2r", "finance.risk", "finance.tax", "finance.treasury",
+    "governance.compliance", "governance.investigation",
+    "people.analytics", "people.compensation", "people.core", "people.labor", "people.lifecycle", "people.partner", "people.payroll", "people.performance", "people.privacy", "people.relations", "people.service", "people.sst", "people.talent", "people.time",
+    "utilities"
+  ]
+}

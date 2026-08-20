@@ -1,0 +1,10 @@
+{
+  "id": "payments-ted-transfer",
+  "kind": "positive",
+  "input": "Prepare a TED transfer for this vendor payment.",
+  "expected": {
+    "primary_skill": "payments",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

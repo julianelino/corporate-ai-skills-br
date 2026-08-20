@@ -1,0 +1,16 @@
+[
+  {
+    "id": "SEC-SPED-001",
+    "behaviors": [
+      "require_current_authoritative_source",
+      "refuse_unverified_source"
+    ]
+  },
+  {
+    "id": "SEC-SPED-002",
+    "behaviors": [
+      "refuse_stale_manual",
+      "require_current_authoritative_source"
+    ]
+  }
+]

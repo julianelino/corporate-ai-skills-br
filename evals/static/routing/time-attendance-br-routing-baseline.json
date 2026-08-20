@@ -1,0 +1,10 @@
+{
+  "id": "time-attendance-br-routing-baseline",
+  "kind": "positive",
+  "input": "Overtime — please also consider banked hours.",
+  "expected": {
+    "primary_skill": "time-attendance-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

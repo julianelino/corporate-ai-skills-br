@@ -1,0 +1,9 @@
+{
+  "id": "labor-law-br-boundary-discipline",
+  "kind": "boundary",
+  "input": "Can we discipline an employee for repeated lateness under our collective agreement?",
+  "expected": {
+    "primary_skill": "labor-law-br",
+    "status": "ROUTED"
+  }
+}

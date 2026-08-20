@@ -1,0 +1,18 @@
+{
+  "note": "Required knowledge topics per critical skill, taken verbatim from the skill's own handles (skill.yaml) or, where handles are self-referential, its own SKILL.md description — never invented. Used by scripts/validate-critical-sources.mjs to measure reference-file topic coverage: a topic counts as covered only when a references/ filename matches it, not when it merely appears in sources.md's own Freshness-Critical Topics list (that would be circular).",
+  "skills": {
+    "labor-law-br": ["termination", "discipline", "working-time", "labor-litigation", "collective-bargaining"],
+    "payroll-br": ["payroll", "vacation", "termination-support", "incidences", "esocial"],
+    "tax-br": ["IRPJ", "CSLL", "PIS", "Cofins", "ICMS", "ISS", "IPI", "IRRF", "INSS withholding", "IBS", "CBS", "tax reform transitions"],
+    "accounting-br": ["recognition", "measurement", "accrual", "provisions", "assets", "liabilities", "equity", "revenue", "expenses", "cost", "depreciation", "impairment", "financial statements"],
+    "payments": ["PIX", "TED", "boleto", "batch payments", "CNAB", "international payments", "tax payments", "vendor payments"],
+    "sped-compliance": ["ECD", "ECF", "EFD", "Reinf", "DCTFWeb", "layouts", "validation", "filing calendar", "technical manuals"],
+    "corporate-risk": ["risk-assessment", "approval-gates"],
+    "corporate-reviewer": ["quality-review", "provenance-review"],
+    "corporate-compliance": ["conduct", "conflict-of-interest", "gifts", "anti-corruption", "retaliation", "policy-control"],
+    "corporate-investigation": ["allegation", "preservation", "evidence", "interviews", "findings"],
+    "employee-relations": ["discipline", "harassment", "discrimination", "grievance", "investigation"],
+    "hr-privacy-lgpd": ["hr-data-access", "privacy-impact"],
+    "financial-fraud-risk": ["duplicate suppliers/invoices/PIX", "bank changes", "split payments", "manual entries", "round amounts", "unusual users", "weekend activity", "reversals"]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "skill": "hr-privacy-lgpd",
+  "purpose": "Apply LGPD-oriented privacy controls to HR data, including purpose, necessity, legal basis, minimization, access, retention, sensitive data, medical data, biometrics, salary, bank data, and disciplinary records",
+  "risk_ceiling": "R6",
+  "decision_authority": [
+    "KNOW",
+    "ANALYZE",
+    "RECOMMEND",
+    "DRAFT"
+  ],
+  "freshness": "critical",
+  "review_scope": [
+    "DOMAIN",
+    "LEGAL",
+    "GOVERNANCE"
+  ],
+  "key_source_hierarchy": "T1-and-corporate per skills/**/hr-privacy-lgpd/sources.md — see its \"Primary Authorities\" and \"Conflict Resolution\" sections.",
+  "gold_case_summary": {
+    "defined": 5,
+    "riskClasses": [
+      "BOUNDARY",
+      "FAIL_SAFE",
+      "HIGH_RISK",
+      "INSUFFICIENT_CONTEXT",
+      "NORMAL"
+    ]
+  },
+  "known_gaps": [
+    {
+      "dimension": "human_review",
+      "detail": "status is \"pending\", requires \"approved\""
+    },
+    {
+      "dimension": "source_freshness_alert",
+      "detail": "stf:UNREACHABLE"
+    },
+    {
+      "dimension": "source_verification",
+      "detail": "none of [planalto, stf] has ever been human-verified (last_verified is null for all)"
+    }
+  ],
+  "human_review": {
+    "status": "pending",
+    "required_for_release": true,
+    "reviewed_at": null,
+    "reviewers": [],
+    "scope": [
+      "DOMAIN",
+      "LEGAL",
+      "GOVERNANCE"
+    ],
+    "skill_version": "0.1.0",
+    "reviewed_commit": null
+  },
+  "note": "Generated snapshot for reviewer convenience. Canonical review state lives in skill.yaml human_review — do not edit status here."
+}

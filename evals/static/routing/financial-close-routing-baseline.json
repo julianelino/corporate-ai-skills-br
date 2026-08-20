@@ -1,0 +1,10 @@
+{
+  "id": "financial-close-routing-baseline",
+  "kind": "positive",
+  "input": "Month end close — please also consider financial close.",
+  "expected": {
+    "primary_skill": "financial-close",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

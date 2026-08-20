@@ -1,0 +1,10 @@
+{
+  "id": "financial-fraud-risk-routing-baseline",
+  "kind": "positive",
+  "input": "Duplicate invoice — please also consider duplicate supplier.",
+  "expected": {
+    "primary_skill": "financial-fraud-risk",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "id": "sped-compliance-boundary-tax-br",
+  "kind": "boundary",
+  "input": "Confirm the ECD and EFD filing status before addressing the ICMS treatment.",
+  "expected": { "primary_skill": "sped-compliance", "status": "ROUTED" }
+}

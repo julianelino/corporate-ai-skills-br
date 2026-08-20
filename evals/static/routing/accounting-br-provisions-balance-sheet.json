@@ -1,0 +1,10 @@
+{
+  "id": "accounting-br-provisions-balance-sheet",
+  "kind": "positive",
+  "input": "What provisions should appear on the balance sheet for this contingent liability?",
+  "expected": {
+    "primary_skill": "accounting-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

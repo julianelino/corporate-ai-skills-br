@@ -1,0 +1,17 @@
+{
+  "version": "0.1.0",
+  "note": "Small, fixed intent taxonomy. Router v2 detects these as informational signals only (routed.intent_signals) — it does NOT use them to adjust candidate scoring in this iteration. Doing that responsibly needs an intent-to-domain compatibility matrix (e.g. REVIEW+invoice -> accounts-payable, REVIEW+source -> corporate-reviewer), which this task did not build: a wrong or missing mapping would silently bias routing on a guess. See ARCHITECTURE.md 'Router v2' and reliability-hardening.md Task 4's deferred list.",
+  "intents": {
+    "ANALYZE": ["analyze", "assess", "evaluate", "review"],
+    "CALCULATE": ["calculate", "compute"],
+    "CLASSIFY": ["classify", "categorize"],
+    "DRAFT": ["draft", "prepare", "write"],
+    "APPROVE_REQUEST": ["approve", "authorize", "sign off"],
+    "AUDIT": ["audit", "inspect"],
+    "INVESTIGATE": ["investigate", "interview", "preserve evidence"],
+    "RECONCILE": ["reconcile", "match"],
+    "PLAN": ["plan", "forecast", "project"],
+    "EXECUTE_REQUEST": ["pay", "send", "submit", "file", "process"],
+    "EXPLAIN": ["explain", "confirm", "what is"]
+  }
+}

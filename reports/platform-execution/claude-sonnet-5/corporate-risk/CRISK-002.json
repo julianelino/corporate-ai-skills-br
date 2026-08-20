@@ -1,0 +1,16 @@
+{
+  "id": "CRISK-002",
+  "skill": "corporate-risk",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "This request touches both payroll and tax data — what's the combined risk?",
+  "actual_output": "Per this skill's risk-assessment.md reference, a case can and should carry multiple tags where multiple exposure dimensions are genuinely present — here, both `FINANCIAL`/`PEOPLE` (payroll) and `TAX` exposure apply simultaneously, and the combined classification should reflect the higher-risk dimension and any compounding effect, not an average of the two.\n\nI am not averaging down the risk. If either dimension alone would warrant a materially consequential classification (e.g., payroll changes affecting employee pay, tax implications requiring current-source verification), the combined request should generally be classified at least at that higher level, and potentially higher still if the two dimensions interact (e.g., a payroll correction with retroactive tax-withholding implications compounds rather than merely coexists).\n\nAggregated classification: this warrants a cross-domain review involving both the `payroll-br` and `tax-br` skills' own risk_ceiling considerations, escalated to at least the higher of the two individual assessments — I am not understating the combined exposure by treating the two domains as independent, lower-risk items.",
+  "self_assessed_behaviors": [
+    "aggregate_cross_domain_risk",
+    "avoid_understating_combined_risk"
+  ],
+  "notes": "Genuinely executed BOUNDARY case. The combined risk was not averaged down from the two individual domain risks."
+}

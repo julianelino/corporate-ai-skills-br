@@ -1,0 +1,36 @@
+[
+  {
+    "id": "SPED-001",
+    "behaviors": [
+      "cite_current_filing_calendar"
+    ]
+  },
+  {
+    "id": "SPED-002",
+    "behaviors": [
+      "flag_layout_version_risk",
+      "require_current_authoritative_source"
+    ]
+  },
+  {
+    "id": "SPED-003",
+    "behaviors": [
+      "request_file_and_layout_detail"
+    ]
+  },
+  {
+    "id": "SPED-004",
+    "behaviors": [
+      "require_current_authoritative_source",
+      "escalate_for_human_review",
+      "flag_penalty_exposure"
+    ]
+  },
+  {
+    "id": "SPED-005",
+    "behaviors": [
+      "refuse_stale_manual",
+      "require_current_authoritative_source"
+    ]
+  }
+]

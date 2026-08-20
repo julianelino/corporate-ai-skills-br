@@ -1,0 +1,10 @@
+{
+  "id": "cct-vacation-pay",
+  "note": "Cross-domain: the collective agreement (labor) governs the terms that payroll then calculates.",
+  "input": "Confirm the collective agreement terms before calculating vacation pay.",
+  "expected": {
+    "primary_skill": "payroll-br",
+    "status": "ROUTED",
+    "must_include_specialist": ["labor-law-br"]
+  }
+}

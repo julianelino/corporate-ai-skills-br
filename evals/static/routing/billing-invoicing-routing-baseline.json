@@ -1,0 +1,10 @@
+{
+  "id": "billing-invoicing-routing-baseline",
+  "kind": "positive",
+  "input": "Billing — please also consider invoicing.",
+  "expected": {
+    "primary_skill": "billing-invoicing",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

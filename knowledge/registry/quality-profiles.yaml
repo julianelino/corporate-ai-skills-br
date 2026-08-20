@@ -1,0 +1,93 @@
+{
+  "version": "0.1.0",
+  "note": "Central policy source. skill.yaml only ever declares quality_profile (and, rarely, quality_overrides with a reason) — it never repeats these requirements per skill. scripts/validate-quality-profile.mjs enforces structure; scripts/report-release-readiness.mjs measures actual vs required per skill; scripts/validate-routing-eval-coverage.mjs reads evals.routing.by_exposure (never a local hardcoded minimum) so a DIRECT skill's positive-match bar and a DELEGATED skill's delegation-case bar can differ without drifting apart in two places.",
+  "profiles": {
+    "critical": {
+      "description": "GOVERNANCE.md-critical or otherwise materially risky regulated/financial/people domains.",
+      "sources": { "requirement": "required" },
+      "references": { "requirement": "required" },
+      "evals": {
+        "routing": {
+          "required": true,
+          "by_exposure": {
+            "DIRECT": { "positive_minimum": 3, "boundary_minimum": 1 },
+            "DELEGATED": { "delegation_minimum": 3, "boundary_minimum": 1 },
+            "INTERNAL": { "integration_minimum": 1 }
+          }
+        },
+        "contract": { "required": true, "minimum": 2 },
+        "behavioral": { "required": true, "minimum": 5, "required_risk_classes": ["NORMAL", "BOUNDARY", "INSUFFICIENT_CONTEXT", "HIGH_RISK", "FAIL_SAFE"] },
+        "adversarial": { "required": true, "minimum": 2 }
+      },
+      "freshness_min": "conditional",
+      "human_review": { "requirement": "required" }
+    },
+    "high": {
+      "description": "Material financial/operational impact, but not named critical in GOVERNANCE.md.",
+      "sources": { "requirement": "required" },
+      "references": { "requirement": "recommended" },
+      "evals": {
+        "routing": {
+          "required": true,
+          "by_exposure": {
+            "DIRECT": { "positive_minimum": 1, "boundary_minimum": 0 },
+            "DELEGATED": { "delegation_minimum": 1, "boundary_minimum": 0 }
+          }
+        },
+        "contract": { "required": true, "minimum": 1 },
+        "behavioral": { "required": true, "minimum": 1 },
+        "adversarial": { "required": false, "minimum": 0 }
+      },
+      "freshness_min": "conditional",
+      "human_review": { "requirement": "conditional" }
+    },
+    "standard": {
+      "description": "Default profile: routine analysis/support skills.",
+      "sources": { "requirement": "conditional" },
+      "references": { "requirement": "conditional" },
+      "evals": {
+        "routing": {
+          "required": true,
+          "by_exposure": {
+            "DIRECT": { "positive_minimum": 1, "boundary_minimum": 0 },
+            "DELEGATED": { "delegation_minimum": 1, "boundary_minimum": 0 }
+          }
+        },
+        "contract": { "required": false, "minimum": 0 },
+        "behavioral": { "required": false, "minimum": 0 },
+        "adversarial": { "required": false, "minimum": 0 }
+      },
+      "freshness_min": null,
+      "human_review": { "requirement": "not_required" }
+    },
+    "utility": {
+      "description": "Deterministic/spreadsheet/automation helpers with no regulated judgment.",
+      "sources": { "requirement": "inherited_or_none" },
+      "references": { "requirement": "conditional" },
+      "evals": {
+        "routing": {
+          "required": true,
+          "by_exposure": { "DIRECT": { "positive_minimum": 1, "boundary_minimum": 0 } }
+        },
+        "functional": { "required": true, "minimum": 1 }
+      },
+      "freshness_min": null,
+      "human_review": { "requirement": "not_required" }
+    },
+    "internal": {
+      "description": "Repository maintenance tooling; never a corporate request target.",
+      "sources": { "requirement": "none" },
+      "references": { "requirement": "none" },
+      "evals": {
+        "integration": { "required": true, "minimum": 1 }
+      },
+      "freshness_min": null,
+      "human_review": { "requirement": "not_required" }
+    }
+  },
+  "consistency_rules": [
+    "risk_ceiling R5 or R6 requires quality_profile critical or high (a materially risky skill cannot be classified standard/utility/internal).",
+    "quality_profile critical requires freshness at least as strict as the profile's freshness_min.",
+    "A quality_overrides entry that relaxes a profile's required control to none/not_required/false must carry a non-empty reason."
+  ]
+}

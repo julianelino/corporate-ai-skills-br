@@ -1,0 +1,6 @@
+{
+  "id": "corporate-compliance-routing-2",
+  "kind": "positive",
+  "input": "Is this a conflict of interest?",
+  "expected": { "primary_skill": "corporate-compliance", "status": "ROUTED", "context_guard": false }
+}

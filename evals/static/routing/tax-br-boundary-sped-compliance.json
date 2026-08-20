@@ -1,0 +1,9 @@
+{
+  "id": "tax-br-boundary-sped-compliance",
+  "kind": "boundary",
+  "input": "Determine the ICMS, PIS, and Cofins treatment, and confirm the EFD filing requirement.",
+  "expected": {
+    "primary_skill": "tax-br",
+    "status": "ROUTED"
+  }
+}

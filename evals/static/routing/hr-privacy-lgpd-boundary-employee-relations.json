@@ -1,0 +1,6 @@
+{
+  "id": "hr-privacy-lgpd-boundary-employee-relations",
+  "kind": "boundary",
+  "input": "An employee grievance references sensitive personal data that must stay private.",
+  "expected": { "primary_skill": "hr-privacy-lgpd", "status": "ROUTED" }
+}

@@ -1,0 +1,128 @@
+{
+  "note": "Findings that must stay visible across tasks instead of silently disappearing when a task closes. Each entry names the task that must resolve it and whether it blocks V1/release readiness.",
+  "items": [
+    {
+      "id": "CRITICAL_ROUTING_DEPTH",
+      "found_in": "Task 2 (2026-08-18)",
+      "description": "Task 1e's dynamic, risk-driven classification correctly put 8 skills into quality_profile: critical (corporate-compliance, corporate-investigation, corporate-reviewer, corporate-risk, employee-relations, financial-fraud-risk, hr-privacy-lgpd, sped-compliance) that Task 1b's baseline only ever gave a single positive routing eval. The critical profile requires >=3.",
+      "affected_skills": [
+        "corporate-compliance",
+        "corporate-investigation",
+        "corporate-reviewer",
+        "corporate-risk",
+        "employee-relations",
+        "financial-fraud-risk",
+        "hr-privacy-lgpd",
+        "sped-compliance"
+      ],
+      "resolving_task": "Task 1b-R1 — Critical Routing Depth Remediation",
+      "release_blocking": true,
+      "status": "closed",
+      "closed_at": "2026-08-18T13:28:09.628Z",
+      "verified_gap_count": 0
+    },
+    {
+      "id": "REFERENCE_DEPTH",
+      "found_in": "Task 3 (2026-08-18); re-measured under a real per-topic verifier (V1 Release Qualification, Workstream A, 2026-08-18)",
+      "description": "File-count coverage overstated real depth: labor-law-br, payroll-br, and employee-relations each had reference files, but those files were thin routing-load stubs with no topic-scoped content. scripts/report-reference-depth.mjs (wired into scripts/verify-carry-forward.mjs) now measures required vs. covered knowledge topics per critical skill from knowledge/registry/critical-topics.yaml, cross-checked against each references/*.md file's own declared Topics Covered list, never by filename guess. Final real measurement: 82/82 required topics covered across all 13 critical skills, sourced from CLT/CF text, TST doctrine, MTE/eSocial/NR-1 guidance, CPC/Lei 6.404 accounting pronouncements, federal/state/municipal tax law including the in-progress EC 132/2023 reform transition, SPED program manuals, Bacen payment-system/fraud-control guidance, general fraud-examination heuristics, Lei 12.846/2013/Decreto 11.129/2022 anti-corruption framework, Lei 13.964/2019 chain-of-custody plus PEACE-model investigative methodology, this repository's own frozen ARCHITECTURE.md/GOVERNANCE.md risk and approval model (corporate-risk, corporate-reviewer — no external T1 source maps to those skills' domains), and LGPD (Lei 13.709/2018) plus Resolucao CD/ANPD 15/2024 incident-notification rules. Retrieved via secondary mirrors/summaries since planalto.gov.br is unreachable from this environment (documented per-file under Known Limitations, with VERIFY_CURRENT_T1_SOURCE flags on every volatile rate/threshold/deadline). Verifier's own detection capability confirmed via an intentional-failure test (2026-08-19): temporarily stripped the Topics Covered heading from hr-privacy-lgpd's privacy-impact.md, confirmed the verifier correctly dropped to 81/82 and hr-privacy-lgpd to 1/2, restored the file, confirmed 82/82 again before this closure. Not fabricated then or since.",
+      "affected_skills": [],
+      "resolving_task": "V1 Release Qualification, Workstream A - REFERENCE_DEPTH (complete, 2026-08-19)",
+      "release_blocking": true,
+      "status": "closed",
+      "verified_gap_count": 0,
+      "closed_at": "2026-08-19T14:49:05.193Z"
+    },
+    {
+      "id": "HUMAN_REVIEW",
+      "found_in": "Task 3 (2026-08-18)",
+      "description": "0/13 critical skills have an actual approved human review. Packages are prepared (reviews/critical/<skill>/) and the approval gate is structurally enforced (validate-critical-sources.mjs refuses a fake/AI approval), but no qualified human has reviewed any of them yet.",
+      "affected_skills": [
+        "accounting-br",
+        "corporate-compliance",
+        "corporate-investigation",
+        "corporate-reviewer",
+        "corporate-risk",
+        "employee-relations",
+        "financial-fraud-risk",
+        "hr-privacy-lgpd",
+        "labor-law-br",
+        "payments",
+        "payroll-br",
+        "sped-compliance",
+        "tax-br"
+      ],
+      "resolving_task": "human action, not a code task",
+      "release_blocking": true,
+      "status": "open",
+      "verified_gap_count": 13
+    },
+    {
+      "id": "FRESHNESS_NOISY_TARGETS",
+      "found_in": "Task 5 (2026-08-18)",
+      "description": "mte, tst, cfc, and sefaz repeatedly fingerprint as CHANGED_UNREVIEWED between consecutive checks with no real content change — their gov.br portal pages send no ETag/Last-Modified and embed rotating widgets as literal text. Documented in scripts/check-source-freshness.mjs; likely fixable by pointing these registry entries at stable deep-content pages instead of portal homepages, not researched here.",
+      "affected_skills": [],
+      "resolving_task": "future source-registry curation task (not yet scheduled)",
+      "release_blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "DEPRECATED_REPLACEMENT",
+      "found_in": "Task 4/6 Router v2 (2026-08-18)",
+      "description": "The original Task 6 scope included warning when a DEPRECATED skill has no viable substitute. No skill currently carries status: DEPRECATED, and the substitute-mapping concept this needs was not built.",
+      "affected_skills": [],
+      "resolving_task": "whenever a skill first reaches status: DEPRECATED",
+      "release_blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "PLATFORM_ADVERSARIAL_EXECUTION",
+      "found_in": "Task 6 (2026-08-18)",
+      "description": "26 adversarial cases exist (evals/adversarial/critical/, >=2 per critical skill) and pass definition validation, but none has ever been executed against a real agent/platform. Defined and valid is not the same claim as tested — scripts/report-security.mjs and scripts/report-adversarial-cases.mjs keep the two visibly separate (Executed: 0, Passed: 0).",
+      "affected_skills": [
+        "accounting-br",
+        "corporate-compliance",
+        "corporate-investigation",
+        "corporate-reviewer",
+        "corporate-risk",
+        "employee-relations",
+        "financial-fraud-risk",
+        "hr-privacy-lgpd",
+        "labor-law-br",
+        "payments",
+        "payroll-br",
+        "sped-compliance",
+        "tax-br"
+      ],
+      "resolving_task": "whenever a real agent/platform adapter is wired to scripts/run-behavioral-evals.mjs's execution mode",
+      "release_blocking": true,
+      "status": "closed",
+      "verified_gap_count": 0,
+      "closed_at": "2026-08-20T13:25:37.166Z"
+    },
+    {
+      "id": "PLATFORM_BEHAVIORAL_EXECUTION",
+      "found_in": "Final Reliability Gate (2026-08-18)",
+      "description": "65 behavioral gold cases exist (evals/behavioral/critical/, Task 2) and pass definition validation, but — same as the adversarial cases — none has ever been executed against a real agent/platform. Called out as its own tracked item rather than left implicit inside PLATFORM_ADVERSARIAL_EXECUTION, so it cannot be missed at the release gate.",
+      "affected_skills": [
+        "accounting-br",
+        "corporate-compliance",
+        "corporate-investigation",
+        "corporate-reviewer",
+        "corporate-risk",
+        "employee-relations",
+        "financial-fraud-risk",
+        "hr-privacy-lgpd",
+        "labor-law-br",
+        "payments",
+        "payroll-br",
+        "sped-compliance",
+        "tax-br"
+      ],
+      "resolving_task": "whenever a real agent/platform adapter is wired to scripts/run-behavioral-evals.mjs's execution mode",
+      "release_blocking": true,
+      "status": "closed",
+      "verified_gap_count": 0,
+      "closed_at": "2026-08-20T13:25:37.290Z"
+    }
+  ]
+}

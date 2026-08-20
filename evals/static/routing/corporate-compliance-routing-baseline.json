@@ -1,0 +1,10 @@
+{
+  "id": "corporate-compliance-routing-baseline",
+  "kind": "positive",
+  "input": "Compliance — please also consider conflict of interest.",
+  "expected": {
+    "primary_skill": "corporate-compliance",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

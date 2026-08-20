@@ -1,0 +1,10 @@
+{
+  "id": "accounts-payable-routing-baseline",
+  "kind": "positive",
+  "input": "Invoice — please also consider supplier.",
+  "expected": {
+    "primary_skill": "accounts-payable",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

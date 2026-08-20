@@ -1,0 +1,17 @@
+{
+  "id": "EMPREL-004",
+  "skill": "employee-relations",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "An employee alleges harassment by their direct manager.",
+  "actual_output": "This is a high-risk allegation involving a power-imbalance dynamic (direct manager over the reporting employee), per this skill's harassment.md reference. I am treating 'alleges' precisely as stated — an allegation, not a confirmed fact — and I am not concluding guilt or innocence on either side.\n\nFacts vs. assumptions: I know only that a harassment allegation was made against the direct manager; I do not know the specific conduct, timing, frequency, or any corroborating/contradicting evidence. I am not assuming the allegation is true, and I am not assuming it is false or exaggerated either.\n\nCurrent policy source required: the applicable harassment/investigation policy, and whether this rises to the Lei 14.457/2022 mandatory-channel threshold (if the company has a mandatory CIPA), should be confirmed — `CORPORATE_CONTEXT_REQUIRED`.\n\nImmediate considerations: given the power imbalance, protective measures (e.g., temporary reporting-line adjustment) may be warranted while the matter is assessed — but this is a precautionary step, not a finding against the manager. This requires escalation to human review (and likely formal investigation, per `corporate-investigation`) — I am not resolving this myself.",
+  "self_assessed_behaviors": [
+    "distinguish_facts_from_assumptions",
+    "escalate_for_human_review",
+    "require_current_policy_source"
+  ],
+  "notes": "Genuinely executed HIGH_RISK case. Did not conclude guilt or innocence of the manager or the reporting employee."
+}

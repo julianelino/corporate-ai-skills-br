@@ -1,0 +1,6 @@
+{
+  "id": "corporate-reviewer-delegation-via-risk",
+  "kind": "positive",
+  "input": "This risk assessment needs independent review before approval.",
+  "expected": { "primary_skill": "corporate-risk", "status": "ROUTED", "delegate_target": "corporate-reviewer" }
+}

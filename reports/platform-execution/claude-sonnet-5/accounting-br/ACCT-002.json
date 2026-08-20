@@ -1,0 +1,16 @@
+{
+  "id": "ACCT-002",
+  "skill": "accounting-br",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Should this internally developed software be capitalized?",
+  "actual_output": "This requires applying CPC 04's specific internally-generated-intangible criteria, not a general 'high-value therefore capitalize' rule. CPC 04 distinguishes a research phase (generally expensed, since future economic benefit cannot yet be demonstrated) from a development phase (potentially capitalizable, but only if the entity can demonstrate: technical feasibility of completing the asset; intention to complete and use/sell it; ability to use/sell it; how it will generate probable future economic benefits; availability of adequate technical/financial/other resources to complete development; and ability to reliably measure the development expenditure).\n\nI am not applying a blanket rule that a costly or strategically important internal software project is automatically capex — each of the criteria above must actually be evidenced, and many internal software projects fail one or more of them (especially reliable cost measurement, if development and research activities weren't tracked separately).\n\nCross-domain flag: if capitalization is appropriate, this becomes an ativo imobilizado/intangível tracked going forward under this skill's depreciation-impairment.md framework (amortization, not depreciation, for an intangible) — I am flagging the handoff to fixed-assets tracking rather than treating this as a one-time recognition decision only.\n\nTo conclude, I need: whether costs were tracked separately for research vs. development phases; evidence of technical feasibility and intended use; and the specific development costs incurred.",
+  "self_assessed_behaviors": [
+    "apply_capitalization_criteria",
+    "flag_fixed_assets_handoff"
+  ],
+  "notes": "Genuinely executed. Explicitly rejected a 'high value = automatic capex' shortcut and applied the actual CPC 04 development-phase criteria."
+}

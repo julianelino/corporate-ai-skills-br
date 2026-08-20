@@ -1,0 +1,104 @@
+{
+  "note": "Collisions, near-misses, and real gaps found empirically while building the routing coverage baseline (2026-08-17, Task 1b) and the routing precision hardening pass (2026-08-17, Task 1c), by running real sentences through engines/reference-routing/index.mjs and inspecting routed.debug. A finding only moves to \"status\": \"fixed\" after a fix was applied AND the full eval suite (npm run eval) still passes.",
+  "taxonomy": {
+    "lexical_false_positive": "The matcher itself is wrong: a trigger matches text it has no business matching (e.g. a bare acronym matching inside an unrelated English word). Fixed structurally, in the matcher, not by patching individual triggers.",
+    "semantic_overlap": "Two skills share real vocabulary for opposite-but-related meanings (customer invoice vs supplier invoice). Fixed with anti_triggers that encode the distinguishing signal.",
+    "legitimate_handoff": "Two skills both have a genuine claim on the input (accounting-br decides recognition, fixed-assets covers asset-specific treatment). Not a bug — must stay a visible secondary candidate, never eliminated.",
+    "missing_trigger": "A skill has no vocabulary at all for a plausible real request in its own scope. Fixed by adding a grounded trigger (tied to the skill's own description/handles, never invented).",
+    "scoring_problem": "Two triggers of unequal real-world specificity end up with equal weight, causing an accidental tie. Fixed by specificity-weighted scoring (trigger token count) and/or the explicit prefix-match escape hatch scoring lower than an exact match.",
+    "namespace_conflict": "Reserved for when namespace-aware routing logic exists; not yet implemented (namespace is metadata only today — see ARCHITECTURE.md 'Capability registry')."
+  },
+  "collisions": [
+    {
+      "input": "Can we discipline an employee for repeated lateness under our collective agreement?",
+      "expected_primary": "labor-law-br",
+      "found_primary_before_fix": "payments",
+      "cause": "payments' bare trigger \"ted\" matched the substring inside \"repeaTED\" under the old bare-substring matcher.",
+      "classification": "lexical_false_positive",
+      "status": "fixed",
+      "fix": "engines/reference-routing/index.mjs now does token/phrase-boundary matching, not substring. \"ted\" only matches the standalone token \"ted\" (e.g. \"via TED\"), never inside \"repeated\"."
+    },
+    {
+      "input": "Can we discipline an employee for repeated lateness under our collective agreement?",
+      "expected_primary": "labor-law-br",
+      "found_primary_before_fix": null,
+      "cause": "labor-law-br had zero triggers matching a plain \"discipline\"/\"collective agreement\" request even though collective-bargaining is one of its own handles.",
+      "classification": "missing_trigger",
+      "status": "fixed",
+      "fix": "Added \"collective agreement\" and \"disciplinary\" to labor-law-br's triggers."
+    },
+    {
+      "input": "Is this dismissal valid under Brazilian labor law?",
+      "expected_primary": "labor-law-br",
+      "found_primary": "labor-law-br",
+      "competing_before_fix": ["tax-br"],
+      "cause": "tax-br's bare trigger \"iss\" (ICMS/ISS service tax) is a substring of \"dismissal\" (d-i-s-m-iss-al). Never flipped the primary (labor-law-br scored higher) but was latent noise on any \"dismiss\"/\"issue\"/\"missile\"-shaped input.",
+      "classification": "lexical_false_positive",
+      "status": "fixed",
+      "fix": "Same token/phrase-boundary matcher fix as the ted/repeated case above; no anti-trigger needed. See evals/static/routing-boundaries/dismissal-risk-not-tax-br.json."
+    },
+    {
+      "input": "Calculate vacation pay including the constitutional bonus.",
+      "expected_primary": "payroll-br",
+      "found_primary_before_fix": "payments",
+      "cause": "payments' bare trigger \"pay\" is a substring/exact-token match inside \"vacation pay\", tying payroll-br's single \"vacation\" match at equal weight; alphabetical tiebreak picked payments.",
+      "classification": "scoring_problem",
+      "status": "fixed",
+      "fix": "Two independent fixes: (1) payments' \"pay\" became the explicit prefix trigger \"pay*\", which now scores 0.5 — below any exact single-token match — so it no longer ties with a real match. (2) payroll-br also gained the more specific \"vacation pay\" trigger as extra margin. Either fix alone now resolves this case."
+    },
+    {
+      "input": "Please issue an invoice to this customer for the completed milestone.",
+      "expected_primary": "billing-invoicing",
+      "found_primary_before_fix": "accounts-payable",
+      "cause": "accounts-payable's bare \"invoice\" trigger matched, and billing-invoicing had no trigger at all covering plain \"invoice\" language — only compound phrases (\"milestone billing\") that didn't appear verbatim.",
+      "classification": "semantic_overlap",
+      "status": "fixed",
+      "fix": "Gave billing-invoicing the shared bare \"invoice\" trigger too, then disambiguated by counterparty direction with anti_triggers: accounts-payable excludes on {customer, client}; billing-invoicing excludes on {supplier, vendor}. See evals/static/routing-boundaries/{supplier,customer}-invoice-*.json."
+    },
+    {
+      "input": "PO 100; receipt 80; invoice 100. Can we pay?",
+      "expected_primary": "accounts-payable",
+      "found_primary_before_fix": null,
+      "cause": "Once billing-invoicing also matched bare \"invoice\" (previous entry), this classic three-way-match wording had no counterparty word to trigger either anti-trigger, so accounts-payable and billing-invoicing tied 1-1.",
+      "classification": "missing_trigger",
+      "status": "fixed",
+      "fix": "Added \"purchase order\", \"po\", and \"receipt\" to accounts-payable's triggers — core three-way-match vocabulary from its own description that was simply absent."
+    },
+    {
+      "input": "How should this software capitalization be treated under CPC accounting rules?",
+      "expected_primary": "accounting-br",
+      "competing": ["fixed-assets"],
+      "cause": "Both skills have a real claim: accounting-br decides the recognition framework, fixed-assets covers asset-specific treatment.",
+      "classification": "legitimate_handoff",
+      "status": "by_design",
+      "action": "None. Namespace metadata (finance.accounting for both) documents the relationship; no anti-trigger should ever be added here."
+    },
+    {
+      "input": "Determine the ICMS, PIS, and Cofins treatment, and confirm the EFD filing requirement.",
+      "expected_primary": "tax-br",
+      "competing": ["sped-compliance"],
+      "cause": "Both skills have a real claim: tax-br decides applicability, sped-compliance covers the corresponding filing obligation.",
+      "classification": "legitimate_handoff",
+      "status": "by_design",
+      "action": "None, same reasoning as accounting-br/fixed-assets."
+    },
+    {
+      "input": "Calculate INSS and check overtime hours for this payroll run.",
+      "expected_primary": "payroll-br",
+      "competing": ["labor-law-br", "time-attendance-br", "payments"],
+      "cause": "labor-law-br and time-attendance-br both legitimately claim \"overtime\" (real overlap, keep). payments still shows up via the \"pay*\" prefix matching \"payroll\", now at reduced weight 0.5 instead of 1.",
+      "classification": "mixed (legitimate_handoff + scoring_problem)",
+      "status": "improved",
+      "action": "labor-law-br/time-attendance-br stay as-is (legitimate). The payments prefix-noise is lower-priority now; revisit with an anti-trigger only if it is ever observed to win a primary slot it shouldn't."
+    },
+    {
+      "input": "Investigation — please also consider allegation. / Can we discipline an employee for repeated lateness under our collective agreement? (and several other corporate-investigation/labor-law-br cases)",
+      "expected_primary": "corporate-investigation or labor-law-br (unchanged)",
+      "found_in": "Task 4 (2026-08-18), router-compare.mjs v1-vs-v2 shadow run",
+      "cause": "Router v2's new handle-evidence signal (a skill's own skill.yaml handles, weighted 0.5 — below any curated trigger) picks up employee-relations' handles \"discipline\"/\"investigation\" whenever those literal words appear, even when employee-relations' curated triggers (harassment/discrimination/grievance/disciplinary process) don't match.",
+      "classification": "legitimate_handoff",
+      "status": "by_design",
+      "action": "None — employee-relations genuinely can be relevant whenever discipline or an internal investigation is mentioned. It only ever appears as a low-weight secondary (never flips primary; confirmed 0 regressions across all 104 static cases in reports/router-v1-v2-comparison.json), which is exactly what handle evidence is for. Revisit only if it is ever observed dominating a primary slot it shouldn't."
+    }
+  ]
+}

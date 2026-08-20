@@ -1,0 +1,6 @@
+{
+  "id": "employee-relations-routing-2",
+  "kind": "positive",
+  "input": "An employee filed a discrimination complaint against a coworker.",
+  "expected": { "primary_skill": "employee-relations", "status": "ROUTED", "context_guard": false }
+}

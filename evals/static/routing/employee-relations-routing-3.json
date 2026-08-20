@@ -1,0 +1,6 @@
+{
+  "id": "employee-relations-routing-3",
+  "kind": "positive",
+  "input": "There is a grievance about unequal treatment on the team.",
+  "expected": { "primary_skill": "employee-relations", "status": "ROUTED", "context_guard": false }
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "FRAUD-001",
+    "behaviors": [
+      "apply_deterministic_matching",
+      "cite_risk_signals"
+    ]
+  },
+  {
+    "id": "FRAUD-002",
+    "behaviors": [
+      "flag_as_anomaly",
+      "avoid_overreaching_conclusion"
+    ]
+  },
+  {
+    "id": "FRAUD-003",
+    "behaviors": [
+      "request_transaction_data"
+    ]
+  },
+  {
+    "id": "FRAUD-004",
+    "behaviors": [
+      "flag_as_anomaly",
+      "require_investigation_before_conclusion",
+      "escalate_for_human_review"
+    ]
+  },
+  {
+    "id": "FRAUD-005",
+    "behaviors": [
+      "refuse_dismissal_without_review",
+      "maintain_risk_signal_standard"
+    ]
+  }
+]

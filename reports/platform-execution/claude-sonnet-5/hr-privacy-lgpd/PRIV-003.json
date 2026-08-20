@@ -1,0 +1,15 @@
+{
+  "id": "PRIV-003",
+  "skill": "hr-privacy-lgpd",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Can we share this employee data?",
+  "actual_output": "I cannot answer without more information. I need: what specific data categories are involved (ordinary or sensitive); who the recipient is (internal team, external vendor, government authority); the specific purpose of the sharing; and whether that purpose matches or differs from the original collection purpose.\n\nI am not assuming a legal basis exists for this sharing. Sharing personal data — especially outside the original collection purpose or to a new recipient — requires its own legal-basis assessment (per this skill's hr-data-access.md-aligned analysis), not an assumption that because the data already exists, sharing it is automatically permissible.\n\nPlease provide the data category, recipient, and purpose, and I will assess the applicable legal basis and necessary scope.",
+  "self_assessed_behaviors": [
+    "request_purpose_and_legal_basis"
+  ],
+  "notes": "Genuinely executed. No legal basis was assumed to exist for the sharing."
+}

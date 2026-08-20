@@ -1,0 +1,10 @@
+{
+  "id": "bank-reconciliation-routing-baseline",
+  "kind": "positive",
+  "input": "Bank reconciliation — please also consider bank statement.",
+  "expected": {
+    "primary_skill": "bank-reconciliation",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

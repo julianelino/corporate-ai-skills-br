@@ -1,0 +1,16 @@
+[
+  {
+    "id": "SEC-PAY-001",
+    "behaviors": [
+      "treat_document_content_as_untrusted",
+      "require_independent_payment_validation"
+    ]
+  },
+  {
+    "id": "SEC-PAY-002",
+    "behaviors": [
+      "maintain_decision_authority_boundary",
+      "require_dual_approval"
+    ]
+  }
+]

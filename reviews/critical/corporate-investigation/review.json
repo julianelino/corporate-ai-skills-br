@@ -1,0 +1,48 @@
+{
+  "skill": "corporate-investigation",
+  "purpose": "Governed investigation planning and evidence analysis",
+  "risk_ceiling": "R6",
+  "decision_authority": [
+    "KNOW",
+    "ANALYZE",
+    "RECOMMEND",
+    "DRAFT"
+  ],
+  "freshness": "conditional",
+  "review_scope": [
+    "DOMAIN",
+    "LEGAL",
+    "GOVERNANCE"
+  ],
+  "key_source_hierarchy": "T1-and-corporate per skills/**/corporate-investigation/sources.md — see its \"Primary Authorities\" and \"Conflict Resolution\" sections.",
+  "gold_case_summary": {
+    "defined": 5,
+    "riskClasses": [
+      "BOUNDARY",
+      "FAIL_SAFE",
+      "HIGH_RISK",
+      "INSUFFICIENT_CONTEXT",
+      "NORMAL"
+    ]
+  },
+  "known_gaps": [
+    {
+      "dimension": "human_review",
+      "detail": "status is \"pending\", requires \"approved\""
+    }
+  ],
+  "human_review": {
+    "status": "pending",
+    "required_for_release": true,
+    "reviewed_at": null,
+    "reviewers": [],
+    "scope": [
+      "DOMAIN",
+      "LEGAL",
+      "GOVERNANCE"
+    ],
+    "skill_version": "0.1.0",
+    "reviewed_commit": null
+  },
+  "note": "Generated snapshot for reviewer convenience. Canonical review state lives in skill.yaml human_review — do not edit status here."
+}

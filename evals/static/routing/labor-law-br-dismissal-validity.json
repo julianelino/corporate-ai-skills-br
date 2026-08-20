@@ -1,0 +1,10 @@
+{
+  "id": "labor-law-br-dismissal-validity",
+  "kind": "positive",
+  "input": "Is this dismissal valid under Brazilian labor law?",
+  "expected": {
+    "primary_skill": "labor-law-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

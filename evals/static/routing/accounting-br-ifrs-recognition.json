@@ -1,0 +1,10 @@
+{
+  "id": "accounting-br-ifrs-recognition",
+  "kind": "positive",
+  "input": "How should we recognize this transaction under IFRS?",
+  "expected": {
+    "primary_skill": "accounting-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

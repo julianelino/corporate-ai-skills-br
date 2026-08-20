@@ -1,0 +1,10 @@
+{
+  "id": "termination-payroll-impact",
+  "note": "Cross-domain: labor determines whether the termination is valid, payroll quantifies its cost. Both are real; neither should be silently dropped.",
+  "input": "Calculate the termination payroll impact after this employee dismissal.",
+  "expected": {
+    "primary_skill": "labor-law-br",
+    "status": "ROUTED",
+    "must_include_specialist": ["payroll-br"]
+  }
+}

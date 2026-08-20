@@ -1,0 +1,10 @@
+{
+  "id": "hr-service-desk-routing-baseline",
+  "kind": "positive",
+  "input": "Hr request — please also consider employee inquiry.",
+  "expected": {
+    "primary_skill": "hr-service-desk",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

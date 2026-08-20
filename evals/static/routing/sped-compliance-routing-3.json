@@ -1,0 +1,6 @@
+{
+  "id": "sped-compliance-routing-3",
+  "kind": "positive",
+  "input": "We need to submit the Reinf event for this period.",
+  "expected": { "primary_skill": "sped-compliance", "status": "ROUTED", "context_guard": false }
+}

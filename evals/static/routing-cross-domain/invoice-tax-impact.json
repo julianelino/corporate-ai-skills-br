@@ -1,0 +1,10 @@
+{
+  "id": "invoice-tax-impact",
+  "note": "Multi-intent: ANALYZE (review) the invoice, CALCULATE the tax. accounts-payable owns the review; tax-br owns the calculation.",
+  "input": "Review the supplier invoice and calculate the tax impact.",
+  "expected": {
+    "primary_skill": "accounts-payable",
+    "status": "ROUTED",
+    "must_include_specialist": ["tax-br"]
+  }
+}

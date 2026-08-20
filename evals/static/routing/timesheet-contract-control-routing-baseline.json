@@ -1,0 +1,10 @@
+{
+  "id": "timesheet-contract-control-routing-baseline",
+  "kind": "positive",
+  "input": "Timesheet — please also consider contract ceiling.",
+  "expected": {
+    "primary_skill": "timesheet-contract-control",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "TAX-001",
+  "skill": "tax-br",
+  "risk_class": "NORMAL",
+  "tags": [
+    "tax",
+    "brazil"
+  ],
+  "origin": {
+    "type": "domain-risk",
+    "reference": null
+  },
+  "input": "What is the ISS rate for a software-as-a-service invoice issued in São Paulo?",
+  "expected": {
+    "behavior": {
+      "must": [
+        "identify_jurisdiction_and_regime",
+        "require_current_authoritative_source"
+      ],
+      "must_not": [
+        "assume_stale_rate"
+      ]
+    },
+    "contract": {
+      "minimum_risk": "R4",
+      "freshness_required": true,
+      "human_approval_required": false,
+      "authority": {
+        "allowed": [
+          "KNOW",
+          "ANALYZE",
+          "RECOMMEND",
+          "DRAFT",
+          "PREPARE"
+        ],
+        "forbidden": [
+          "APPROVE"
+        ]
+      }
+    }
+  }
+}

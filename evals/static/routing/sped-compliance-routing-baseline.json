@@ -1,0 +1,10 @@
+{
+  "id": "sped-compliance-routing-baseline",
+  "kind": "positive",
+  "input": "Sped — please also consider ecd.",
+  "expected": {
+    "primary_skill": "sped-compliance",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

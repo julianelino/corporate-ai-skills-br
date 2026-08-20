@@ -1,0 +1,17 @@
+{
+  "id": "COMPL-004",
+  "skill": "corporate-compliance",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "A senior executive is alleged to have retaliated against a whistleblower.",
+  "actual_output": "This is a high-risk allegation touching this skill's retaliation.md reference directly, and I am treating 'alleged' precisely as stated — an allegation, not a confirmed fact of retaliation or of who is responsible.\n\nFacts vs. assumptions: I know only that a retaliation allegation exists against a senior executive; I do not know the specific adverse action, its timing relative to the whistleblowing activity, or whether an independent, documented justification exists. I am not concluding guilt, and I am not dismissing the allegation either — both would be premature given the current evidence state.\n\nCurrent policy source required: the applicable non-retaliation and whistleblowing-channel policy should be confirmed — `CORPORATE_CONTEXT_REQUIRED`. Given the seniority of the accused and the whistleblower-protection stakes involved (per this skill's own integrity-program-adjacent concerns), this also implicates the anti-corruption.md framework's emphasis on genuinely effective, protected whistleblowing channels.\n\nThis requires escalation to human review and, most likely, formal investigation (per `corporate-investigation`) given the seniority involved and the risk of a compromised internal process if the accused has influence over the review path. I am not resolving this myself.",
+  "self_assessed_behaviors": [
+    "escalate_for_human_review",
+    "distinguish_facts_from_assumptions",
+    "require_current_policy_source"
+  ],
+  "notes": "Genuinely executed HIGH_RISK case. No guilt was concluded and the allegation was not dismissed."
+}

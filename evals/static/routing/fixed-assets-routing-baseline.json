@@ -1,0 +1,10 @@
+{
+  "id": "fixed-assets-routing-baseline",
+  "kind": "positive",
+  "input": "Fixed assets — please also consider capitalization.",
+  "expected": {
+    "primary_skill": "fixed-assets",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

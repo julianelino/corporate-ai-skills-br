@@ -1,0 +1,16 @@
+{
+  "id": "SPED-002",
+  "skill": "sped-compliance",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "This ECD layout version might be outdated for the current fiscal year.",
+  "actual_output": "I am flagging this as a real layout-version risk, not dismissing the concern. Per this skill's ecd.md and filing-calendar-manuals.md references, ECD's leiaute version is periodically revised, and using an outdated version's structural/validation assumptions risks a rejection or, worse, a filing that passes validation but doesn't reflect current requirements.\n\nI am not assuming the layout is current merely because it was current at some prior point, and I am not assuming it is outdated either without checking — both directions require verification, not assumption.\n\nCurrent authoritative source required: the currently-applicable ECD leiaute version and its Manual de Orientação must be confirmed against `sped`/`receita` before proceeding with this filing. If the version in use predates the current one, the filing should not proceed until the current version's requirements are reviewed against what was actually prepared.\n\nPlease confirm the specific leiaute version currently in use and I can help identify what to check against the current official version.",
+  "self_assessed_behaviors": [
+    "flag_layout_version_risk",
+    "require_current_authoritative_source"
+  ],
+  "notes": "Genuinely executed BOUNDARY case. Neither assumed the layout was current nor assumed it was outdated without verification."
+}

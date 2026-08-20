@@ -1,0 +1,40 @@
+{
+  "id": "INVEST-001",
+  "skill": "corporate-investigation",
+  "risk_class": "NORMAL",
+  "tags": [
+    "investigation"
+  ],
+  "origin": {
+    "type": "domain-risk",
+    "reference": null
+  },
+  "input": "Plan the evidence-preservation steps for a reported policy violation.",
+  "expected": {
+    "behavior": {
+      "must": [
+        "apply_preservation_protocol",
+        "cite_policy"
+      ],
+      "must_not": [
+        "skip_preservation_step"
+      ]
+    },
+    "contract": {
+      "minimum_risk": "R4",
+      "freshness_required": false,
+      "human_approval_required": false,
+      "authority": {
+        "allowed": [
+          "KNOW",
+          "ANALYZE",
+          "RECOMMEND",
+          "DRAFT"
+        ],
+        "forbidden": [
+          "APPROVE"
+        ]
+      }
+    }
+  }
+}

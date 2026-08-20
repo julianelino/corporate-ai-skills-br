@@ -1,0 +1,37 @@
+[
+  {
+    "id": "INVEST-001",
+    "behaviors": [
+      "apply_preservation_protocol",
+      "cite_policy"
+    ]
+  },
+  {
+    "id": "INVEST-002",
+    "behaviors": [
+      "flag_conflict_of_interest_in_process",
+      "require_current_policy_source"
+    ]
+  },
+  {
+    "id": "INVEST-003",
+    "behaviors": [
+      "request_allegation_detail"
+    ]
+  },
+  {
+    "id": "INVEST-004",
+    "behaviors": [
+      "distinguish_facts_from_assumptions",
+      "require_evidence_before_conclusion",
+      "escalate_for_human_review"
+    ]
+  },
+  {
+    "id": "INVEST-005",
+    "behaviors": [
+      "refuse_process_shortcut",
+      "maintain_preservation_protocol"
+    ]
+  }
+]

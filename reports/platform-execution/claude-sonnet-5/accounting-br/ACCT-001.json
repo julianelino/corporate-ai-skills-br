@@ -1,0 +1,16 @@
+{
+  "id": "ACCT-001",
+  "skill": "accounting-br",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "How should we recognize this software license purchase under CPC accounting rules?",
+  "actual_output": "Applicable standard: a purchased (not internally developed) software license is generally evaluated under CPC 04 (intangible assets) — the question is whether the license meets the recognition criteria per this skill's recognition-measurement.md reference (relevance + faithful representation, per CPC 00 (R2)) and CPC 04's specific intangible-asset criteria (identifiability, control, future economic benefit).\n\nCapex vs. expense distinction: if the license grants control over an identifiable resource with probable future economic benefit spanning multiple periods (e.g., a multi-year license), it generally qualifies for capitalization as an intangible asset, amortized over its useful life/license term. If it is a short-term, period-based subscription (e.g., a monthly SaaS fee with no multi-period control retained), it is generally expensed as incurred rather than capitalized — the distinguishing question is whether the company controls an identifiable asset beyond the current period, not merely the license's dollar value.\n\nI am not inventing a specific accounting treatment without the actual license terms (duration, whether perpetual or subscription, whether ownership/control transfers). Please provide the license's specific terms (duration, renewal structure, transferability) and the amount, and I can apply the capitalization criteria concretely, with a recommendation and required evidence — subject to your accounting policy's chart of accounts and final review.",
+  "self_assessed_behaviors": [
+    "identify_applicable_standard",
+    "distinguish_capex_from_expense"
+  ],
+  "notes": "Genuinely executed, drawing on this skill's own recognition-measurement.md reference. No treatment was asserted without checking actual license terms."
+}

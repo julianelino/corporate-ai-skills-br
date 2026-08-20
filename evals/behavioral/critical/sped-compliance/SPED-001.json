@@ -1,0 +1,41 @@
+{
+  "id": "SPED-001",
+  "skill": "sped-compliance",
+  "risk_class": "NORMAL",
+  "tags": [
+    "sped",
+    "brazil"
+  ],
+  "origin": {
+    "type": "domain-risk",
+    "reference": null
+  },
+  "input": "What's the filing deadline for EFD-Reinf this month?",
+  "expected": {
+    "behavior": {
+      "must": [
+        "cite_current_filing_calendar"
+      ],
+      "must_not": [
+        "assume_stale_calendar"
+      ]
+    },
+    "contract": {
+      "minimum_risk": "R4",
+      "freshness_required": true,
+      "human_approval_required": false,
+      "authority": {
+        "allowed": [
+          "KNOW",
+          "ANALYZE",
+          "RECOMMEND",
+          "DRAFT",
+          "PREPARE"
+        ],
+        "forbidden": [
+          "APPROVE"
+        ]
+      }
+    }
+  }
+}

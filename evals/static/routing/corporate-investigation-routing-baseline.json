@@ -1,0 +1,10 @@
+{
+  "id": "corporate-investigation-routing-baseline",
+  "kind": "positive",
+  "input": "Investigation — please also consider allegation.",
+  "expected": {
+    "primary_skill": "corporate-investigation",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

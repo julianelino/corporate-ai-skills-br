@@ -1,0 +1,9 @@
+{
+  "id": "payments-boundary-accounts-payable",
+  "kind": "boundary",
+  "input": "Prepare a PIX batch payment; verify the invoice first.",
+  "expected": {
+    "primary_skill": "payments",
+    "status": "ROUTED"
+  }
+}

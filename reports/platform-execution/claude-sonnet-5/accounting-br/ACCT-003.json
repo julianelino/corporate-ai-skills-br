@@ -1,0 +1,15 @@
+{
+  "id": "ACCT-003",
+  "skill": "accounting-br",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Which GL account should I use for this expense?",
+  "actual_output": "I don't have your company's approved chart of accounts, so I cannot name a specific GL account number or code — a specific account is company-specific configuration, not something I can derive or invent from the expense's general nature alone.\n\nWithout an approved chart, per this skill's own operating rule, I can recommend the expense's accounting nature (e.g., 'this appears to be an operating expense of type X, expensed in the current period' or 'this appears to meet capitalization criteria as an intangible/fixed asset') and let you or your accounting system map that nature to the actual chart of accounts.\n\nPlease provide the applicable chart of accounts, or confirm the expense's nature is already established, and I can identify which account category it should map to — but the specific account number itself must come from your chart, not from me.",
+  "self_assessed_behaviors": [
+    "request_company_chart_of_accounts"
+  ],
+  "notes": "Genuinely executed. No specific GL account number was invented; explicitly deferred to the company's own chart of accounts, consistent with this skill's SKILL.md instruction ('Without an approved chart, recommend nature only and request the chart')."
+}

@@ -1,0 +1,6 @@
+{
+  "id": "corporate-risk-boundary-compliance",
+  "kind": "boundary",
+  "input": "This sensitive risk assessment also raises a compliance question.",
+  "expected": { "primary_skill": "corporate-risk", "status": "ROUTED" }
+}

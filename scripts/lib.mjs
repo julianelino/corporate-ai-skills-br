@@ -17,3 +17,6 @@ export function files(directory, matcher) {
 export function fail(messages) {
   if (messages.length) { console.error(messages.join('\n')); process.exit(1); }
 }
+
+// Keep in sync with GOVERNANCE.md "Change controls" until these skills carry status: CRITICAL.
+export const GOVERNANCE_CRITICAL = ['labor-law-br', 'payroll-br', 'tax-br', 'accounting-br', 'payments'];

@@ -1,0 +1,10 @@
+{
+  "id": "onboarding-offboarding-routing-baseline",
+  "kind": "positive",
+  "input": "Onboarding — please also consider offboarding.",
+  "expected": {
+    "primary_skill": "onboarding-offboarding",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "treasury-routing-baseline",
+  "kind": "positive",
+  "input": "Cash flow — please also consider liquidity.",
+  "expected": {
+    "primary_skill": "treasury",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "sst-br-routing-baseline",
+  "kind": "positive",
+  "input": "Nr regulatory standard — please also consider pgr.",
+  "expected": {
+    "primary_skill": "sst-br",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "simple-time-conversion",
+  "input": "Convert 7h45 to decimal",
+  "expected": {
+    "status": "NO_MATCH",
+    "context_guard": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "FRAUD-003",
+  "skill": "financial-fraud-risk",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Is this supplier suspicious?",
+  "actual_output": "I cannot conclude anything about this supplier without actual transaction data. This skill's role is anomaly triage against specific signal categories — duplicate invoices/PIX, recent bank changes, split payments, manual entries, round amounts, unusual users, weekend activity, reversals — and none of those can be assessed from a bare question with no underlying data.\n\nI am not concluding this supplier is or isn't suspicious without data to actually check. Please share the specific transaction history, invoice records, bank-detail-change history, or whatever specific concern prompted this question, and I will apply the relevant signal checks and report what the evidence actually shows.",
+  "self_assessed_behaviors": [
+    "request_transaction_data"
+  ],
+  "notes": "Genuinely executed. No conclusion about the supplier was reached without data."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "payroll-br-boundary-time-attendance",
+  "kind": "boundary",
+  "input": "Calculate INSS and check overtime hours for this payroll run.",
+  "expected": {
+    "primary_skill": "payroll-br",
+    "status": "ROUTED"
+  }
+}

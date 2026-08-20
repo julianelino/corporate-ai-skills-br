@@ -1,0 +1,58 @@
+{
+  "skill": "payroll-br",
+  "purpose": "Brazilian payroll analysis and simulation",
+  "risk_ceiling": "R5",
+  "decision_authority": [
+    "KNOW",
+    "ANALYZE",
+    "RECOMMEND",
+    "PREPARE"
+  ],
+  "freshness": "critical",
+  "review_scope": [
+    "DOMAIN",
+    "LEGAL",
+    "PAYROLL",
+    "GOVERNANCE"
+  ],
+  "key_source_hierarchy": "T1-and-corporate per skills/**/payroll-br/sources.md — see its \"Primary Authorities\" and \"Conflict Resolution\" sections.",
+  "gold_case_summary": {
+    "defined": 5,
+    "riskClasses": [
+      "BOUNDARY",
+      "FAIL_SAFE",
+      "HIGH_RISK",
+      "INSUFFICIENT_CONTEXT",
+      "NORMAL"
+    ]
+  },
+  "known_gaps": [
+    {
+      "dimension": "human_review",
+      "detail": "status is \"pending\", requires \"approved\""
+    },
+    {
+      "dimension": "source_freshness_alert",
+      "detail": "mte:CHANGED_UNREVIEWED"
+    },
+    {
+      "dimension": "source_verification",
+      "detail": "none of [receita, planalto, econet, mte, esocial, fgts-digital] has ever been human-verified (last_verified is null for all)"
+    }
+  ],
+  "human_review": {
+    "status": "pending",
+    "required_for_release": true,
+    "reviewed_at": null,
+    "reviewers": [],
+    "scope": [
+      "DOMAIN",
+      "LEGAL",
+      "PAYROLL",
+      "GOVERNANCE"
+    ],
+    "skill_version": "0.1.0",
+    "reviewed_commit": null
+  },
+  "note": "Generated snapshot for reviewer convenience. Canonical review state lives in skill.yaml human_review — do not edit status here."
+}

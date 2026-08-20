@@ -1,13 +1,56 @@
-# Sources
+# Source Map
 
-## PRIMARY
+## Source Policy
+
+T1-required · freshness: critical. This skill returns `unknown` and does not proceed on a consequential conclusion when a required current source is missing (see `docs/adr` and `GOVERNANCE.md` "Change controls").
+
+## Primary Authorities
 
 - `planalto`, `stf`, `tst`, and the competent TRT from `sources/SOURCE_REGISTRY.yaml`.
 
-## CORPORATE
+Relevant T1 entries in `sources/SOURCE_REGISTRY.yaml`:
+
+- `planalto` — Presidência da República — Legislação
+- `mte` — Ministério do Trabalho e Emprego
+- `tst` — Tribunal Superior do Trabalho
+- `stf` — Supremo Tribunal Federal
+
+## Corporate Sources
 
 - Valid CCT/ACT, contract, policies, and admissible case evidence.
 
-## SECONDARY
+## Secondary Professional Sources
 
-- Professional analysis may locate issues but never serves as sole legal authority.
+- `econet` — Econet (use for: practical-reference, topic-discovery, permitted-interpretation; never use as: sole-legal-authority, copied-paid-content)
+
+## Freshness-Critical Topics
+
+- termination
+- discipline
+- working-time
+- labor-litigation
+- collective-bargaining
+
+## Conflict Resolution
+
+When sources conflict, resolve in this order and never silently pick the more convenient reading:
+
+1. Compare authority (T1 official/court/standards outranks T3 secondary, which outranks T4 benchmark).
+2. Compare jurisdiction (federal vs. state vs. municipal vs. corporate instrument).
+3. Compare effective/publication date (the current one governs; a repealed or superseded source does not).
+4. Compare scope (a source may be authoritative for its own subject and silent, not authoritative, on another).
+5. Check whether a case-specific corporate instrument (CCT/ACT, contract, policy) narrows or extends the general rule for this case.
+6. If the conflict is material to the conclusion and cannot be resolved from available sources, report the conflict — owner, authority, freshness, evidence — and escalate; do not choose silently (per ARCHITECTURE.md "Context and data ownership").
+
+## Source Restrictions
+
+Do not treat a secondary or unverified source as sufficient for a consequential conclusion.
+
+## When External Verification Is Required
+
+Always, before a consequential conclusion: this skill is `freshness: critical`. A cached or remembered rule is not sufficient; confirm against a current T1 source before recommending, drafting, or preparing.
+
+## References Loaded On Demand
+
+- `references/evidence.md`
+- `references/termination.md`

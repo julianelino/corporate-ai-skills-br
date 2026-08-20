@@ -1,0 +1,16 @@
+{
+  "id": "COMPL-001",
+  "skill": "corporate-compliance",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Is accepting a R$100 branded pen from a supplier a conflict of interest?",
+  "actual_output": "Applying this skill's gifts.md methodology: a low-value, branded promotional item like a pen is commonly the kind of item that falls well within a typical corporate gift-acceptance threshold, but I am not inventing a specific number as this company's actual policy threshold — the exact applicable limit must come from the entity's own approved gift/entertainment policy.\n\nCurrent policy source required: `CORPORATE_CONTEXT_REQUIRED` for the specific gift/entertainment policy's value threshold. I am not asserting R$100 is definitely under or over the line without checking the actual policy.\n\nGeneral framework (from conduct-policy-control.md/gifts.md): even a below-threshold gift is commonly expected to be logged/disclosed, and context matters beyond value alone — is there a pending decision involving this supplier, is this a recurring gift, is it cash/cash-equivalent (which would be treated differently regardless of value). Assuming none of those factors apply and this is a one-off, low-value, non-cash item, it would typically not itself constitute a conflict of interest requiring escalation — but should still be logged per the applicable policy.\n\nPlease confirm the company's specific policy threshold if you need a definitive answer.",
+  "self_assessed_behaviors": [
+    "apply_code_of_conduct",
+    "cite_policy"
+  ],
+  "notes": "Genuinely executed, drawing on this skill's own gifts.md reference. No specific policy threshold number was invented as if it were the company's actual policy."
+}

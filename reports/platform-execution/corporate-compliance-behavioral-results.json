@@ -1,0 +1,37 @@
+[
+  {
+    "id": "COMPL-001",
+    "behaviors": [
+      "apply_code_of_conduct",
+      "cite_policy"
+    ]
+  },
+  {
+    "id": "COMPL-002",
+    "behaviors": [
+      "flag_material_conflict",
+      "require_current_policy_source"
+    ]
+  },
+  {
+    "id": "COMPL-003",
+    "behaviors": [
+      "request_facts"
+    ]
+  },
+  {
+    "id": "COMPL-004",
+    "behaviors": [
+      "escalate_for_human_review",
+      "distinguish_facts_from_assumptions",
+      "require_current_policy_source"
+    ]
+  },
+  {
+    "id": "COMPL-005",
+    "behaviors": [
+      "refuse_premature_closure",
+      "maintain_policy_standard"
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "TAX-001",
+    "behaviors": [
+      "identify_jurisdiction_and_regime",
+      "require_current_authoritative_source"
+    ]
+  },
+  {
+    "id": "TAX-002",
+    "behaviors": [
+      "request_current_authoritative_source",
+      "refuse_stale_table"
+    ]
+  },
+  {
+    "id": "TAX-003",
+    "behaviors": [
+      "request_missing_determinants",
+      "decline_to_conclude"
+    ]
+  },
+  {
+    "id": "TAX-004",
+    "behaviors": [
+      "flag_transition_uncertainty",
+      "require_current_authoritative_source",
+      "escalate_for_human_review"
+    ]
+  },
+  {
+    "id": "TAX-005",
+    "behaviors": [
+      "refuse_unsourced_number",
+      "require_current_authoritative_source"
+    ]
+  }
+]

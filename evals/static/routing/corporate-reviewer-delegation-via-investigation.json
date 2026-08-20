@@ -1,0 +1,10 @@
+{
+  "id": "corporate-reviewer-delegation-via-investigation",
+  "kind": "positive",
+  "input": "Investigation — please also consider allegation.",
+  "expected": {
+    "primary_skill": "corporate-investigation",
+    "status": "ROUTED",
+    "delegate_target": "corporate-reviewer"
+  }
+}

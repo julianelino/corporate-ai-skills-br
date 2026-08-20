@@ -1,0 +1,1372 @@
+{
+  "registry_version": "0.3.0",
+  "generated_from": "skills/**/skill.yaml + knowledge/registry/routing-triggers.yaml via scripts/build-capability-registry.mjs",
+  "capabilities": [
+    {
+      "skill": "account-reconciliation",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.r2r",
+      "triggers": [
+        "reconciliation",
+        "reconcile the ledger",
+        "gl reconciliation",
+        "open items"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "account-reconciliation"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "accounting-br",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.accounting",
+      "triggers": [
+        "accounting",
+        "cpc",
+        "ifrs",
+        "depreciation",
+        "provisions",
+        "accrual",
+        "balance sheet"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "accounting-br"
+      ],
+      "requires_fresh_sources": [
+        "legislation",
+        "corporate-policy"
+      ],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "accounts-payable",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.p2p",
+      "triggers": [
+        "invoice",
+        "supplier",
+        "accounts payable",
+        "boleto",
+        "purchase order",
+        "po",
+        "receipt"
+      ],
+      "anti_triggers": [
+        "customer",
+        "client"
+      ],
+      "handles": [
+        "accounts-payable"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "accounts-receivable",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.o2c",
+      "triggers": [
+        "accounts receivable",
+        "aging report",
+        "delinquency",
+        "installments",
+        "overdue invoice"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "accounts-receivable"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "bank-reconciliation",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.r2r",
+      "triggers": [
+        "bank reconciliation",
+        "bank statement",
+        "unidentified transaction"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "bank-reconciliation"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "billing-invoicing",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.o2c",
+      "triggers": [
+        "billing",
+        "invoicing",
+        "measurement billing",
+        "milestone billing",
+        "invoice"
+      ],
+      "anti_triggers": [
+        "supplier",
+        "vendor"
+      ],
+      "handles": [
+        "billing-invoicing"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "budgeting",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.fpa",
+      "triggers": [
+        "budget cycle",
+        "budget submission",
+        "budget assumptions"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "budgeting"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "collections",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.o2c",
+      "triggers": [
+        "collections",
+        "overdue payment",
+        "dunning cadence"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "collections"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "compensation-rewards",
+      "domain": [
+        "people",
+        "finance"
+      ],
+      "namespace": "people.compensation",
+      "triggers": [
+        "salary band",
+        "compensation review",
+        "merit increase",
+        "promotion budget",
+        "pay equity"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "compensation-analysis",
+        "promotion-support"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "payroll-br",
+        "fpa",
+        "corporate-risk"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "controllership",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.r2r",
+      "triggers": [
+        "controllership",
+        "management reporting",
+        "cost center report"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "controllership"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "corporate-compliance",
+      "domain": [
+        "governance",
+        "compliance"
+      ],
+      "namespace": "governance.compliance",
+      "triggers": [
+        "compliance",
+        "conflict of interest",
+        "gift",
+        "retaliation",
+        "code of conduct"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "conduct",
+        "conflict-of-interest",
+        "gifts",
+        "anti-corruption",
+        "retaliation",
+        "policy-control"
+      ],
+      "requires_fresh_sources": [
+        "legislation",
+        "corporate-policy"
+      ],
+      "can_delegate_to": [
+        "corporate-investigation",
+        "corporate-risk",
+        "employee-relations",
+        "financial-fraud-risk"
+      ],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "corporate-document-authoring",
+      "domain": [
+        "documents"
+      ],
+      "namespace": "documents",
+      "triggers": [
+        "draft",
+        "document",
+        "letter",
+        "report",
+        "policy"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "corporate-document-authoring"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "corporate-investigation",
+      "domain": [
+        "governance",
+        "compliance"
+      ],
+      "namespace": "governance.investigation",
+      "triggers": [
+        "investigation",
+        "allegation",
+        "preserve evidence",
+        "interview witness"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "allegation",
+        "preservation",
+        "evidence",
+        "interviews",
+        "findings"
+      ],
+      "requires_fresh_sources": [
+        "legislation",
+        "corporate-policy"
+      ],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer",
+        "employee-relations",
+        "financial-fraud-risk",
+        "hr-privacy-lgpd"
+      ],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "corporate-reviewer",
+      "domain": [
+        "core",
+        "governance"
+      ],
+      "namespace": "core.review",
+      "triggers": [],
+      "anti_triggers": [],
+      "handles": [
+        "quality-review",
+        "provenance-review"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "corporate-risk",
+      "domain": [
+        "core",
+        "governance"
+      ],
+      "namespace": "core.risk",
+      "triggers": [
+        "risk",
+        "approval",
+        "sensitive"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "risk-assessment",
+        "approval-gates"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "corporate-router",
+      "domain": [
+        "core"
+      ],
+      "namespace": "core.routing",
+      "triggers": [
+        "route",
+        "which specialist",
+        "who should handle"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "intent-triage",
+        "context-guard"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R3"
+    },
+    {
+      "skill": "credit-risk",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.o2c",
+      "triggers": [
+        "credit risk",
+        "credit limit",
+        "counterparty exposure",
+        "credit concentration"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "credit-risk"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "employee-relations",
+      "domain": [
+        "people",
+        "legal"
+      ],
+      "namespace": "people.relations",
+      "triggers": [
+        "harassment",
+        "discrimination",
+        "grievance",
+        "disciplinary process"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "discipline",
+        "harassment",
+        "discrimination",
+        "grievance",
+        "investigation"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "labor-law-br",
+        "hr-privacy-lgpd",
+        "corporate-risk"
+      ],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "executive-advisor",
+      "domain": [
+        "core"
+      ],
+      "namespace": "core.advisory",
+      "triggers": [
+        "executive decision",
+        "decision memo",
+        "board summary"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "executive-decision-memo"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "fpa",
+        "rh-business-partner"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "expense-management",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.p2p",
+      "triggers": [
+        "expense report",
+        "reimbursement",
+        "expense claim"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "expense-management"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "finance-admin-operations",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.operations",
+      "triggers": [
+        "finance operations",
+        "billing mirror",
+        "cash view"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "finance-admin-operations"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "finance-analytics",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.fpa",
+      "triggers": [
+        "finance kpi",
+        "finance trend analysis",
+        "finance driver"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "finance-analytics"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "finance-business-partner",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.fpa",
+      "triggers": [
+        "pricing decision",
+        "resource allocation",
+        "investment decision",
+        "runway"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "finance-business-partner"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "financial-audit",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.audit",
+      "triggers": [
+        "financial audit",
+        "internal control testing",
+        "materiality",
+        "sample testing"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "financial-audit"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "financial-close",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.accounting",
+      "triggers": [
+        "month end close",
+        "financial close",
+        "closing checklist"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "financial-close"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "financial-consolidation",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.accounting",
+      "triggers": [
+        "consolidation",
+        "eliminations",
+        "multi entity reporting"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "financial-consolidation"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "financial-fraud-risk",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.risk",
+      "triggers": [
+        "duplicate invoice",
+        "duplicate supplier",
+        "fraud signal",
+        "split payment",
+        "duplicate",
+        "fraud"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "financial-fraud-risk"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "financial-spreadsheets",
+      "domain": [
+        "utilities",
+        "finance"
+      ],
+      "namespace": "utilities",
+      "triggers": [
+        "spreadsheet",
+        "excel",
+        "google sheets",
+        "xlookup"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "financial-spreadsheets"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R3"
+    },
+    {
+      "skill": "fixed-assets",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.accounting",
+      "triggers": [
+        "fixed assets",
+        "capitalization",
+        "useful life",
+        "asset impairment",
+        "asset disposal"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "fixed-assets"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "forecasting",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.fpa",
+      "triggers": [
+        "rolling forecast",
+        "stress scenario",
+        "forecast scenario"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "forecasting"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "fpa",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.fpa",
+      "triggers": [
+        "budget",
+        "forecast",
+        "margin",
+        "ebitda",
+        "runway"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "fpa"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "hr-privacy-lgpd",
+      "domain": [
+        "people",
+        "privacy"
+      ],
+      "namespace": "people.privacy",
+      "triggers": [
+        "medical diagnosis",
+        "medical diagnoses",
+        "biometric",
+        "personal data",
+        "employee data",
+        "privacy"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "hr-data-access",
+        "privacy-impact"
+      ],
+      "requires_fresh_sources": [
+        "legislation",
+        "corporate-policy"
+      ],
+      "can_delegate_to": [
+        "corporate-risk",
+        "labor-law-br"
+      ],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "hr-service-desk",
+      "domain": [
+        "people"
+      ],
+      "namespace": "people.service",
+      "triggers": [
+        "hr request",
+        "employee inquiry",
+        "hr ticket"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "hr-case-intake",
+        "service-triage"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "payroll-br",
+        "hr-privacy-lgpd",
+        "employee-relations"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "intercompany",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.accounting",
+      "triggers": [
+        "intercompany",
+        "related party balance",
+        "intercompany settlement"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "intercompany"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "labor-law-br",
+      "domain": [
+        "people",
+        "legal"
+      ],
+      "namespace": "people.labor",
+      "triggers": [
+        "termination",
+        "terminate",
+        "just cause",
+        "labor law",
+        "overtime",
+        "dismissal",
+        "pregnant",
+        "probation",
+        "collective agreement",
+        "disciplinary"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "termination",
+        "discipline",
+        "working-time",
+        "labor-litigation",
+        "collective-bargaining"
+      ],
+      "requires_fresh_sources": [
+        "legislation",
+        "case-law",
+        "collective-agreement"
+      ],
+      "can_delegate_to": [
+        "employee-relations",
+        "payroll-br",
+        "corporate-risk"
+      ],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "learning-development",
+      "domain": [
+        "people"
+      ],
+      "namespace": "people.performance",
+      "triggers": [
+        "training plan",
+        "learning path",
+        "development plan"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "learning-plan",
+        "training-evaluation"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "rh-business-partner"
+      ],
+      "risk_ceiling": "R3"
+    },
+    {
+      "skill": "occupational-health-br",
+      "domain": [
+        "people",
+        "sst",
+        "privacy"
+      ],
+      "namespace": "people.sst",
+      "triggers": [
+        "pcmso",
+        "occupational health",
+        "fitness for work",
+        "medical confidentiality"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "occupational-health-process",
+        "medical-privacy"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "hr-privacy-lgpd",
+        "corporate-risk"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "onboarding-offboarding",
+      "domain": [
+        "people"
+      ],
+      "namespace": "people.lifecycle",
+      "triggers": [
+        "onboarding",
+        "offboarding",
+        "new hire checklist",
+        "exit process"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "onboarding",
+        "offboarding"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "labor-law-br",
+        "payroll-br",
+        "hr-privacy-lgpd",
+        "corporate-risk"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "payments",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.treasury",
+      "triggers": [
+        "pay*",
+        "pix",
+        "ted",
+        "cnab",
+        "bank change",
+        "supplier pix"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "payments"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "payroll-auditor",
+      "domain": [
+        "people",
+        "payroll"
+      ],
+      "namespace": "people.payroll",
+      "triggers": [
+        "payroll audit",
+        "duplicate payment",
+        "payroll variance",
+        "negative net pay"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "payroll-audit",
+        "variance-analysis"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "payroll-br",
+        "time-attendance-br",
+        "corporate-risk"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "payroll-br",
+      "domain": [
+        "people",
+        "payroll"
+      ],
+      "namespace": "people.payroll",
+      "triggers": [
+        "payroll",
+        "fgts",
+        "inss",
+        "irrf",
+        "vacation",
+        "vacation pay"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "payroll",
+        "vacation",
+        "termination-support",
+        "incidences",
+        "esocial"
+      ],
+      "requires_fresh_sources": [
+        "legislation",
+        "esocial",
+        "fgts"
+      ],
+      "can_delegate_to": [
+        "payroll-auditor",
+        "time-attendance-br",
+        "corporate-risk"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "people-analytics",
+      "domain": [
+        "people",
+        "analytics"
+      ],
+      "namespace": "people.analytics",
+      "triggers": [
+        "headcount",
+        "turnover rate",
+        "attrition",
+        "time to hire",
+        "absenteeism"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "people-metrics",
+        "workforce-analysis"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "hr-privacy-lgpd",
+        "payroll-br",
+        "fpa"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "performance-talent",
+      "domain": [
+        "people"
+      ],
+      "namespace": "people.performance",
+      "triggers": [
+        "performance review",
+        "goal calibration",
+        "succession plan"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "performance-cycle",
+        "development-plan",
+        "succession-support"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "employee-relations",
+        "learning-development",
+        "rh-business-partner"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "profitability-analysis",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.fpa",
+      "triggers": [
+        "profitability analysis",
+        "margin by customer",
+        "segment profitability"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "profitability-analysis"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "rh-business-partner",
+      "domain": [
+        "people"
+      ],
+      "namespace": "people.partner",
+      "triggers": [
+        "hiring decision",
+        "workforce planning",
+        "people business advice"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "hiring-decision",
+        "workforce-planning",
+        "people-business-advice"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "compensation-rewards",
+        "performance-talent",
+        "people-analytics",
+        "fpa"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "rh-core-ops",
+      "domain": [
+        "people"
+      ],
+      "namespace": "people.core",
+      "triggers": [
+        "employee record",
+        "hr operations",
+        "employee lifecycle"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "employee-lifecycle",
+        "hr-operations"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "payroll-br",
+        "hr-service-desk",
+        "hr-privacy-lgpd"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "sped-compliance",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.tax",
+      "triggers": [
+        "sped",
+        "ecd",
+        "ecf",
+        "efd",
+        "reinf",
+        "dctfweb"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "sped-compliance"
+      ],
+      "requires_fresh_sources": [
+        "legislation",
+        "revenue"
+      ],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "spreadsheet-automation",
+      "domain": [
+        "utilities"
+      ],
+      "namespace": "utilities",
+      "triggers": [
+        "spreadsheet automation",
+        "vba macro",
+        "apps script",
+        "power query script"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "spreadsheet-automation"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "sst-br",
+      "domain": [
+        "people",
+        "sst"
+      ],
+      "namespace": "people.sst",
+      "triggers": [
+        "nr regulatory standard",
+        "pgr",
+        "cat accident report",
+        "epi",
+        "workplace accident"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "sst-analysis",
+        "incident-support",
+        "nr-routing"
+      ],
+      "requires_fresh_sources": [
+        "legislation"
+      ],
+      "can_delegate_to": [
+        "occupational-health-br",
+        "hr-privacy-lgpd",
+        "corporate-risk"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "talent-acquisition",
+      "domain": [
+        "people"
+      ],
+      "namespace": "people.talent",
+      "triggers": [
+        "job requisition",
+        "candidate screening",
+        "interview scorecard",
+        "job offer",
+        "candidate",
+        "candidates"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "requisition",
+        "screening",
+        "interview",
+        "offer-preparation"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "rh-business-partner",
+        "compensation-rewards",
+        "hr-privacy-lgpd"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "tax-br",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.tax",
+      "triggers": [
+        "tax",
+        "icms",
+        "iss",
+        "pis",
+        "cofins",
+        "irpj"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "tax-br"
+      ],
+      "requires_fresh_sources": [
+        "legislation",
+        "revenue",
+        "state",
+        "municipal"
+      ],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R6"
+    },
+    {
+      "skill": "time-attendance-br",
+      "domain": [
+        "people",
+        "payroll"
+      ],
+      "namespace": "people.time",
+      "triggers": [
+        "overtime",
+        "banked hours",
+        "12x36",
+        "night work",
+        "time punch"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "time-analysis",
+        "time-adjustment"
+      ],
+      "requires_fresh_sources": [
+        "legislation"
+      ],
+      "can_delegate_to": [
+        "labor-law-br",
+        "payroll-br",
+        "corporate-risk"
+      ],
+      "risk_ceiling": "R5"
+    },
+    {
+      "skill": "timesheet-contract-control",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.operations",
+      "triggers": [
+        "timesheet",
+        "contract ceiling",
+        "billable hours",
+        "overrun alert"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "timesheet-contract-control"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R4"
+    },
+    {
+      "skill": "treasury",
+      "domain": [
+        "finance"
+      ],
+      "namespace": "finance.treasury",
+      "triggers": [
+        "cash flow",
+        "liquidity",
+        "dso",
+        "dpo",
+        "fx exposure",
+        "working capital"
+      ],
+      "anti_triggers": [],
+      "handles": [
+        "treasury"
+      ],
+      "requires_fresh_sources": [],
+      "can_delegate_to": [
+        "corporate-risk",
+        "corporate-reviewer"
+      ],
+      "risk_ceiling": "R5"
+    }
+  ]
+}

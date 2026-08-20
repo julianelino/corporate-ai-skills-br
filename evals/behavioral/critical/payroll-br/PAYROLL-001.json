@@ -1,0 +1,41 @@
+{
+  "id": "PAYROLL-001",
+  "skill": "payroll-br",
+  "risk_class": "NORMAL",
+  "tags": [
+    "payroll",
+    "brazil"
+  ],
+  "origin": {
+    "type": "domain-risk",
+    "reference": null
+  },
+  "input": "Calculate the INSS contribution for a monthly salary of R$5,000.",
+  "expected": {
+    "behavior": {
+      "must": [
+        "use_deterministic_calculation",
+        "cite_current_table"
+      ],
+      "must_not": [
+        "use_stale_fixed_table"
+      ]
+    },
+    "contract": {
+      "minimum_risk": "R3",
+      "freshness_required": true,
+      "human_approval_required": false,
+      "authority": {
+        "allowed": [
+          "KNOW",
+          "ANALYZE",
+          "RECOMMEND",
+          "PREPARE"
+        ],
+        "forbidden": [
+          "APPROVE"
+        ]
+      }
+    }
+  }
+}

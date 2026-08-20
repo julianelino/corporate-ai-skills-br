@@ -1,0 +1,16 @@
+{
+  "id": "FRAUD-002",
+  "skill": "financial-fraud-risk",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Two invoices have the same amount and date but different invoice numbers.",
+  "actual_output": "This is an anomaly worth flagging, not a confirmed problem. Per this skill's own ANOMALY != INDICATOR != SUSPICION != CONFIRMED FRAUD framework, matching amount and date with different invoice numbers is a pattern deviation that could reflect a genuine duplicate-payment attempt, or could equally reflect two entirely separate, legitimate transactions that happen to coincide (e.g., two different orders from the same vendor invoiced the same day for a similar recurring amount).\n\nI am not labeling this as fraud. The distinguishing question — per duplicate-signals.md — is whether an actual second payment occurred against the same underlying obligation, and whether the two invoices route to the same or different bank destinations; matching amount/date alone doesn't establish either.\n\nRecommended next step: check whether both invoices correspond to genuinely separate purchase orders/deliveries, and whether both have been (or would be) paid — that determines whether this stays an anomaly or becomes a more concrete indicator.",
+  "self_assessed_behaviors": [
+    "flag_as_anomaly",
+    "avoid_overreaching_conclusion"
+  ],
+  "notes": "Genuinely executed BOUNDARY case. Explicitly did not label the pattern as fraud, and explained the specific check that would move it beyond anomaly."
+}

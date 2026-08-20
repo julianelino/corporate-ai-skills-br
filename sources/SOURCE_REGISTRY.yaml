@@ -1,24 +1,518 @@
 {
-  "registry_version": "0.1.0",
+  "registry_version": "0.2.0",
   "default_jurisdiction": "BR",
   "sources": [
-    {"id":"planalto","name":"Presidência da República — Legislação","url":"https://www.planalto.gov.br/ccivil_03/leis/_lei-principal.htm","authority":"official","tier":"T1","jurisdiction":"BR","domains":["labor","payroll","tax","privacy"],"freshness":"critical","copyright":"public-law"},
-    {"id":"mte","name":"Ministério do Trabalho e Emprego","url":"https://www.gov.br/trabalho-e-emprego/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["labor","payroll","sst"],"freshness":"critical","copyright":"official-publication"},
-    {"id":"esocial","name":"eSocial","url":"https://www.gov.br/esocial/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["payroll","hr","sst"],"freshness":"critical","copyright":"official-publication"},
-    {"id":"fgts-digital","name":"FGTS Digital","url":"https://www.gov.br/fgtsdigital/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["payroll"],"freshness":"critical","copyright":"official-publication"},
-    {"id":"receita","name":"Receita Federal do Brasil","url":"https://www.gov.br/receitafederal/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["tax","payroll","accounting"],"freshness":"critical","copyright":"official-publication"},
-    {"id":"sped","name":"Sistema Público de Escrituração Digital","url":"https://www.gov.br/sped/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["tax","accounting"],"freshness":"critical","copyright":"official-publication"},
-    {"id":"tst","name":"Tribunal Superior do Trabalho","url":"https://www.tst.jus.br","authority":"court","tier":"T1","jurisdiction":"BR","domains":["labor"],"freshness":"critical","copyright":"public-decision"},
-    {"id":"stf","name":"Supremo Tribunal Federal","url":"https://portal.stf.jus.br","authority":"court","tier":"T1","jurisdiction":"BR","domains":["labor","privacy"],"freshness":"critical","copyright":"public-decision"},
-    {"id":"cfc","name":"Conselho Federal de Contabilidade","url":"https://cfc.org.br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["accounting","audit"],"freshness":"critical","copyright":"official-publication"},
-    {"id":"cpc","name":"Comitê de Pronunciamentos Contábeis","url":"https://www.cpc.org.br","authority":"standards","tier":"T1","jurisdiction":"BR","domains":["accounting"],"freshness":"critical","copyright":"standards"},
-    {"id":"bacen","name":"Banco Central do Brasil","url":"https://www.bcb.gov.br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["treasury","finance"],"freshness":"critical","copyright":"official-publication"},
-    {"id":"cvm","name":"Comissão de Valores Mobiliários","url":"https://www.gov.br/cvm/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["accounting","finance"],"freshness":"critical","copyright":"official-publication"},
-    {"id":"sefaz","name":"Secretarias de Fazenda estaduais","url":"https://www.gov.br/receitafederal/pt-br","authority":"official","tier":"T1","jurisdiction":"BR","domains":["tax"],"freshness":"critical","copyright":"official-publication"},
-    {"id":"municipal-tax","name":"Municípios competentes","url":"https://www.gov.br/pt-br/servicos/consultar-cadastro-nacional-de-pessoas-juridicas","authority":"official","tier":"T1","jurisdiction":"BR","domains":["tax"],"freshness":"critical","copyright":"official-publication"},
-    {"id":"abrh","name":"ABRH Brasil","url":"https://abrhbrasil.org.br","authority":"professional","tier":"T3","jurisdiction":"BR","domains":["hr"],"freshness":"periodic","copyright":"third-party"},
-    {"id":"fipecafi","name":"FIPECAFI","url":"https://fipecafi.org","authority":"professional","tier":"T3","jurisdiction":"BR","domains":["accounting","finance"],"freshness":"periodic","copyright":"third-party"},
-    {"id":"econet","name":"Econet","url":"https://www.econeteditora.com.br","authority":"secondary","tier":"T3","jurisdiction":"BR","domains":["labor","payroll","tax"],"freshness":"periodic","use_for":["practical-reference","topic-discovery","permitted-interpretation"],"never_use_as":["sole-legal-authority","copied-paid-content"],"copyright":"third-party-paid-or-restricted"},
-    {"id":"openai-skills","name":"OpenAI Agent Skills guidance","url":"https://developers.openai.com","authority":"benchmark","tier":"T4","jurisdiction":"global","domains":["architecture"],"freshness":"periodic","copyright":"third-party"}
+    {
+      "id": "planalto",
+      "name": "Presidência da República — Legislação",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/_lei-principal.htm",
+      "authority": "official",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "labor",
+        "payroll",
+        "tax",
+        "privacy"
+      ],
+      "freshness": "critical",
+      "copyright": "public-law",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CURRENT",
+        "last_checked": "2026-08-18T18:07:21.563Z",
+        "last_verified": null,
+        "fingerprint": "hash:955b567af8ae2465c134d96803d4f1f8c6ded24e2ae26991d839bf34fe2ef06e",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "mte",
+      "name": "Ministério do Trabalho e Emprego",
+      "url": "https://www.gov.br/trabalho-e-emprego/pt-br",
+      "authority": "official",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "labor",
+        "payroll",
+        "sst"
+      ],
+      "freshness": "critical",
+      "copyright": "official-publication",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CHANGED_UNREVIEWED",
+        "last_checked": "2026-08-18T18:07:22.018Z",
+        "last_verified": null,
+        "fingerprint": "hash:71d1c923e0da8d4ebf9591d604eeee92b46eec1d851ca842fcd0ec5dee7e1700",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "esocial",
+      "name": "eSocial",
+      "url": "https://www.gov.br/esocial/pt-br",
+      "authority": "official",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "payroll",
+        "hr",
+        "sst"
+      ],
+      "freshness": "critical",
+      "copyright": "official-publication",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CURRENT",
+        "last_checked": "2026-08-18T18:07:22.336Z",
+        "last_verified": null,
+        "fingerprint": "hash:0ccaa4b7d40f0e45ee411931781285e9043ca3cebf6fbd2100fbcbf86aa621f4",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "fgts-digital",
+      "name": "FGTS Digital",
+      "url": "https://www.gov.br/fgtsdigital/pt-br",
+      "authority": "official",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "payroll"
+      ],
+      "freshness": "critical",
+      "copyright": "official-publication",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CURRENT",
+        "last_checked": "2026-08-18T18:07:22.384Z",
+        "last_verified": null,
+        "fingerprint": "hash:4ff7077737082a0ba2c771e05831dae49f87d95788b71889033c8b25abeffbd7",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "receita",
+      "name": "Receita Federal do Brasil",
+      "url": "https://www.gov.br/receitafederal/pt-br",
+      "authority": "official",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "tax",
+        "payroll",
+        "accounting"
+      ],
+      "freshness": "critical",
+      "copyright": "official-publication",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CURRENT",
+        "last_checked": "2026-08-18T18:07:22.479Z",
+        "last_verified": null,
+        "fingerprint": "hash:aca80dc613c906ec70fb8b87c0465de99ed0a8e3f6b6a439c0b5d860837c1802",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "sped",
+      "name": "Sistema Público de Escrituração Digital",
+      "url": "https://www.gov.br/sped/pt-br",
+      "authority": "official",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "tax",
+        "accounting"
+      ],
+      "freshness": "critical",
+      "copyright": "official-publication",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "etag",
+        "status": "CHANGED_UNREVIEWED",
+        "last_checked": "2026-08-18T18:07:22.537Z",
+        "last_verified": null,
+        "fingerprint": "etag:W/\"3d6c7-QXEzHUA8mrhjshob5/+Z4bzsldc:dtagent10343260715123811Gh+C\"",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "tst",
+      "name": "Tribunal Superior do Trabalho",
+      "url": "https://www.tst.jus.br",
+      "authority": "court",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "labor"
+      ],
+      "freshness": "critical",
+      "copyright": "public-decision",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CHANGED_UNREVIEWED",
+        "last_checked": "2026-08-18T18:07:22.577Z",
+        "last_verified": null,
+        "fingerprint": "hash:35c285d7c109472e646d590dc06caf9ddd689372e7ab2b2cf685f9a157a53da4",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "stf",
+      "name": "Supremo Tribunal Federal",
+      "url": "https://portal.stf.jus.br",
+      "authority": "court",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "labor",
+        "privacy"
+      ],
+      "freshness": "critical",
+      "copyright": "public-decision",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "UNREACHABLE",
+        "last_checked": "2026-08-18T18:07:22.830Z",
+        "last_verified": null,
+        "fingerprint": null,
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "cfc",
+      "name": "Conselho Federal de Contabilidade",
+      "url": "https://cfc.org.br",
+      "authority": "official",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "accounting",
+        "audit"
+      ],
+      "freshness": "critical",
+      "copyright": "official-publication",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CHANGED_UNREVIEWED",
+        "last_checked": "2026-08-18T18:07:22.922Z",
+        "last_verified": null,
+        "fingerprint": "hash:bbf9c3ff02d5fa8d0f4412a3ed69a9084f366de15334dc95d835e7a1e7c31d71",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "cpc",
+      "name": "Comitê de Pronunciamentos Contábeis",
+      "url": "https://www.cpc.org.br",
+      "authority": "standards",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "accounting"
+      ],
+      "freshness": "critical",
+      "copyright": "standards",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CURRENT",
+        "last_checked": "2026-08-18T18:07:24.758Z",
+        "last_verified": null,
+        "fingerprint": "hash:84456cf307508d227324b58df68ac6b886429d92f815b48f437f1a2107540bca",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "bacen",
+      "name": "Banco Central do Brasil",
+      "url": "https://www.bcb.gov.br",
+      "authority": "official",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "treasury",
+        "finance"
+      ],
+      "freshness": "critical",
+      "copyright": "official-publication",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CURRENT",
+        "last_checked": "2026-08-18T18:07:25.205Z",
+        "last_verified": null,
+        "fingerprint": "hash:87d7eb6cce78f690d8f118be6ff2f50a8c822d687f153a44f875e1ce4da38d04",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "cvm",
+      "name": "Comissão de Valores Mobiliários",
+      "url": "https://www.gov.br/cvm/pt-br",
+      "authority": "official",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "accounting",
+        "finance"
+      ],
+      "freshness": "critical",
+      "copyright": "official-publication",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CHANGED_UNREVIEWED",
+        "last_checked": "2026-08-18T18:07:25.567Z",
+        "last_verified": null,
+        "fingerprint": "hash:f507450a25da3c368aa10e3d6d8ae78ddc1426c30e8dbb0ef50383ce22b80517",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "sefaz",
+      "name": "Secretarias de Fazenda estaduais",
+      "url": "https://www.gov.br/receitafederal/pt-br",
+      "authority": "official",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "tax"
+      ],
+      "freshness": "critical",
+      "copyright": "official-publication",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CHANGED_UNREVIEWED",
+        "last_checked": "2026-08-18T18:07:25.626Z",
+        "last_verified": null,
+        "fingerprint": "hash:aca80dc613c906ec70fb8b87c0465de99ed0a8e3f6b6a439c0b5d860837c1802",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "municipal-tax",
+      "name": "Municípios competentes",
+      "url": "https://www.gov.br/pt-br/servicos/consultar-cadastro-nacional-de-pessoas-juridicas",
+      "authority": "official",
+      "tier": "T1",
+      "jurisdiction": "BR",
+      "domains": [
+        "tax"
+      ],
+      "freshness": "critical",
+      "copyright": "official-publication",
+      "freshness_lifecycle": {
+        "mode": "monitor",
+        "criticality": "critical",
+        "review_interval_days": 30,
+        "change_detection": "normalized_hash",
+        "status": "CHANGED_UNREVIEWED",
+        "last_checked": "2026-08-18T18:07:25.682Z",
+        "last_verified": null,
+        "fingerprint": "hash:c02595acd741db774f23e0506e78d1d856a778d19e16af10c0ac1873eb0a88cd",
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "abrh",
+      "name": "ABRH Brasil",
+      "url": "https://abrhbrasil.org.br",
+      "authority": "professional",
+      "tier": "T3",
+      "jurisdiction": "BR",
+      "domains": [
+        "hr"
+      ],
+      "freshness": "periodic",
+      "copyright": "third-party",
+      "freshness_lifecycle": {
+        "mode": "manual",
+        "criticality": "standard",
+        "review_interval_days": 180,
+        "change_detection": "manual",
+        "status": "UNKNOWN",
+        "last_checked": null,
+        "last_verified": null,
+        "fingerprint": null,
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "fipecafi",
+      "name": "FIPECAFI",
+      "url": "https://fipecafi.org",
+      "authority": "professional",
+      "tier": "T3",
+      "jurisdiction": "BR",
+      "domains": [
+        "accounting",
+        "finance"
+      ],
+      "freshness": "periodic",
+      "copyright": "third-party",
+      "freshness_lifecycle": {
+        "mode": "manual",
+        "criticality": "standard",
+        "review_interval_days": 180,
+        "change_detection": "manual",
+        "status": "UNKNOWN",
+        "last_checked": null,
+        "last_verified": null,
+        "fingerprint": null,
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "econet",
+      "name": "Econet",
+      "url": "https://www.econeteditora.com.br",
+      "authority": "secondary",
+      "tier": "T3",
+      "jurisdiction": "BR",
+      "domains": [
+        "labor",
+        "payroll",
+        "tax"
+      ],
+      "freshness": "periodic",
+      "use_for": [
+        "practical-reference",
+        "topic-discovery",
+        "permitted-interpretation"
+      ],
+      "never_use_as": [
+        "sole-legal-authority",
+        "copied-paid-content"
+      ],
+      "copyright": "third-party-paid-or-restricted",
+      "freshness_lifecycle": {
+        "mode": "manual",
+        "criticality": "standard",
+        "review_interval_days": 180,
+        "change_detection": "manual",
+        "status": "UNKNOWN",
+        "last_checked": null,
+        "last_verified": null,
+        "fingerprint": null,
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    },
+    {
+      "id": "openai-skills",
+      "name": "OpenAI Agent Skills guidance",
+      "url": "https://developers.openai.com",
+      "authority": "benchmark",
+      "tier": "T4",
+      "jurisdiction": "global",
+      "domains": [
+        "architecture"
+      ],
+      "freshness": "periodic",
+      "copyright": "third-party",
+      "freshness_lifecycle": {
+        "mode": "manual",
+        "criticality": "standard",
+        "review_interval_days": 180,
+        "change_detection": "manual",
+        "status": "UNKNOWN",
+        "last_checked": null,
+        "last_verified": null,
+        "fingerprint": null,
+        "effective_from": null,
+        "effective_until": null,
+        "supersedes": null,
+        "superseded_by": null
+      }
+    }
   ]
 }

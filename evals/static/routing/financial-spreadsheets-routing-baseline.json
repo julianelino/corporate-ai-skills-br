@@ -1,0 +1,10 @@
+{
+  "id": "financial-spreadsheets-routing-baseline",
+  "kind": "positive",
+  "input": "Spreadsheet — please also consider excel.",
+  "expected": {
+    "primary_skill": "financial-spreadsheets",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

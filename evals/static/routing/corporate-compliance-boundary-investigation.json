@@ -1,0 +1,6 @@
+{
+  "id": "corporate-compliance-boundary-investigation",
+  "kind": "boundary",
+  "input": "This gift may be a conflict of interest that requires investigation.",
+  "expected": { "primary_skill": "corporate-compliance", "status": "ROUTED" }
+}

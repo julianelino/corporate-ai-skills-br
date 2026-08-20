@@ -1,0 +1,10 @@
+{
+  "id": "corporate-router-routing-baseline",
+  "kind": "positive",
+  "input": "Route — please also consider which specialist.",
+  "expected": {
+    "primary_skill": "corporate-router",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

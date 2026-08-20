@@ -1,0 +1,10 @@
+{
+  "id": "payroll-auditor-routing-baseline",
+  "kind": "positive",
+  "input": "Payroll audit — please also consider duplicate payment.",
+  "expected": {
+    "primary_skill": "payroll-auditor",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

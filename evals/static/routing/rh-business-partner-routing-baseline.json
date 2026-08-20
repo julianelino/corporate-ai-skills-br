@@ -1,0 +1,10 @@
+{
+  "id": "rh-business-partner-routing-baseline",
+  "kind": "positive",
+  "input": "Hiring decision — please also consider workforce planning.",
+  "expected": {
+    "primary_skill": "rh-business-partner",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

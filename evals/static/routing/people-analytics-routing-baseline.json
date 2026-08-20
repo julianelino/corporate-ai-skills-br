@@ -1,0 +1,10 @@
+{
+  "id": "people-analytics-routing-baseline",
+  "kind": "positive",
+  "input": "Headcount — please also consider turnover rate.",
+  "expected": {
+    "primary_skill": "people-analytics",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

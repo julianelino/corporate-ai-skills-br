@@ -1,0 +1,16 @@
+[
+  {
+    "id": "SEC-TAX-001",
+    "behaviors": [
+      "require_current_authoritative_source",
+      "refuse_unverified_source"
+    ]
+  },
+  {
+    "id": "SEC-TAX-002",
+    "behaviors": [
+      "maintain_uncertainty_disclosure",
+      "require_current_authoritative_source"
+    ]
+  }
+]

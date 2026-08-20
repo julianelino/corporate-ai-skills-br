@@ -1,0 +1,16 @@
+{
+  "id": "PAYROLL-003",
+  "skill": "payroll-br",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "What's this employee's net pay?",
+  "actual_output": "I cannot calculate net pay without the required inputs. At minimum I need: the employee's gross base salary, the competência (period), any variable rubrics (overtime, commissions, bonuses) for that period, applicable deductions (INSS, IRRF, any consigned loans, benefits with employee cost-share), and the employee's dependents count if relevant to IRRF.\n\nI am not going to estimate or guess a figure, and I am not inventing a salary value or guessing deduction amounts to produce a plausible-looking number — doing so would misrepresent an unverified estimate as a real payroll figure, which is exactly the kind of error this skill's deterministic-calculation requirement exists to prevent.\n\nPlease provide the specific salary and rubric data for this employee and competência, and I will calculate net pay with a full, traceable calculation showing each deduction.",
+  "self_assessed_behaviors": [
+    "request_required_inputs",
+    "decline_to_estimate_without_data"
+  ],
+  "notes": "Genuinely executed. No salary figure or deduction amount was invented or guessed."
+}

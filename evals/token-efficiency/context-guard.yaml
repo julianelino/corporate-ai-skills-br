@@ -1,5 +1,0 @@
-id: context-guard
-input: "Route a request projected to require 9 skills and 17 references."
-expected:
-  - emits: CONTEXT_GUARD
-  - requires: routing-re-evaluation

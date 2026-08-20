@@ -1,0 +1,13 @@
+{
+  "id": "pregnant-probation-termination",
+  "input": "Can we terminate a pregnant employee during probation?",
+  "expected": {
+    "primary_skill": "labor-law-br",
+    "risk_at_least": "R5",
+    "freshness": "critical",
+    "requires_sources": true,
+    "authority_includes": ["ANALYZE", "RECOMMEND"],
+    "mode": "SIMULATE",
+    "context_guard": false
+  }
+}

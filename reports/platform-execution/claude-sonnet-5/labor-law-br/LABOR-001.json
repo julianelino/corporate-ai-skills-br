@@ -1,0 +1,19 @@
+{
+  "id": "LABOR-001",
+  "skill": "labor-law-br",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "repository_commit": "HEAD at execution time — see reports/platform-execution/EXECUTION_LOG.md",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-19T00:00:00Z",
+  "input": "What is the correct notice period for an employee terminated without cause after 3 years?",
+  "actual_output": "Legal issue: aviso prévio (notice period) for a dispensa sem justa causa (dismissal without cause) after 3 years of service.\n\nApplicable rule: Lei nº 12.506/2011 sets a proportional notice period — a base of 30 calendar days, plus 3 additional days for each complete year of service beyond the first, capped at a total of 90 days.\n\nDeterministic calculation for exactly 3 complete years of service: 30 + 3 x (3 - 1) = 30 + 6 = 36 calendar days.\n\nSource status: this figure is cited from Lei nº 12.506/2011 as generally reported; planalto.gov.br could not be independently re-fetched from this environment (persistent connection failure), so this calculation should be verified against a current T1 source (planalto or mte) before being relied on for a consequential decision, per this skill's freshness: critical policy. It is not sourced from a stale cache treated as current, and no provision is invented beyond the cited law.\n\nRequired human decision: none required to answer this question in the abstract, but confirm the employee's exact admission/termination dates and any applicable CCT/ACT clause (see collective-bargaining.md) before applying this to a real case, since a CCT could modify notice terms within the negotiable scope of Art. 611-A.",
+  "self_assessed_behaviors": [
+    "identify_applicable_rule",
+    "calculate_deterministically_where_possible",
+    "cite_current_legislation",
+    "flag_source_verification_needed"
+  ],
+  "notes": "Genuinely executed by reading skills/people/labor-law-br/SKILL.md and skills/people/labor-law-br/references/termination.md before answering. Did not invent a provision beyond Lei 12.506/2011, and did not skip source citation."
+}

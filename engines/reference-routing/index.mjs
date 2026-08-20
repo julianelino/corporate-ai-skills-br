@@ -1,9 +1,8 @@
-import { readFileSync } from 'node:fs';
+import * as v1 from './v1.mjs';
+import * as v2 from './v2.mjs';
 
-export function route(intent, registryPath = new URL('../../knowledge/registry/capability-registry.yaml', import.meta.url)) {
-  const registry = JSON.parse(readFileSync(registryPath, 'utf8'));
-  const query = intent.toLowerCase();
-  const matches = registry.capabilities.map((item) => ({ item, score: item.triggers.filter((trigger) => query.includes(trigger.toLowerCase())).length })).filter(({ score }) => score > 0).sort((a, b) => b.score - a.score || a.item.skill.localeCompare(b.item.skill));
-  const selected = matches.slice(0, 6).map(({ item }) => item);
-  return { intent, primary: selected[0]?.skill ?? 'corporate-router', specialists: selected.map((item) => item.skill).length ? selected.map((item) => item.skill) : ['corporate-router'], context_guard: matches.length > 6, mode: selected.some((item) => ['R4', 'R5', 'R6'].includes(item.risk_ceiling)) ? 'SIMULATE' : 'ANALYZE' };
-}
+// ROUTER_VERSION=v1 selects the frozen Task 1c baseline (see v1.mjs, v2.mjs, and
+// scripts/router-compare.mjs). Default is v2 once its shadow comparison against all committed
+// static evals showed zero unexplained regressions (Task 4) — see
+// docs/superpowers/plans/2026-08-17-reliability-hardening.md.
+export const route = process.env.ROUTER_VERSION === 'v1' ? v1.route : v2.route;

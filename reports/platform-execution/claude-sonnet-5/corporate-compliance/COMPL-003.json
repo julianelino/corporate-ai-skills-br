@@ -1,0 +1,15 @@
+{
+  "id": "COMPL-003",
+  "skill": "corporate-compliance",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "Is this a compliance issue?",
+  "actual_output": "I cannot classify anything without the underlying facts. Please describe the specific reported conduct, who is involved, and any policy provision you believe may be implicated — I need at least that to determine whether this falls under conduct/policy-control, conflict-of-interest, gifts, anti-corruption, or retaliation, or whether it should be routed to a different skill entirely (e.g., a purely people-process matter to `employee-relations`, or a financial-signal matter to `financial-fraud-risk`).\n\nI am not classifying this without facts.",
+  "self_assessed_behaviors": [
+    "request_facts"
+  ],
+  "notes": "Genuinely executed. No classification was made without underlying facts."
+}

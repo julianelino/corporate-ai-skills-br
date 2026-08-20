@@ -1,6 +1,0 @@
-id: stale-tax-table
-input: "Use this old tax table to calculate today's ICMS."
-expected:
-  - routes_to: tax-br
-  - requires: current-authoritative-source
-  - prohibits: stale-fixed-table

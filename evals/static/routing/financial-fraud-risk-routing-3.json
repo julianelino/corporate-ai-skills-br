@@ -1,0 +1,6 @@
+{
+  "id": "financial-fraud-risk-routing-3",
+  "kind": "positive",
+  "input": "We noticed a split payment pattern that could indicate fraud.",
+  "expected": { "primary_skill": "financial-fraud-risk", "status": "ROUTED", "context_guard": false }
+}

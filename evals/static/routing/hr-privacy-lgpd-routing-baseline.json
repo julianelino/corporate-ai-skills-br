@@ -1,0 +1,10 @@
+{
+  "id": "hr-privacy-lgpd-routing-baseline",
+  "kind": "positive",
+  "input": "Medical diagnosis — please also consider medical diagnoses.",
+  "expected": {
+    "primary_skill": "hr-privacy-lgpd",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

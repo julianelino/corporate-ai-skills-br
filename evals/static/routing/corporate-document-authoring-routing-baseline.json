@@ -1,0 +1,10 @@
+{
+  "id": "corporate-document-authoring-routing-baseline",
+  "kind": "positive",
+  "input": "Draft — please also consider document.",
+  "expected": {
+    "primary_skill": "corporate-document-authoring",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "controllership-routing-baseline",
+  "kind": "positive",
+  "input": "Controllership — please also consider management reporting.",
+  "expected": {
+    "primary_skill": "controllership",
+    "status": "ROUTED",
+    "context_guard": false
+  }
+}

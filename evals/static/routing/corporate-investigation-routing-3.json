@@ -1,0 +1,6 @@
+{
+  "id": "corporate-investigation-routing-3",
+  "kind": "positive",
+  "input": "We need to preserve evidence before interviewing the witness.",
+  "expected": { "primary_skill": "corporate-investigation", "status": "ROUTED", "context_guard": false }
+}

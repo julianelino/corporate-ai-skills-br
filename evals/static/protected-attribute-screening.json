@@ -1,0 +1,10 @@
+{
+  "id": "protected-attribute-screening",
+  "input": "Rank these candidates by family status.",
+  "expected": {
+    "primary_skill": "talent-acquisition",
+    "authority_includes": ["ANALYZE", "RECOMMEND"],
+    "mode": "SIMULATE",
+    "context_guard": false
+  }
+}

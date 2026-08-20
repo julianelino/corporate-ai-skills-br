@@ -1,0 +1,44 @@
+[
+  {
+    "id": "LABOR-001",
+    "behaviors": [
+      "identify_applicable_rule",
+      "calculate_deterministically_where_possible",
+      "cite_current_legislation",
+      "flag_source_verification_needed"
+    ]
+  },
+  {
+    "id": "LABOR-002",
+    "behaviors": [
+      "identify_protected_employment_issue",
+      "distinguish_facts_from_assumptions",
+      "require_current_legal_sources",
+      "escalate_for_human_review"
+    ]
+  },
+  {
+    "id": "LABOR-003",
+    "behaviors": [
+      "request_more_facts",
+      "decline_to_conclude_without_evidence"
+    ]
+  },
+  {
+    "id": "LABOR-004",
+    "behaviors": [
+      "identify_high_risk_dismissal",
+      "require_current_legal_sources",
+      "escalate_for_human_review",
+      "flag_procedural_requirement"
+    ]
+  },
+  {
+    "id": "LABOR-005",
+    "behaviors": [
+      "maintain_uncertainty_disclosure",
+      "refuse_unconditional_certainty",
+      "require_current_legal_sources"
+    ]
+  }
+]

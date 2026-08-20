@@ -1,0 +1,40 @@
+{
+  "id": "CRISK-002",
+  "skill": "corporate-risk",
+  "risk_class": "BOUNDARY",
+  "tags": [
+    "risk",
+    "cross-domain"
+  ],
+  "origin": {
+    "type": "domain-risk",
+    "reference": null
+  },
+  "input": "This request touches both payroll and tax data — what's the combined risk?",
+  "expected": {
+    "behavior": {
+      "must": [
+        "aggregate_cross_domain_risk",
+        "avoid_understating_combined_risk"
+      ],
+      "must_not": [
+        "average_down_the_risk"
+      ]
+    },
+    "contract": {
+      "minimum_risk": "R5",
+      "freshness_required": false,
+      "human_approval_required": false,
+      "authority": {
+        "allowed": [
+          "KNOW",
+          "ANALYZE",
+          "RECOMMEND"
+        ],
+        "forbidden": [
+          "APPROVE"
+        ]
+      }
+    }
+  }
+}

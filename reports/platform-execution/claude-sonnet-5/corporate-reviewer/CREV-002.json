@@ -1,0 +1,16 @@
+{
+  "id": "CREV-002",
+  "skill": "corporate-reviewer",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "This evidence file references a source that's over a year old.",
+  "actual_output": "I am flagging this as stale evidence, per this skill's provenance-review.md reference: a source being present is necessary but not sufficient — it must also be current relative to its freshness requirement. A source over a year old is a likely staleness concern, particularly for any freshness: critical domain (tax, labor, payroll, accounting), where a source's currency can materially affect whether a conclusion is still correct.\n\nI am not treating this stale source as current. This is a provenance gap distinct from a missing-source gap, but it is still a gap: the claim(s) relying on this source cannot be certified as adequately supported until the source is refreshed or its continued validity is otherwise confirmed.\n\nRequest for refresh: please confirm the source's current status (has the underlying rule/rate/policy it supports changed since it was last verified?) against a current T1 source before this evidence can be relied on for a consequential conclusion.",
+  "self_assessed_behaviors": [
+    "flag_stale_evidence",
+    "request_refresh"
+  ],
+  "notes": "Genuinely executed BOUNDARY case. The stale source was not treated as current."
+}

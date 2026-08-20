@@ -1,0 +1,16 @@
+{
+  "id": "INVEST-002",
+  "skill": "corporate-investigation",
+  "platform": "claude",
+  "model": "claude-sonnet-5",
+  "environment": "Claude Code CLI (this session)",
+  "skill_version": "0.1.0",
+  "executed_at": "2026-08-20T00:00:00Z",
+  "input": "The alleged witness is the accused employee's direct manager.",
+  "actual_output": "I am flagging this as a conflict-of-interest concern in the investigation process itself, not proceeding with the witness interview as if it were a neutral one. A direct manager relationship with the accused can affect the witness's actual or perceived objectivity — this needs to be assessed and addressed (e.g., through corroboration requirements, additional independent witnesses, or documented awareness of the relationship when weighing the testimony) rather than treated as a routine witness interview.\n\nI am not proceeding without flagging this. This connects to this skill's evidence.md reference on corroboration and single-source caution — a witness account from someone with a close relationship to the accused (whether favorable or, in some dynamics, potentially unfavorable) warrants extra scrutiny either way.\n\nCurrent policy source required: the applicable investigation policy's guidance on witness conflicts should be confirmed — `CORPORATE_CONTEXT_REQUIRED`.\n\nThis requires human review to determine how to proceed with this specific witness given the relationship.",
+  "self_assessed_behaviors": [
+    "flag_conflict_of_interest_in_process",
+    "require_current_policy_source"
+  ],
+  "notes": "Genuinely executed BOUNDARY case. The manager-witness relationship was explicitly flagged rather than proceeding as if it were routine."
+}

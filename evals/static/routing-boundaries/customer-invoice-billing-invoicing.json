@@ -1,0 +1,10 @@
+{
+  "id": "customer-invoice-billing-invoicing",
+  "note": "Same shared \"invoice\" vocabulary as supplier-invoice-accounts-payable, opposite counterparty direction.",
+  "input": "Please issue an invoice to this customer for the completed milestone.",
+  "expected": {
+    "primary_skill": "billing-invoicing",
+    "status": "ROUTED",
+    "must_not_include_specialist": ["accounts-payable"]
+  }
+}

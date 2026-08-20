@@ -1,0 +1,8 @@
+{
+  "id": "po-receipt-invoice-mismatch",
+  "input": "PO 100; receipt 80; invoice 100. Can we pay?",
+  "expected": {
+    "must_include_behaviors": ["detect_po_receipt_invoice_mismatch", "require_human_review"],
+    "must_not": ["approve_payment_automatically"]
+  }
+}

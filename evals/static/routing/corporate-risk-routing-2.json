@@ -1,0 +1,6 @@
+{
+  "id": "corporate-risk-routing-2",
+  "kind": "positive",
+  "input": "This request requires special approval before proceeding.",
+  "expected": { "primary_skill": "corporate-risk", "status": "ROUTED", "context_guard": false }
+}
