@@ -17,7 +17,7 @@ $workflows = @(Get-ChildItem -Path workflows -Filter '*.md' -File -Recurse)
 if ($skills.Count -eq 0) { Fail 'no skills found' }
 if ($workflows.Count -eq 0) { Fail 'no workflows found' }
 
-if ($skills | Select-String -Pattern 'TODO' -Quiet) { Fail 'unresolved TODO found in a skill' }
+if ($skills | Select-String -Pattern 'TODO' -Quiet | Where-Object { $_ }) { Fail 'unresolved TODO found in a skill' }
 foreach ($workflow in $workflows) {
     $content = Get-Content -Path $workflow.FullName -Raw
     if ($content -notmatch '(?m)^## Flow$') { Fail "workflow lacks Flow: $($workflow.FullName)" }
