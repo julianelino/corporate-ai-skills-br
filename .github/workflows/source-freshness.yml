@@ -13,10 +13,10 @@ jobs:
   check-and-request-review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: "24"
       # Runs real HTTP checks (scripts/check-source-freshness.mjs) — never part of `npm run check` /
       # Core, deliberately not committed back: this workflow only reads and reports, it never pushes
       # a change to SOURCE_REGISTRY.yaml or any knowledge content on its own.
@@ -26,7 +26,7 @@ jobs:
       - name: Build impact report
         run: node scripts/report-source-impact.mjs | tee /tmp/freshness-report.txt
       - name: Open review issue if any source needs attention
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const fs = require('fs');
