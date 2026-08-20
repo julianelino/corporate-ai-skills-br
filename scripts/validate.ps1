@@ -20,8 +20,8 @@ if ($workflows.Count -eq 0) { Fail 'no workflows found' }
 if ($skills | Select-String -Pattern 'TODO' -Quiet | Where-Object { $_ }) { Fail 'unresolved TODO found in a skill' }
 foreach ($workflow in $workflows) {
     $content = Get-Content -Path $workflow.FullName -Raw
-    if ($content -notmatch '(?m)^## Flow$') { Fail "workflow lacks Flow: $($workflow.FullName)" }
-    if ($content -notmatch '(?m)^## Controls$') { Fail "workflow lacks Controls: $($workflow.FullName)" }
+    if ($content -notmatch '(?m)^## Flow\r?$') { Fail "workflow lacks Flow: $($workflow.FullName)" }
+    if ($content -notmatch '(?m)^## Controls\r?$') { Fail "workflow lacks Controls: $($workflow.FullName)" }
 }
 
 Write-Output "PORTABLE_VALIDATION_PASSED: $($skills.Count) skills, $($workflows.Count) workflows"
